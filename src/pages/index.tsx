@@ -45,6 +45,7 @@ export default function Home() {
     transformValues: (values) => ({
       ...values,
       macE: values.macE.toUpperCase(),
+      accessories: values.accessories.slice(1),
     }),
   });
 

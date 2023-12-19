@@ -14,8 +14,8 @@ function PostItem(props: { post: PostByIdOutput }) {
         <Link className="mb-4 text-blue-500 underline" href="/">
           Regresar
         </Link>
-        <h1 className="mt-4 text-4xl font-bold">{post?.n}</h1>
-        <pre className="mt-8 overflow-x-scroll rounded-xl bg-gray-800 p-4">
+        <h1 className="mt-4 text-lg font-bold">{post?.n}</h1>
+        <pre className="mt-6 overflow-x-scroll rounded-xl bg-gray-800 p-4">
           {JSON.stringify(post, null, 4)}
         </pre>
       </div>

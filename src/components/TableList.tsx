@@ -87,6 +87,7 @@ function filterData(data: DataProps[], search: string) {
       item.n.toLowerCase().includes(query) ||
       item.serialNumber.toLowerCase().includes(query) ||
       item.brand.toLowerCase().includes(query) ||
+      item.office.toLowerCase().includes(query) ||
       item.date.toLocaleDateString().includes(query),
   );
 }
