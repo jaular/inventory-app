@@ -1,0 +1,6 @@
+.modal {
+  h2 {
+    font-size: var(--mantine-font-size-lg);
+    font-weight: var(--mantine-h3-font-weight);
+  }
+}
