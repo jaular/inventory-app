@@ -88,7 +88,7 @@ type ExcelProps2 = AccProps & {
   };
 };
 
-var new_headers = [
+var new_headers2 = [
   "ID",
   "Tipo",
   "S/N",
@@ -119,7 +119,7 @@ export const downloadExcelAcc = (sortedData: ExcelProps2[]) => {
   utils.book_append_sheet(workbook, worksheet, "Sheet1");
 
   // fix headers
-  utils.sheet_add_aoa(worksheet, [new_headers], { origin: "A1" });
+  utils.sheet_add_aoa(worksheet, [new_headers2], { origin: "A1" });
 
   // column width
   const wscols = [
