@@ -100,3 +100,49 @@ export const userSchema = z.object({
     .or(z.literal("")),
   role: z.string().min(1, { message: "Pick one option" }).trim(),
 });
+
+export const accSchema = z.object({
+  n: z.string().cuid().optional(),
+  type: z.string().min(1, { message: "Pick one option" }).trim(),
+  serialNumber: z
+    .string()
+    .min(2, { message: "Must be 2 or more characters long" })
+    .trim()
+    .or(z.literal("")),
+  brand: z
+    .string()
+    .min(1, { message: "Pick one option" })
+    .trim()
+    .or(z.literal("")),
+  modelName: z
+    .string()
+    .min(2, { message: "Must be 2 or more characters long" })
+    .trim()
+    .or(z.literal("")),
+  condition: z
+    .string()
+    .min(2, { message: "Must be 2 or more characters long" })
+    .trim()
+    .or(z.literal("")),
+  userName: z
+    .string()
+    .min(2, { message: "Must be 2 or more characters long" })
+    .trim()
+    .or(z.literal("")),
+  department: z
+    .string()
+    .min(2, { message: "Must be 2 or more characters long" })
+    .trim()
+    .or(z.literal("")),
+  date: z
+    .date({
+      required_error: "Please select a date and time",
+      invalid_type_error: "That's not a date!",
+    })
+    .optional(),
+  note: z
+    .string()
+    .min(2, { message: "Must be 2 or more characters long" })
+    .trim()
+    .or(z.literal("")),
+});

@@ -60,9 +60,15 @@ function AuthShowcase() {
             </Menu.Label>
             <Menu.Label>{sessionData.user?.email}</Menu.Label>
             <Menu.Divider />
+            <Menu.Item>
+              <Link href="/">Inventario (PC)</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link href="/accs">Inventario (Accesorios)</Link>
+            </Menu.Item>
             {sessionData?.user.role === "admin" && (
               <Menu.Item>
-                <Link href="/user">Gestión de usuarios</Link>
+                <Link href="/users">Gestión de usuarios</Link>
               </Menu.Item>
             )}
 

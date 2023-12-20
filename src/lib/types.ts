@@ -21,3 +21,15 @@ export type UserProps = {
   email: string;
   role: string;
 };
+
+export type AccProps = {
+  type: string;
+  serialNumber: string;
+  brand: string;
+  modelName: string;
+  condition: string;
+  userName: string;
+  department: string;
+  date: any;
+  note: string;
+};

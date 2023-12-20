@@ -37,6 +37,27 @@ model Post {
     createdById String
 }
 
+model Acc {
+    n            String @id @default(cuid())
+    type         String
+    serialNumber String
+    brand        String
+    modelName    String
+    condition    String
+
+    userName   String
+    department String
+
+    date DateTime @default(now())
+    note String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    createdBy   User   @relation(fields: [createdById], references: [id])
+    createdById String
+}
+
 // Necessary for Next auth
 model Account {
     id                String  @id @default(cuid())
@@ -74,6 +95,7 @@ model User {
     accounts      Account[]
     sessions      Session[]
     posts         Post[]
+    accs          Acc[]
 }
 
 model VerificationToken {
