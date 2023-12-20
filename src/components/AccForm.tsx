@@ -79,7 +79,7 @@ const AccForm = ({
           label="Estado"
           data={["Nuevo", "Usado", "Dañado"]}
           searchable
-          {...form.getInputProps("contion")}
+          {...form.getInputProps("condition")}
         />
 
         <Divider
@@ -112,6 +112,7 @@ const AccForm = ({
           defaultValue={new Date()}
           {...form.getInputProps("date")}
         />
+        <div></div>
         <Textarea
           className="col-span-2 max-w-lg md:col-span-3"
           label="Observaciones"
