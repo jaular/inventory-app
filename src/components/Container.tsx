@@ -7,7 +7,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const Container = ({ title = "Home", children }: Props) => {
+const Container = ({ title = "Inventario", children }: Props) => {
   return (
     <>
       <Head>

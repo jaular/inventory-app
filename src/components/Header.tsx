@@ -9,7 +9,7 @@ import classes from "~/styles/header.module.css";
 const Header = () => {
   return (
     <header className={cx(classes.header, "mb-14")}>
-      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 py-4 text-center sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 py-4 text-center sm:px-6 lg:px-8">
         <Link href="/">
           <span>Logo</span>
         </Link>
@@ -59,6 +59,7 @@ function AuthShowcase() {
               --
             </Menu.Label>
             <Menu.Label>{sessionData.user?.email}</Menu.Label>
+            <Menu.Divider />
             {sessionData?.user.role === "admin" && (
               <Menu.Item>
                 <Link href="/user">Gestión de usuarios</Link>

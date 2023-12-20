@@ -148,7 +148,7 @@ const UserTableList = ({ data, onUpdate }: Props) => {
     <>
       <TextInput
         className="md:max-w-xs"
-        placeholder=" -- buscar -- "
+        placeholder="Buscar"
         leftSection={<IconSearch size={14} stroke={1.5} />}
         value={search}
         autoComplete="off"

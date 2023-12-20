@@ -146,7 +146,9 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
     );
   };
 
-  const tableMinWidth = useMediaQuery("(max-width: 400px)") ? "1280px" : "100%";
+  const tableMinWidth = useMediaQuery("(max-width: 400px)")
+    ? "1280px"
+    : "1000px";
 
   var new_headers = [
     "ID",
@@ -154,7 +156,7 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
     "Nombre del equipo",
     "Marca",
     "Modelo",
-    "Direccion Mac (E)",
+    // "Direccion Mac (E)",
     "Gama",
     "Memoria RAM",
     "Mouse",
@@ -175,7 +177,7 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
       name: row.name,
       brand: row.brand,
       modelName: row.modelName,
-      macE: row.macE,
+      // macE: row.macE,
       range: row.range,
       ram: row.ram,
       mouse: acc[i]?.mouse === "Mouse" ? "si" : "no",
@@ -196,7 +198,6 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
     // column width
     const wscols = [
       { wch: 30 },
-      { wch: 20 },
       { wch: 20 },
       { wch: 20 },
       { wch: 20 },
@@ -273,7 +274,7 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
         title="Eliminar"
       >
         <p>
-          ¿Estás seguro de que quieres eliminar este dispositivo:{" "}
+          ¿Estás seguro de que quieres eliminar este elemento:{" "}
           <strong>{deviceId}</strong>?
         </p>
         <Group pt="lg">
@@ -300,7 +301,7 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
       <div className="flex items-center justify-between">
         <TextInput
           className="w-64"
-          placeholder=" -- buscar -- "
+          placeholder="Buscar"
           leftSection={<IconSearch size={14} stroke={1.5} />}
           value={search}
           autoComplete="off"
@@ -385,7 +386,7 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
               rows
             ) : (
               <Table.Tr>
-                <Table.Td colSpan={7}>
+                <Table.Td colSpan={8}>
                   <Text fw={500} ta="center">
                     Nada encontrado
                   </Text>

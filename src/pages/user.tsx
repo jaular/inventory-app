@@ -65,7 +65,7 @@ export default function UserPage() {
 
   if (sessionData?.user.role === "admin") {
     return (
-      <Container title="Management">
+      <Container title="Gestión de usuarios">
         <Modal
           className={classes.modal}
           overlayProps={{
@@ -97,7 +97,7 @@ export default function UserPage() {
   }
 
   return (
-    <Container title="Management">
+    <Container title="Gestión de usuarios">
       <div className="text-center">
         <p>You are not authorized to view this page!</p>
       </div>
