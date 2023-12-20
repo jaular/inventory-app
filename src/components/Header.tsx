@@ -61,7 +61,7 @@ function AuthShowcase() {
             <Menu.Label>{sessionData.user?.email}</Menu.Label>
             <Menu.Divider />
             <Menu.Item>
-              <Link href="/">Inventario (PC)</Link>
+              <Link href="/">Inventario (Equipos)</Link>
             </Menu.Item>
             <Menu.Item>
               <Link href="/accs">Inventario (Accesorios)</Link>

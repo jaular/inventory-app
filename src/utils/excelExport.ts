@@ -78,7 +78,7 @@ export const downloadExcel = (sortedData: ExcelProps[]) => {
   worksheet["!cols"] = wscols;
 
   // create an XLSX file
-  writeFile(workbook, "PC.xlsx", { compression: true });
+  writeFile(workbook, "Equipos.xlsx", { compression: true });
 };
 
 type ExcelProps2 = AccProps & {

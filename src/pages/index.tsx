@@ -88,7 +88,7 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <Container title="Inventario (PC)">
+      <Container title="Inventario (Equipos)">
         <Center h={300}>
           <Loader color="blue" size="lg" />
         </Center>
@@ -98,7 +98,7 @@ export default function Home() {
 
   if (sessionData && sessionData?.user.role !== "none") {
     return (
-      <Container title="Inventario (PC)">
+      <Container title="Inventario (Equipos)">
         <Modal
           className={classes.modal}
           overlayProps={{
@@ -121,7 +121,7 @@ export default function Home() {
         </Modal>
 
         <h1 className="text-center text-lg font-medium md:text-xl">
-          Inventario (PC)
+          Inventario (Equipos)
         </h1>
 
         <Group justify="center" className="mt-8">
@@ -142,7 +142,7 @@ export default function Home() {
   }
 
   return (
-    <Container title="Inventario (PC)">
+    <Container title="Inventario (Equipos)">
       <div className="text-center">
         <p>You are not authorized to view this page!</p>
       </div>
