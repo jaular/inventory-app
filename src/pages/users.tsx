@@ -1,7 +1,7 @@
 import type { UserProps } from "~/lib/types";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { Modal } from "@mantine/core";
+import { Center, Loader, Modal } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { useForm, zodResolver } from "@mantine/form";
 import { api } from "~/utils/api";
@@ -16,14 +16,14 @@ type DataProps = UserProps & {
   id: string;
 };
 
-export default function UserPage() {
+export default function UsersPage() {
   const [formModalOpened, setFormModalOpened] = useState<boolean>(false);
   const [createState, setCreateState] = useState<boolean>(true);
 
   const { data: sessionData } = useSession();
 
   const utils = api.useUtils();
-  const { data, isSuccess } = api.user.getAll.useQuery();
+  const { data, isSuccess, isLoading } = api.user.getAll.useQuery();
   const userData = data as DataProps[];
 
   const updateUser = api.user.update.useMutation({
@@ -63,6 +63,16 @@ export default function UserPage() {
 
   const modelWidth = useMediaQuery("(max-width: 1200px)") ? "100%" : "85%";
 
+  if (isLoading) {
+    return (
+      <Container>
+        <Center h={300}>
+          <Loader color="blue" size="lg" />
+        </Center>
+      </Container>
+    );
+  }
+
   if (sessionData?.user.role === "admin") {
     return (
       <Container title="Gestión de usuarios">
@@ -86,7 +96,11 @@ export default function UserPage() {
           />
         </Modal>
 
-        <div className="mx-auto mt-16 w-full max-w-5xl px-4 sm:px-6 md:mt-24 lg:px-8">
+        <h1 className="text-center text-lg font-medium md:text-xl">
+          Gestión de usuarios
+        </h1>
+
+        <div className="mx-auto mt-16 w-full max-w-7xl px-4 sm:px-6 md:mt-24 lg:px-8">
           <UserTableList
             data={isSuccess ? userData : []}
             onUpdate={handleUpdate}

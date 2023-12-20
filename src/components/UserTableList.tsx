@@ -97,8 +97,6 @@ function sortData(
 }
 
 const UserTableList = ({ data, onUpdate }: Props) => {
-  const [deviceId, setDeviceId] = useState("");
-  const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
   const [search, setSearch] = useState("");
   const [sortedData, setSortedData] = useState(data);
   const [sortBy, setSortBy] = useState<keyof UserProps | null>(null);
@@ -164,7 +162,7 @@ const UserTableList = ({ data, onUpdate }: Props) => {
           highlightOnHover
           horizontalSpacing="md"
           verticalSpacing="xs"
-          miw={700}
+          miw={800}
           layout="fixed"
         >
           <Table.Thead

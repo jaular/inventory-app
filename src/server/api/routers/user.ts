@@ -1,16 +1,11 @@
-import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { userSchema } from "~/lib/schema";
 
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from "~/server/api/trpc";
+import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 
 export const userRouter = createTRPCRouter({
-  getAll: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.user.findMany({
+  getAll: protectedProcedure.query(async ({ ctx }) => {
+    return await ctx.db.user.findMany({
       orderBy: { id: "desc" },
     });
   }),
@@ -19,7 +14,7 @@ export const userRouter = createTRPCRouter({
     .input(userSchema)
     .mutation(async ({ ctx, input }) => {
       const { id } = input;
-      return ctx.db.user.update({
+      return await ctx.db.user.update({
         where: { id },
         data: input,
       });
@@ -27,9 +22,9 @@ export const userRouter = createTRPCRouter({
 
   getUserById: protectedProcedure
     .input(z.object({ id: z.string() }))
-    .query(({ input, ctx }) => {
+    .query(async ({ input, ctx }) => {
       const { id } = input;
-      return ctx.db.user.findMany({
+      return await ctx.db.user.findMany({
         where: { id },
       });
     }),

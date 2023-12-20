@@ -10,6 +10,13 @@ import {
   Textarea,
 } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
+import {
+  brandData,
+  rangeData,
+  ramData,
+  departmentData,
+  officeData,
+} from "~/lib/data";
 import "dayjs/locale/es";
 
 type DataProps = PostProps & {
@@ -26,49 +33,6 @@ type Props = {
   createPost: boolean;
   updatePost: boolean;
 };
-
-const brandData = ["Asus", "Acer", "HP", "Dell", "Lenovo", "Otro"];
-const rangeData = ["Baja", "Media", "Alta"];
-const ramData = [
-  "2GB",
-  "4GB",
-  "6GB",
-  "8GB",
-  "12GB",
-  "16GB",
-  "20GB",
-  "24GB",
-  "26GB",
-  "30GB",
-  "32GB",
-  "36GB",
-  "40GB",
-];
-const departmentData = [
-  "Tecnología y Sistemas",
-  "Marca",
-  "Infraestructura",
-  "Comercial",
-  "Finanzas",
-  "Logistica",
-  "Juridico",
-  "Talento Humano",
-];
-const officeData = [
-  "Sambil",
-  "CPS",
-  "Bella Vista",
-  "Marfi",
-  "18oct",
-  "Coro",
-  "Punto Fijo",
-  "Cañada",
-  "Tendencia",
-  "Torre 13",
-  "Machiques",
-  "Villa de Rosario",
-  "San José",
-];
 
 const Form = ({
   form,
@@ -115,6 +79,7 @@ const Form = ({
         <Select
           label="Marca"
           data={brandData}
+          searchable
           {...form.getInputProps("brand")}
         />
         <TextInput label="Modelo" {...form.getInputProps("modelName")} />
@@ -122,11 +87,13 @@ const Form = ({
         <Select
           label="Gama"
           data={rangeData}
+          searchable
           {...form.getInputProps("range")}
         />
         <Select
           label="Memoria RAM"
           data={ramData}
+          searchable
           {...form.getInputProps("ram")}
         />
         {/* <TextInput label="Dirección MAC (E)" {...form.getInputProps("macE")} /> */}
@@ -155,12 +122,14 @@ const Form = ({
         <Select
           label="Dirección"
           data={departmentData}
+          searchable
           {...form.getInputProps("department")}
         />
         <TextInput label="Gerencia" {...form.getInputProps("management")} />
         <Select
           label="Sede"
           data={officeData}
+          searchable
           {...form.getInputProps("office")}
         />
 

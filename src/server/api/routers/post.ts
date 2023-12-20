@@ -1,4 +1,3 @@
-import { Prisma } from "@prisma/client";
 import { z } from "zod";
 import { postSchema } from "~/lib/schema";
 
@@ -7,12 +6,6 @@ import {
   protectedProcedure,
   publicProcedure,
 } from "~/server/api/trpc";
-
-const defaultPostSelect = Prisma.validator<Prisma.PostSelect>()({
-  serialNumber: true,
-  modelName: true,
-  createdBy: true,
-});
 
 export const postRouter = createTRPCRouter({
   // create: protectedProcedure
@@ -28,8 +21,30 @@ export const postRouter = createTRPCRouter({
   //     });
   //   }),
 
-  getAll: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.post.findMany({
+  // https://github.com/prisma/prisma/discussions/3087
+  // getAll: protectedProcedure
+  //   .input(z.object({ t: z.number() }))
+  //   .query(async ({ ctx, input }) => {
+  //     const { t } = input;
+  //     const [data, total] = await ctx.db.$transaction([
+  //       ctx.db.post.findMany({
+  //         take: t,
+  //         include: {
+  //           createdBy: {
+  //             select: { name: true },
+  //           },
+  //         },
+  //         orderBy: { createdAt: "desc" },
+  //         // where: { createdBy: { id: ctx.session.user.id } },
+  //       }),
+  //       ctx.db.post.count(),
+  //     ]);
+
+  //     return { data, total };
+  //   }),
+
+  getAll: protectedProcedure.query(async ({ ctx }) => {
+    return await ctx.db.post.findMany({
       include: {
         createdBy: {
           select: { name: true },
@@ -44,7 +59,7 @@ export const postRouter = createTRPCRouter({
     .input(z.object({ n: z.string() }))
     .query(async ({ ctx, input }) => {
       const { n } = input;
-      return ctx.db.post.findFirst({
+      return await ctx.db.post.findFirst({
         include: {
           createdBy: {
             select: { name: true },
@@ -57,7 +72,7 @@ export const postRouter = createTRPCRouter({
   create: protectedProcedure
     .input(postSchema)
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.post.create({
+      return await ctx.db.post.create({
         data: { ...input, createdBy: { connect: { id: ctx.session.user.id } } },
       });
     }),
@@ -66,7 +81,7 @@ export const postRouter = createTRPCRouter({
     .input(postSchema)
     .mutation(async ({ ctx, input }) => {
       const { n } = input;
-      return ctx.db.post.update({
+      return await ctx.db.post.update({
         where: { n },
         data: input,
       });
@@ -76,13 +91,13 @@ export const postRouter = createTRPCRouter({
     .input(z.object({ n: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const { n } = input;
-      return ctx.db.post.delete({
+      return await ctx.db.post.delete({
         where: { n },
       });
     }),
 
-  getLatest: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.post.findFirst({
+  getLatest: protectedProcedure.query(async ({ ctx }) => {
+    return await ctx.db.post.findFirst({
       orderBy: { createdAt: "desc" },
       where: { createdBy: { id: ctx.session.user.id } },
     });
@@ -97,9 +112,9 @@ export const postRouter = createTRPCRouter({
 
   getUserById: protectedProcedure
     .input(z.object({ id: z.string() }))
-    .query(({ input, ctx }) => {
+    .query(async ({ input, ctx }) => {
       const { id } = input;
-      return ctx.db.user.findMany({
+      return await ctx.db.user.findMany({
         where: { id },
       });
     }),

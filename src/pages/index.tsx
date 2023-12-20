@@ -1,7 +1,7 @@
 import type { PostProps } from "~/lib/types";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { Button, Group, Modal } from "@mantine/core";
+import { Button, Group, Modal, Loader, Center } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { useForm, zodResolver } from "@mantine/form";
 import { api } from "~/utils/api";
@@ -19,7 +19,7 @@ export default function Home() {
   const { data: sessionData } = useSession();
 
   const utils = api.useUtils();
-  const { data, isSuccess } = api.post.getAll.useQuery();
+  const { data, isSuccess, isLoading } = api.post.getAll.useQuery();
 
   const createPost = api.post.create.useMutation({
     async onSuccess() {
@@ -84,11 +84,21 @@ export default function Home() {
     } catch {}
   };
 
-  const modelWidth = useMediaQuery("(max-width: 1200px)") ? "100%" : "85%";
+  const modelWidth = useMediaQuery("(max-width: 1200px)") ? "100%" : "70%";
+
+  if (isLoading) {
+    return (
+      <Container title="Inventario (PC)">
+        <Center h={300}>
+          <Loader color="blue" size="lg" />
+        </Center>
+      </Container>
+    );
+  }
 
   if (sessionData && sessionData?.user.role !== "none") {
     return (
-      <Container>
+      <Container title="Inventario (PC)">
         <Modal
           className={classes.modal}
           overlayProps={{
@@ -110,6 +120,10 @@ export default function Home() {
           />
         </Modal>
 
+        <h1 className="text-center text-lg font-medium md:text-xl">
+          Inventario (PC)
+        </h1>
+
         <Group justify="center" className="mt-8">
           <Button variant="default" onClick={() => setFormModalOpened(true)}>
             Añadir elemento
@@ -128,7 +142,7 @@ export default function Home() {
   }
 
   return (
-    <Container>
+    <Container title="Inventario (PC)">
       <div className="text-center">
         <p>You are not authorized to view this page!</p>
       </div>

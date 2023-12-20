@@ -25,20 +25,13 @@ import {
   IconSearch,
   IconTableExport,
 } from "@tabler/icons-react";
-import { writeFile, utils } from "xlsx";
 import cx from "clsx";
+import { downloadExcel } from "~/utils/excelExport";
 import classes from "~/styles/table.module.css";
 
 type DataProps = PostProps & {
   n: string;
   accessories: any; // string[]
-  createdBy?: {
-    name: string | null;
-  };
-};
-
-type ExcelProps = PostProps & {
-  n: string;
   createdBy?: {
     name: string | null;
   };
@@ -87,7 +80,9 @@ function filterData(data: DataProps[], search: string) {
       item.n.toLowerCase().includes(query) ||
       item.serialNumber.toLowerCase().includes(query) ||
       item.brand.toLowerCase().includes(query) ||
+      item.modelName.toLowerCase().includes(query) ||
       item.office.toLowerCase().includes(query) ||
+      item.userName.toLowerCase().includes(query) ||
       item.date.toLocaleDateString().includes(query),
   );
 }
@@ -150,72 +145,6 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
     ? "1280px"
     : "1000px";
 
-  var new_headers = [
-    "ID",
-    "S/N",
-    "Nombre del equipo",
-    "Marca",
-    "Modelo",
-    // "Direccion Mac (E)",
-    "Gama",
-    "Memoria RAM",
-    "Mouse",
-    "Bolso",
-    "Usuario",
-    "Sede",
-    "Fecha de entrega",
-  ];
-  const downloadExcel = (sortedData: ExcelProps[]) => {
-    const acc = sortedData.map((row) => ({
-      mouse: row.accessories.find((item) => item === "Mouse"),
-      bag: row.accessories.find((item) => item === "Bolso"),
-    }));
-
-    const rows = sortedData.map((row, i) => ({
-      id: row.n,
-      serialNumber: row.serialNumber,
-      name: row.name,
-      brand: row.brand,
-      modelName: row.modelName,
-      // macE: row.macE,
-      range: row.range,
-      ram: row.ram,
-      mouse: acc[i]?.mouse === "Mouse" ? "si" : "no",
-      bag: acc[i]?.bag === "Bolso" ? "si" : "no",
-      userName: row.userName,
-      office: row.office,
-      date: row.date.toLocaleDateString(),
-    }));
-
-    // generate worksheet and workbook
-    const worksheet = utils.json_to_sheet(rows);
-    const workbook = utils.book_new();
-    utils.book_append_sheet(workbook, worksheet, "Sheet1");
-
-    // fix headers
-    utils.sheet_add_aoa(worksheet, [new_headers], { origin: "A1" });
-
-    // column width
-    const wscols = [
-      { wch: 30 },
-      { wch: 20 },
-      { wch: 20 },
-      { wch: 20 },
-      { wch: 20 },
-      { wch: 20 },
-      { wch: 20 },
-      { wch: 20 },
-      { wch: 20 },
-      { wch: 20 },
-      { wch: 20 },
-      { wch: 20 },
-    ];
-    worksheet["!cols"] = wscols;
-
-    // create an XLSX file
-    writeFile(workbook, "DataSheet.xlsx", { compression: true });
-  };
-
   const rows = sortedData.map((row) => (
     <Table.Tr key={row.n}>
       <Table.Td className="truncate">
@@ -224,7 +153,7 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
         </Anchor>
       </Table.Td>
       <Table.Td className="truncate">{row.serialNumber}</Table.Td>
-      <Table.Td>{row.brand}</Table.Td>
+      <Table.Td className="truncate">{row.brand}</Table.Td>
       <Table.Td className="truncate">{row.modelName}</Table.Td>
       <Table.Td className="truncate">{row.userName}</Table.Td>
       <Table.Td className="truncate">{row.office}</Table.Td>
@@ -325,7 +254,7 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
 
       <ScrollArea
         className="mt-8"
-        style={{ height: 254 }}
+        style={{ height: 400 }}
         onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
       >
         <Table
