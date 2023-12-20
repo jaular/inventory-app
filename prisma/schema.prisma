@@ -17,7 +17,6 @@ model Post {
     name         String
     brand        String
     modelName    String
-    macE         String
     range        String
     ram          String
     accessories  String[]

@@ -3,7 +3,7 @@ export type PostProps = {
   name: string;
   brand: string;
   modelName: string;
-  macE: string;
+  // macE: string;
   range: string;
   ram: string;
   accessories: string[];

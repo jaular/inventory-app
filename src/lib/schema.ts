@@ -30,13 +30,13 @@ export const postSchema = z.object({
     .min(2, { message: "Must be 2 or more characters long" })
     .trim()
     .or(z.literal("")),
-  macE: z
-    .string()
-    .regex(macRegex, {
-      message: "Invalid MAC address",
-    })
-    .trim()
-    .or(z.literal("")),
+  // macE: z
+  //   .string()
+  //   .regex(macRegex, {
+  //     message: "Invalid MAC address",
+  //   })
+  //   .trim()
+  //   .or(z.literal("")),
   range: z
     .string()
     .min(1, { message: "Pick one option" })

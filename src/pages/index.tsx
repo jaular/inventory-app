@@ -44,8 +44,10 @@ export default function Home() {
     initialValues: postInitialValues,
     transformValues: (values) => ({
       ...values,
-      macE: values.macE.toUpperCase(),
-      accessories: values.accessories.slice(1),
+      // macE: values.macE.toUpperCase(),
+      accessories: createState
+        ? values.accessories.slice(1)
+        : values.accessories,
     }),
   });
 
@@ -110,7 +112,7 @@ export default function Home() {
 
         <Group justify="center" className="mt-8">
           <Button variant="default" onClick={() => setFormModalOpened(true)}>
-            Añadir nuevo elemento
+            Añadir elemento
           </Button>
         </Group>
 

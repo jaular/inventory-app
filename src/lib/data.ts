@@ -3,7 +3,7 @@ export const postInitialValues = {
   name: "",
   brand: "",
   modelName: "",
-  macE: "",
+  // macE: "",
   range: "",
   ram: "",
   accessories: [""],

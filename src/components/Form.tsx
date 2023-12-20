@@ -129,7 +129,7 @@ const Form = ({
           data={ramData}
           {...form.getInputProps("ram")}
         />
-        <TextInput label="Dirección MAC (E)" {...form.getInputProps("macE")} />
+        {/* <TextInput label="Dirección MAC (E)" {...form.getInputProps("macE")} /> */}
         <Checkbox.Group
           className="col-span-2 md:col-span-3 xl:col-span-4"
           label="Accesorios"
@@ -142,7 +142,7 @@ const Form = ({
         </Checkbox.Group>
 
         <Divider
-          my="xs"
+          my="md"
           label="Responsable"
           labelPosition="center"
           className="col-span-2 md:col-span-3 xl:col-span-4"
@@ -152,12 +152,12 @@ const Form = ({
           label="Nombre del usuario"
           {...form.getInputProps("userName")}
         />
-        <TextInput label="Gerencia" {...form.getInputProps("management")} />
         <Select
           label="Dirección"
           data={departmentData}
           {...form.getInputProps("department")}
         />
+        <TextInput label="Gerencia" {...form.getInputProps("management")} />
         <Select
           label="Sede"
           data={officeData}
@@ -165,18 +165,21 @@ const Form = ({
         />
 
         <Divider
-          my="xs"
-          label="Informacíon adicional"
+          my="md"
+          label="Información adicional"
           labelPosition="center"
           className="col-span-2 md:col-span-3 xl:col-span-4"
         />
         <DatePickerInput
-          // locale="es"
+          locale="es"
           label="Fecha de entrega"
           defaultValue={new Date()}
           {...form.getInputProps("date")}
         />
-        <TextInput label="# de orden" {...form.getInputProps("orderNumber")} />
+        <TextInput
+          label="Número de orden"
+          {...form.getInputProps("orderNumber")}
+        />
         <Textarea
           className="col-span-2 max-w-lg md:col-span-3"
           label="Observaciones"
