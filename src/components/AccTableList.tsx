@@ -1,11 +1,7 @@
 import type { AccProps } from "~/lib/types";
+import type { MRT_ColumnDef, MRT_Row } from "mantine-react-table";
 import { useMemo, useState } from "react";
-import {
-  MantineReactTable,
-  useMantineReactTable,
-  type MRT_ColumnDef,
-  type MRT_Row,
-} from "mantine-react-table";
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { Modal, Group, ActionIcon, Button, Tooltip } from "@mantine/core";
 import {
   IconPencil,
@@ -53,6 +49,7 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
       {
         accessorKey: "type",
         header: "Tipo",
+        maxSize: 110,
       },
       {
         accessorKey: "serialNumber",
@@ -62,6 +59,7 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
       {
         accessorKey: "brand",
         header: "Marca",
+        maxSize: 130,
       },
       {
         accessorKey: "modelName",
@@ -71,6 +69,7 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
       {
         accessorKey: "condition",
         header: "Estado",
+        maxSize: 130,
       },
       {
         accessorKey: "userName",
@@ -80,16 +79,18 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
       {
         accessorKey: "department",
         header: "Dirección",
-        maxSize: 130,
+        maxSize: 180,
       },
       {
         accessorFn: (row) => row.date.toLocaleDateString(),
         header: "Fecha",
+        maxSize: 150,
       },
       {
         header: "...",
+        enableSorting: false,
         accessorFn: (row) => (
-          <Group>
+          <ActionIcon.Group>
             <Tooltip label="Actualizar" color="gray" offset={10}>
               <ActionIcon
                 size={32}
@@ -113,7 +114,7 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
                 <IconTrash size={18} stroke={1.5} />
               </ActionIcon>
             </Tooltip>
-          </Group>
+          </ActionIcon.Group>
         ),
       },
     ],
@@ -123,11 +124,6 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
   const table = useMantineReactTable({
     columns,
     data,
-    mantineTableProps: {
-      style: {
-        tableLayout: "fixed",
-      },
-    },
     enableRowSelection: true,
     enableDensityToggle: false,
     localization: localization,
@@ -135,14 +131,23 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
       columnVisibility: {
         n: false,
         modelName: false,
-        department: false,
+        office: false,
       },
       pagination: { pageSize: 5, pageIndex: 0 },
     },
     paginationDisplayMode: "pages",
+    mantineTableProps: {
+      style: {
+        tableLayout: "fixed",
+      },
+    },
     mantinePaginationProps: {
       showRowsPerPage: false,
       rowsPerPageOptions: ["5", "10"],
+      size: "sm",
+    },
+    mantineSelectCheckboxProps: {
+      size: "sm",
     },
     // renderTopToolbarCustomActions: ({ table }) => (),
   });

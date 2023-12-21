@@ -94,7 +94,7 @@ const AccForm = ({
           {...form.getInputProps("userName")}
         />
         <Select
-          label="Dirección"
+          label="Direcci&oacute;n"
           data={departmentData}
           searchable
           {...form.getInputProps("department")}
@@ -102,7 +102,7 @@ const AccForm = ({
 
         <Divider
           my="md"
-          label="Información adicional"
+          label="Informaci&oacute;n adicional"
           labelPosition="center"
           className="col-span-2 md:col-span-3 xl:col-span-4"
         />

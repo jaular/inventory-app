@@ -36,7 +36,7 @@ function AuthShowcase() {
             </Button> */}
             {sessionData.user?.image ? (
               <Image
-                className="rounded-full"
+                className="rounded-full bg-gray-700"
                 src={sessionData.user?.image}
                 title={sessionData.user?.name || ""}
                 width={34}
@@ -45,7 +45,7 @@ function AuthShowcase() {
               />
             ) : (
               <IconUser
-                className="rounded-full bg-gray-500"
+                className="rounded-full bg-gray-700"
                 width={34}
                 height={34}
               />
@@ -62,18 +62,20 @@ function AuthShowcase() {
             <Menu.Label>{sessionData.user?.email}</Menu.Label>
             <Menu.Divider />
             <Menu.Item>
-              <Link href="/">Inventario (Equipos)</Link>
+              <Link href="/">Equipos</Link>
             </Menu.Item>
             <Menu.Item>
-              <Link href="/accs">Inventario (Accesorios)</Link>
+              <Link href="/accs">Accesorios</Link>
             </Menu.Item>
             {sessionData?.user.role === "admin" && (
               <Menu.Item>
-                <Link href="/users">Gestión de usuarios</Link>
+                <Link href="/users">Gesti&oacute;n de usuarios</Link>
               </Menu.Item>
             )}
-
-            <Menu.Item onClick={() => void signOut()}>Cerrar sesión</Menu.Item>
+            <Menu.Divider />
+            <Menu.Item onClick={() => void signOut()}>
+              Cerrar sesi&oacute;n
+            </Menu.Item>
           </Menu.Dropdown>
         </Menu>
       ) : (

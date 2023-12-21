@@ -97,7 +97,7 @@ export default function UsersPage() {
         </Modal>
 
         <h1 className="text-center text-lg font-medium md:text-xl">
-          Gestión de usuarios
+          Gesti&oacute;n de usuarios
         </h1>
 
         <div className="mx-auto mt-16 w-full max-w-7xl px-4 sm:px-6 md:mt-24 lg:px-8">

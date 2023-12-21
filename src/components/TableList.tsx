@@ -1,12 +1,16 @@
 import type { PostProps } from "~/lib/types";
+import type { MRT_ColumnDef, MRT_Row } from "mantine-react-table";
 import { useMemo, useState } from "react";
+import Link from "next/link";
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import {
-  MantineReactTable,
-  useMantineReactTable,
-  type MRT_ColumnDef,
-  type MRT_Row,
-} from "mantine-react-table";
-import { Modal, Group, ActionIcon, Button, Tooltip } from "@mantine/core";
+  Modal,
+  Group,
+  ActionIcon,
+  Button,
+  Tooltip,
+  Anchor,
+} from "@mantine/core";
 import {
   IconPencil,
   IconTrash,
@@ -50,11 +54,16 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
         accessorKey: "n",
         header: "ID",
         maxSize: 130,
+        accessorFn: (row) => (
+          <Anchor component={Link} href={`/post/${row.n}`}>
+            {row.n}
+          </Anchor>
+        ),
       },
       {
         accessorKey: "name",
         header: "Nombre",
-        maxSize: 130,
+        maxSize: 150,
       },
       {
         accessorKey: "serialNumber",
@@ -64,6 +73,7 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
       {
         accessorKey: "brand",
         header: "Marca",
+        maxSize: 130,
       },
       {
         accessorKey: "modelName",
@@ -78,15 +88,18 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
       {
         accessorKey: "office",
         header: "Sede",
+        maxSize: 130,
       },
       {
         accessorFn: (row) => row.date.toLocaleDateString(),
         header: "Fecha",
+        maxSize: 150,
       },
       {
         header: "...",
+        enableSorting: false,
         accessorFn: (row) => (
-          <Group>
+          <ActionIcon.Group>
             <Tooltip label="Actualizar" color="gray" offset={10}>
               <ActionIcon
                 size={32}
@@ -110,7 +123,7 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
                 <IconTrash size={18} stroke={1.5} />
               </ActionIcon>
             </Tooltip>
-          </Group>
+          </ActionIcon.Group>
         ),
       },
     ],
@@ -120,11 +133,6 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
   const table = useMantineReactTable({
     columns,
     data,
-    mantineTableProps: {
-      style: {
-        tableLayout: "fixed",
-      },
-    },
     enableRowSelection: true,
     enableDensityToggle: false,
     localization: localization,
@@ -137,9 +145,18 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
       pagination: { pageSize: 5, pageIndex: 0 },
     },
     paginationDisplayMode: "pages",
+    mantineTableProps: {
+      style: {
+        tableLayout: "fixed",
+      },
+    },
     mantinePaginationProps: {
       showRowsPerPage: false,
       rowsPerPageOptions: ["5", "10"],
+      size: "sm",
+    },
+    mantineSelectCheckboxProps: {
+      size: "sm",
     },
     // renderTopToolbarCustomActions: ({ table }) => (),
   });

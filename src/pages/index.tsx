@@ -2,8 +2,9 @@ import type { PostProps } from "~/lib/types";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { Button, Group, Modal, Loader, Center } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
+// import { useMediaQuery } from "@mantine/hooks";
 import { useForm, zodResolver } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import { api } from "~/utils/api";
 import { postSchema } from "~/lib/schema";
 import { postInitialValues } from "~/lib/data";
@@ -24,18 +25,27 @@ export default function Home() {
   const createPost = api.post.create.useMutation({
     async onSuccess() {
       await utils.post.getAll.invalidate();
+      notifications.show({
+        message: "Elemento creado",
+      });
     },
   });
 
   const updatePost = api.post.update.useMutation({
     async onSuccess() {
       await utils.post.getAll.invalidate();
+      notifications.show({
+        message: "Elemento actualizado",
+      });
     },
   });
 
   const deletePost = api.post.delete.useMutation({
     async onSuccess() {
       await utils.post.getAll.invalidate();
+      notifications.show({
+        message: "Elemento eliminado",
+      });
     },
   });
 
@@ -84,7 +94,7 @@ export default function Home() {
     } catch {}
   };
 
-  const modelWidth = useMediaQuery("(max-width: 1200px)") ? "100%" : "70%";
+  // const modelWidth = useMediaQuery("(max-width: 1200px)") ? "100%" : "70%";
 
   if (isLoading) {
     return (
@@ -100,29 +110,30 @@ export default function Home() {
     return (
       <Container title="Inventario (Equipos)">
         <Modal
+          fullScreen
           className={classes.modal}
-          overlayProps={{
-            backgroundOpacity: 0.55,
-            blur: 3,
-          }}
-          size={modelWidth}
+          // overlayProps={{
+          //   backgroundOpacity: 0.55,
+          //   blur: 3,
+          // }}
+          // size={modelWidth}
           title={createState ? "Crear" : "Actualizar"}
           opened={formModalOpened}
           onClose={() => handleReset()}
         >
-          <Form
-            form={form}
-            createState={createState}
-            createPost={createPost.isLoading}
-            updatePost={updatePost.isLoading}
-            onSubmit={handleSubmit}
-            onReset={handleReset}
-          />
+          {formModalOpened && (
+            <Form
+              form={form}
+              createState={createState}
+              createPost={createPost.isLoading}
+              updatePost={updatePost.isLoading}
+              onSubmit={handleSubmit}
+              onReset={handleReset}
+            />
+          )}
         </Modal>
 
-        <h1 className="text-center text-lg font-medium md:text-xl">
-          Inventario (Equipos)
-        </h1>
+        <h1 className="text-center text-lg font-medium md:text-2xl">Equipos</h1>
 
         <Group justify="center" className="mt-8">
           <Button variant="default" onClick={() => setFormModalOpened(true)}>

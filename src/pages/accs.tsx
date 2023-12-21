@@ -2,8 +2,9 @@ import type { AccProps } from "~/lib/types";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { Button, Group, Modal, Loader, Center } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
+// import { useMediaQuery } from "@mantine/hooks";
 import { useForm, zodResolver } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import { api } from "~/utils/api";
 import { accSchema } from "~/lib/schema";
 import { accInitialValues } from "~/lib/data";
@@ -24,18 +25,27 @@ export default function AccPage() {
   const createAcc = api.acc.create.useMutation({
     async onSuccess() {
       await utils.acc.getAll.invalidate();
+      notifications.show({
+        message: "Elemento creado",
+      });
     },
   });
 
   const updateAcc = api.acc.update.useMutation({
     async onSuccess() {
       await utils.acc.getAll.invalidate();
+      notifications.show({
+        message: "Elemento actualizado",
+      });
     },
   });
 
   const deleteAcc = api.acc.delete.useMutation({
     async onSuccess() {
       await utils.acc.getAll.invalidate();
+      notifications.show({
+        message: "Elemento eliminado",
+      });
     },
   });
 
@@ -80,7 +90,7 @@ export default function AccPage() {
     } catch {}
   };
 
-  const modelWidth = useMediaQuery("(max-width: 1200px)") ? "100%" : "70%";
+  // const modelWidth = useMediaQuery("(max-width: 1200px)") ? "100%" : "70%";
 
   if (isLoading) {
     return (
@@ -96,28 +106,31 @@ export default function AccPage() {
     return (
       <Container title="Inventario (Accesorios)">
         <Modal
+          fullScreen
           className={classes.modal}
-          overlayProps={{
-            backgroundOpacity: 0.55,
-            blur: 3,
-          }}
-          size={modelWidth}
+          // overlayProps={{
+          //   backgroundOpacity: 0.55,
+          //   blur: 3,
+          // }}
+          // size={modelWidth}
           title={createState ? "Crear" : "Actualizar"}
           opened={formModalOpened}
           onClose={() => handleReset()}
         >
-          <AccForm
-            form={form}
-            createState={createState}
-            createAcc={createAcc.isLoading}
-            updateAcc={updateAcc.isLoading}
-            onSubmit={handleSubmit}
-            onReset={handleReset}
-          />
+          {formModalOpened && (
+            <AccForm
+              form={form}
+              createState={createState}
+              createAcc={createAcc.isLoading}
+              updateAcc={updateAcc.isLoading}
+              onSubmit={handleSubmit}
+              onReset={handleReset}
+            />
+          )}
         </Modal>
 
-        <h1 className="text-center text-lg font-medium md:text-xl">
-          Inventario (Accesorios)
+        <h1 className="text-center text-lg font-medium md:text-2xl">
+          Accesorios
         </h1>
 
         <Group justify="center" className="mt-8">

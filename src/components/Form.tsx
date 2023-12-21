@@ -135,7 +135,7 @@ const Form = ({
 
         <Divider
           my="md"
-          label="Información adicional"
+          label="Informaci&oacute;n adicional"
           labelPosition="center"
           className="col-span-2 md:col-span-3 xl:col-span-4"
         />
@@ -146,7 +146,7 @@ const Form = ({
           {...form.getInputProps("date")}
         />
         <TextInput
-          label="Número de orden"
+          label="N&uacute;mero de orden"
           {...form.getInputProps("orderNumber")}
         />
         <Textarea
