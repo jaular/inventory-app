@@ -7,10 +7,12 @@ import {
   IconPencil,
   IconTrash,
   IconTableExport,
+  IconLayoutRows,
   IconTableRow,
 } from "@tabler/icons-react";
 import { downloadExcelAcc } from "~/utils/excelExport";
 import { localization } from "~/lib/tableLocale";
+import { typeData, brandData, conditionData } from "~/lib/data";
 import classes from "~/styles/table.module.css";
 
 type DataProps = AccProps & {
@@ -49,7 +51,11 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
       {
         accessorKey: "type",
         header: "Tipo",
-        maxSize: 110,
+        maxSize: 140,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: typeData,
+        },
       },
       {
         accessorKey: "serialNumber",
@@ -59,7 +65,11 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
       {
         accessorKey: "brand",
         header: "Marca",
-        maxSize: 130,
+        maxSize: 150,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: brandData,
+        },
       },
       {
         accessorKey: "modelName",
@@ -69,7 +79,11 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
       {
         accessorKey: "condition",
         header: "Estado",
-        maxSize: 130,
+        maxSize: 140,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: conditionData,
+        },
       },
       {
         accessorKey: "userName",
@@ -131,7 +145,7 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
       columnVisibility: {
         n: false,
         modelName: false,
-        office: false,
+        department: false,
       },
       pagination: { pageSize: 5, pageIndex: 0 },
     },
@@ -199,6 +213,22 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
             onClick={handleExportData}
           >
             <IconTableExport
+              style={{ width: "70%", height: "70%" }}
+              stroke={1.5}
+            />
+          </ActionIcon>
+        </Tooltip>
+        <Tooltip label="Exportar todas las filas" color="gray" offset={10}>
+          <ActionIcon
+            size={32}
+            variant="light"
+            color="teal"
+            disabled={table.getPrePaginationRowModel().rows.length === 0}
+            onClick={() =>
+              handleExportRows(table.getPrePaginationRowModel().rows)
+            }
+          >
+            <IconLayoutRows
               style={{ width: "70%", height: "70%" }}
               stroke={1.5}
             />

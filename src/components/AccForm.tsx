@@ -9,7 +9,7 @@ import {
   Textarea,
 } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
-import { brandData, departmentData } from "~/lib/data";
+import { typeData, brandData, conditionData, departmentData } from "~/lib/data";
 import "dayjs/locale/es";
 
 type DataProps = AccProps & {
@@ -62,7 +62,7 @@ const AccForm = ({
         )}
         <Select
           label="Tipo"
-          data={["Mouse", "Teclado", "Monitor", "Cargador"]}
+          data={typeData}
           searchable
           withAsterisk
           {...form.getInputProps("type")}
@@ -77,7 +77,7 @@ const AccForm = ({
         <TextInput label="Modelo" {...form.getInputProps("modelName")} />
         <Select
           label="Estado"
-          data={["Nuevo", "Usado", "Dañado"]}
+          data={conditionData}
           searchable
           {...form.getInputProps("condition")}
         />

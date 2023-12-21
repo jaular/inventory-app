@@ -64,6 +64,8 @@ export const ramData = [
   "36GB",
   "40GB",
 ];
+export const typeData = ["Mouse", "Teclado", "Monitor", "Cargador"];
+export const conditionData = ["Nuevo", "Usado", "Dañado"];
 export const departmentData = [
   "Tecnología y Sistemas",
   "Marca",

@@ -15,10 +15,12 @@ import {
   IconPencil,
   IconTrash,
   IconTableExport,
+  IconLayoutRows,
   IconTableRow,
 } from "@tabler/icons-react";
 import { downloadExcel } from "~/utils/excelExport";
 import { localization } from "~/lib/tableLocale";
+import { brandData, officeData } from "~/lib/data";
 import classes from "~/styles/table.module.css";
 
 type DataProps = PostProps & {
@@ -73,7 +75,11 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
       {
         accessorKey: "brand",
         header: "Marca",
-        maxSize: 130,
+        maxSize: 150,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: brandData,
+        },
       },
       {
         accessorKey: "modelName",
@@ -88,7 +94,11 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
       {
         accessorKey: "office",
         header: "Sede",
-        maxSize: 130,
+        maxSize: 160,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: officeData,
+        },
       },
       {
         accessorFn: (row) => row.date.toLocaleDateString(),
@@ -208,6 +218,22 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
             onClick={handleExportData}
           >
             <IconTableExport
+              style={{ width: "70%", height: "70%" }}
+              stroke={1.5}
+            />
+          </ActionIcon>
+        </Tooltip>
+        <Tooltip label="Exportar todas las filas" color="gray" offset={10}>
+          <ActionIcon
+            size={32}
+            variant="light"
+            color="teal"
+            disabled={table.getPrePaginationRowModel().rows.length === 0}
+            onClick={() =>
+              handleExportRows(table.getPrePaginationRowModel().rows)
+            }
+          >
+            <IconLayoutRows
               style={{ width: "70%", height: "70%" }}
               stroke={1.5}
             />
