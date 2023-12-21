@@ -8,13 +8,12 @@ type ExcelProps = PostProps & {
   };
 };
 
-var new_headers = [
+const new_headers = [
   "ID",
   "S/N",
   "Nombre del equipo",
   "Marca",
   "Modelo",
-  // "Direccion Mac (E)",
   "Gama",
   "Memoria RAM",
   "Mouse",
@@ -38,7 +37,6 @@ export const downloadExcel = (sortedData: ExcelProps[]) => {
     name: row.name,
     brand: row.brand,
     modelName: row.modelName,
-    // macE: row.macE,
     range: row.range,
     ram: row.ram,
     mouse: acc[i]?.mouse === "Mouse" ? "si" : "no",
@@ -70,7 +68,7 @@ export const downloadExcel = (sortedData: ExcelProps[]) => {
     { wch: 10 },
     { wch: 10 },
     { wch: 20 },
-    { wch: 20 },
+    { wch: 25 },
     { wch: 20 },
     { wch: 20 },
     { wch: 20 },
@@ -88,7 +86,7 @@ type ExcelProps2 = AccProps & {
   };
 };
 
-var new_headers2 = [
+const new_headers2 = [
   "ID",
   "Tipo",
   "S/N",

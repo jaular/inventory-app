@@ -1,30 +1,20 @@
 import type { AccProps } from "~/lib/types";
-import { useState, useEffect } from "react";
-import { useMediaQuery } from "@mantine/hooks";
+import { useMemo, useState } from "react";
 import {
-  Table,
-  Modal,
-  ScrollArea,
-  Group,
-  ActionIcon,
-  UnstyledButton,
-  Text,
-  Center,
-  TextInput,
-  Button,
-  Tooltip,
-} from "@mantine/core";
+  MantineReactTable,
+  useMantineReactTable,
+  type MRT_ColumnDef,
+  type MRT_Row,
+} from "mantine-react-table";
+import { Modal, Group, ActionIcon, Button, Tooltip } from "@mantine/core";
 import {
   IconPencil,
   IconTrash,
-  IconSelector,
-  IconChevronDown,
-  IconChevronUp,
-  IconSearch,
   IconTableExport,
+  IconTableRow,
 } from "@tabler/icons-react";
-import cx from "clsx";
 import { downloadExcelAcc } from "~/utils/excelExport";
+import { localization } from "~/lib/tableLocale";
 import classes from "~/styles/table.module.css";
 
 type DataProps = AccProps & {
@@ -36,154 +26,125 @@ type DataProps = AccProps & {
 
 type Props = {
   data: DataProps[];
-  onUpdate: (acc: AccProps) => void;
+  onUpdate: (Post: AccProps) => void;
   onDelete: (serialNumber: string) => Promise<void>;
 };
-
-type ThProps = {
-  children: React.ReactNode;
-  reversed: boolean;
-  sorted: boolean;
-  onSort(): void;
-};
-
-function Th({ children, reversed, sorted, onSort }: ThProps) {
-  const Icon = sorted
-    ? reversed
-      ? IconChevronUp
-      : IconChevronDown
-    : IconSelector;
-  return (
-    <Table.Th className={classes.th}>
-      <UnstyledButton onClick={onSort} className={classes.control}>
-        <Group justify="space-between">
-          <Text fw={500} fz="sm">
-            {children}
-          </Text>
-          <Center className={classes.icon}>
-            <Icon size={14} stroke={1.5} />
-          </Center>
-        </Group>
-      </UnstyledButton>
-    </Table.Th>
-  );
-}
-
-function filterData(data: DataProps[], search: string) {
-  const query = search.toLowerCase().trim();
-
-  return data.filter(
-    (item) =>
-      item.n.toLowerCase().includes(query) ||
-      item.serialNumber.toLowerCase().includes(query) ||
-      item.brand.toLowerCase().includes(query) ||
-      item.modelName.toLowerCase().includes(query) ||
-      item.userName.toLowerCase().includes(query) ||
-      item.date.toLocaleDateString().includes(query),
-  );
-}
-
-function sortData(
-  data: DataProps[],
-  payload: {
-    sortBy: keyof AccProps | null;
-    reversed: boolean;
-    search: string;
-  },
-) {
-  const { sortBy } = payload;
-
-  if (!sortBy) {
-    return filterData(data, payload.search);
-  }
-
-  return filterData(
-    [...data].sort((a, b) => {
-      if (payload.reversed) {
-        return b[sortBy].localeCompare(a[sortBy]);
-      }
-
-      return a[sortBy].localeCompare(b[sortBy]);
-    }),
-    payload.search,
-  );
-}
 
 const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
   const [deviceId, setDeviceId] = useState("");
   const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
-  const [search, setSearch] = useState("");
-  const [sortedData, setSortedData] = useState(data);
-  const [sortBy, setSortBy] = useState<keyof AccProps | null>(null);
-  const [reverseSortDirection, setReverseSortDirection] = useState(false);
-  const [scrolled, setScrolled] = useState<boolean>(false);
 
-  useEffect(() => {
-    setSortedData(data);
-  }, [data]);
-
-  const setSorting = (field: keyof AccProps) => {
-    const reversed = field === sortBy ? !reverseSortDirection : false;
-    setReverseSortDirection(reversed);
-    setSortBy(field);
-    setSortedData(sortData(data, { sortBy: field, reversed, search }));
+  const handleExportRows = (rows: MRT_Row<DataProps>[]) => {
+    const rowData = rows.map((row) => row.original);
+    downloadExcelAcc(rowData);
   };
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.currentTarget;
-    setSearch(value);
-    setSortedData(
-      sortData(data, { sortBy, reversed: reverseSortDirection, search: value }),
-    );
+  const handleExportData = () => {
+    downloadExcelAcc(data);
   };
 
-  const tableMinWidth = useMediaQuery("(max-width: 400px)")
-    ? "1280px"
-    : "1200px";
+  const columns = useMemo<MRT_ColumnDef<DataProps>[]>(
+    () => [
+      {
+        accessorKey: "n",
+        header: "ID",
+        size: 10,
+      },
+      {
+        accessorKey: "type",
+        header: "Tipo",
+        size: 10,
+      },
+      {
+        accessorKey: "serialNumber",
+        header: "S/N",
+        size: 10,
+      },
+      {
+        accessorKey: "brand",
+        header: "Marca",
+        size: 10,
+      },
+      {
+        accessorKey: "modelName",
+        header: "Modelo",
+        size: 10,
+      },
+      {
+        accessorKey: "condition",
+        header: "Estado",
+        size: 10,
+      },
+      {
+        accessorKey: "userName",
+        header: "Usuario",
+        size: 10,
+      },
+      {
+        accessorKey: "department",
+        header: "Dirección",
+        size: 10,
+      },
+      {
+        accessorFn: (row) => row.date.toLocaleDateString(),
+        header: "Fecha",
+        size: 10,
+      },
+      {
+        header: "...",
+        accessorFn: (row) => (
+          <Group>
+            <Tooltip label="Actualizar" color="gray" offset={10}>
+              <ActionIcon
+                size={32}
+                variant="light"
+                color="gray"
+                onClick={() => onUpdate(row)}
+              >
+                <IconPencil size={18} stroke={1.5} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Eliminar" color="gray" offset={10}>
+              <ActionIcon
+                size={32}
+                variant="light"
+                color="red"
+                onClick={() => {
+                  setDeleteModalOpened(true);
+                  setDeviceId(row.n);
+                }}
+              >
+                <IconTrash size={18} stroke={1.5} />
+              </ActionIcon>
+            </Tooltip>
+          </Group>
+        ),
+      },
+    ],
+    [],
+  );
 
-  const rows = sortedData.map((row) => (
-    <Table.Tr key={row.n}>
-      {/* <Table.Td className="truncate">
-        <Anchor component={Link} href={`/acc/${row.n}`}>
-          {row.n}
-        </Anchor>
-      </Table.Td> */}
-      <Table.Td className="truncate">{row.type}</Table.Td>
-      <Table.Td className="truncate">{row.serialNumber}</Table.Td>
-      <Table.Td className="truncate">{row.brand}</Table.Td>
-      <Table.Td className="truncate">{row.modelName}</Table.Td>
-      <Table.Td className="truncate">{row.condition}</Table.Td>
-      <Table.Td className="truncate">{row.userName}</Table.Td>
-      <Table.Td className="truncate">{row.date.toLocaleDateString()}</Table.Td>
-      <Table.Td>
-        <Group>
-          <Tooltip label="Actualizar" color="gray" offset={10}>
-            <ActionIcon
-              size={32}
-              variant="light"
-              color="gray"
-              onClick={() => onUpdate(row)}
-            >
-              <IconPencil size={18} stroke={1.5} />
-            </ActionIcon>
-          </Tooltip>
-          <Tooltip label="Eliminar" color="gray" offset={10}>
-            <ActionIcon
-              size={32}
-              variant="light"
-              color="red"
-              onClick={() => {
-                setDeleteModalOpened(true);
-                setDeviceId(row.n);
-              }}
-            >
-              <IconTrash size={18} stroke={1.5} />
-            </ActionIcon>
-          </Tooltip>
-        </Group>
-      </Table.Td>
-    </Table.Tr>
-  ));
+  const table = useMantineReactTable({
+    columns,
+    data,
+    enableRowSelection: true,
+    enableDensityToggle: false,
+    localization: localization,
+    initialState: {
+      columnVisibility: {
+        n: false,
+        modelName: false,
+        department: false,
+      },
+      pagination: { pageSize: 5, pageIndex: 0 },
+    },
+    paginationDisplayMode: "pages",
+    mantinePaginationProps: {
+      showRowsPerPage: false,
+      rowsPerPageOptions: ["5", "10"],
+    },
+    // renderTopToolbarCustomActions: ({ table }) => (),
+  });
 
   return (
     <>
@@ -223,22 +184,13 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
         </Group>
       </Modal>
 
-      <div className="flex items-center justify-between">
-        <TextInput
-          className="w-64"
-          placeholder="Buscar"
-          leftSection={<IconSearch size={14} stroke={1.5} />}
-          value={search}
-          autoComplete="off"
-          onChange={handleSearchChange}
-        />
-
-        <Tooltip label="Exportar hoja de cálculo" color="gray" offset={10}>
+      <ActionIcon.Group className="my-4">
+        <Tooltip label="Exportar todo" color="gray" offset={10}>
           <ActionIcon
             size={32}
             variant="light"
             color="teal"
-            onClick={() => downloadExcelAcc(sortedData)}
+            onClick={handleExportData}
           >
             <IconTableExport
               style={{ width: "70%", height: "70%" }}
@@ -246,88 +198,24 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
             />
           </ActionIcon>
         </Tooltip>
-      </div>
-
-      <ScrollArea
-        className="mt-8"
-        style={{ height: 400 }}
-        onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
-      >
-        <Table
-          highlightOnHover
-          horizontalSpacing="md"
-          verticalSpacing="xs"
-          miw={tableMinWidth}
-          layout="fixed"
-        >
-          <Table.Thead
-            className={cx(classes.header, {
-              [classes.scrolled || ""]: scrolled,
-            })}
+        <Tooltip label="Exportar filas seleccionadas" color="gray" offset={10}>
+          <ActionIcon
+            size={32}
+            variant="light"
+            color="teal"
+            disabled={
+              !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
+            }
+            onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
           >
-            <Table.Tr>
-              {/* <Table.Th className="w-[8rem]">ID</Table.Th> */}
-              <Th
-                sorted={sortBy === "type"}
-                reversed={reverseSortDirection}
-                onSort={() => setSorting("type")}
-              >
-                Tipo
-              </Th>
-              <Th
-                sorted={sortBy === "serialNumber"}
-                reversed={reverseSortDirection}
-                onSort={() => setSorting("serialNumber")}
-              >
-                S/N
-              </Th>
-              <Th
-                sorted={sortBy === "brand"}
-                reversed={reverseSortDirection}
-                onSort={() => setSorting("brand")}
-              >
-                Marca
-              </Th>
-              <Th
-                sorted={sortBy === "modelName"}
-                reversed={reverseSortDirection}
-                onSort={() => setSorting("modelName")}
-              >
-                Modelo
-              </Th>
-              <Th
-                sorted={sortBy === "condition"}
-                reversed={reverseSortDirection}
-                onSort={() => setSorting("condition")}
-              >
-                Estado
-              </Th>
-              <Th
-                sorted={sortBy === "userName"}
-                reversed={reverseSortDirection}
-                onSort={() => setSorting("userName")}
-              >
-                Usuario
-              </Th>
-              <Table.Th>Fecha de entrega</Table.Th>
-              <Table.Th />
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>
-            {rows.length > 0 ? (
-              rows
-            ) : (
-              <Table.Tr>
-                <Table.Td colSpan={8}>
-                  <Text fw={500} ta="center">
-                    Nada encontrado
-                  </Text>
-                </Table.Td>
-              </Table.Tr>
-            )}
-          </Table.Tbody>
-        </Table>
-      </ScrollArea>
+            <IconTableRow
+              style={{ width: "70%", height: "70%" }}
+              stroke={1.5}
+            />
+          </ActionIcon>
+        </Tooltip>
+      </ActionIcon.Group>
+      <MantineReactTable table={table} />
     </>
   );
 };
