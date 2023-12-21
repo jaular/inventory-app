@@ -38,6 +38,7 @@ function AuthShowcase() {
               <Image
                 className="rounded-full"
                 src={sessionData.user?.image}
+                title={sessionData.user?.name || ""}
                 width={34}
                 height={34}
                 alt="user"
