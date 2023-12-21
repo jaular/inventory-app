@@ -49,42 +49,39 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
       {
         accessorKey: "n",
         header: "ID",
-        size: 10,
+        maxSize: 130,
       },
       {
         accessorKey: "name",
         header: "Nombre",
-        size: 10,
+        maxSize: 130,
       },
       {
         accessorKey: "serialNumber",
         header: "S/N",
-        size: 10,
+        maxSize: 130,
       },
       {
         accessorKey: "brand",
         header: "Marca",
-        size: 10,
       },
       {
         accessorKey: "modelName",
         header: "Modelo",
-        size: 10,
+        maxSize: 130,
       },
       {
         accessorKey: "userName",
         header: "Usuario",
-        size: 10,
+        maxSize: 130,
       },
       {
         accessorKey: "office",
         header: "Sede",
-        size: 10,
       },
       {
         accessorFn: (row) => row.date.toLocaleDateString(),
         header: "Fecha",
-        size: 10,
       },
       {
         header: "...",
@@ -123,6 +120,11 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
   const table = useMantineReactTable({
     columns,
     data,
+    mantineTableProps: {
+      style: {
+        tableLayout: "fixed",
+      },
+    },
     enableRowSelection: true,
     enableDensityToggle: false,
     localization: localization,

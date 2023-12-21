@@ -48,47 +48,43 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
       {
         accessorKey: "n",
         header: "ID",
-        size: 10,
+        maxSize: 130,
       },
       {
         accessorKey: "type",
         header: "Tipo",
-        size: 10,
       },
       {
         accessorKey: "serialNumber",
         header: "S/N",
-        size: 10,
+        maxSize: 130,
       },
       {
         accessorKey: "brand",
         header: "Marca",
-        size: 10,
       },
       {
         accessorKey: "modelName",
         header: "Modelo",
-        size: 10,
+        maxSize: 130,
       },
       {
         accessorKey: "condition",
         header: "Estado",
-        size: 10,
       },
       {
         accessorKey: "userName",
         header: "Usuario",
-        size: 10,
+        maxSize: 130,
       },
       {
         accessorKey: "department",
         header: "Dirección",
-        size: 10,
+        maxSize: 130,
       },
       {
         accessorFn: (row) => row.date.toLocaleDateString(),
         header: "Fecha",
-        size: 10,
       },
       {
         header: "...",
@@ -127,6 +123,11 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
   const table = useMantineReactTable({
     columns,
     data,
+    mantineTableProps: {
+      style: {
+        tableLayout: "fixed",
+      },
+    },
     enableRowSelection: true,
     enableDensityToggle: false,
     localization: localization,
