@@ -17,22 +17,27 @@ type DataProps = PostProps & {
 };
 
 type Props = {
+  id: string;
   data: DataProps[];
   isSuccess: boolean;
   post: PostByIdOutput;
 };
 
-function PostItem({ post, data, isSuccess }: Props) {
+function PostItem({ id, post, data, isSuccess }: Props) {
   return (
     <Container>
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <Link className="mb-4 text-blue-500 underline" href="/">
           Regresar
         </Link>
-        <h1 className="my-4 text-lg">
-          Historial de cambios del elemento con ID:{" "}
-          <span className="font-bold">{post?.n}</span>
-        </h1>
+        <div className="my-4">
+          <h1 className="text-lg">
+            Historial de cambios del elemento con ID:{" "}
+            <span className="font-bold">{id}</span>
+          </h1>
+          {!post?.n && <p>Elemento ya fue eliminado!</p>}
+        </div>
+
         <TrackingTableList data={isSuccess ? data : []} />
       </div>
     </Container>
@@ -58,7 +63,12 @@ const PostViewPage = () => {
   }
   const { data: post } = postQuery;
   return (
-    <PostItem post={post} data={isSuccess ? data : []} isSuccess={isSuccess} />
+    <PostItem
+      id={n}
+      post={post}
+      data={isSuccess ? data : []}
+      isSuccess={isSuccess}
+    />
   );
 };
 

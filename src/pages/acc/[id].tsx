@@ -17,22 +17,26 @@ type DataProps = AccProps & {
 };
 
 type Props = {
+  id: string;
   data: DataProps[];
   isSuccess: boolean;
   acc: AccByIdOutput;
 };
 
-function AccItem({ acc, data, isSuccess }: Props) {
+function AccItem({ id, acc, data, isSuccess }: Props) {
   return (
     <Container>
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <Link className="mb-4 text-blue-500 underline" href="/accs">
           Regresar
         </Link>
-        <h1 className="my-4 text-lg">
-          Historial de cambios del elemento con ID:{" "}
-          <span className="font-bold">{acc?.n}</span>
-        </h1>
+        <div className="my-4">
+          <h1 className="text-lg">
+            Historial de cambios del elemento con ID:{" "}
+            <span className="font-bold">{id}</span>
+          </h1>
+          {!acc?.n && <p>Elemento ya fue eliminado!</p>}
+        </div>
         <AccTrackingTableList data={isSuccess ? data : []} />
       </div>
     </Container>
@@ -58,7 +62,12 @@ const AccViewPage = () => {
   }
   const { data: acc } = accQuery;
   return (
-    <AccItem acc={acc} data={isSuccess ? data : []} isSuccess={isSuccess} />
+    <AccItem
+      id={n}
+      acc={acc}
+      data={isSuccess ? data : []}
+      isSuccess={isSuccess}
+    />
   );
 };
 
