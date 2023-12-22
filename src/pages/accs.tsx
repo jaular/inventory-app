@@ -30,6 +30,7 @@ export default function AccPage() {
       });
     },
   });
+  const createAccTracking = api.acc.createTracking.useMutation();
 
   const updateAcc = api.acc.update.useMutation({
     async onSuccess() {
@@ -66,9 +67,12 @@ export default function AccPage() {
   const handleSubmit = async (acc: AccProps) => {
     try {
       if (createState) {
-        await createAcc.mutateAsync(acc);
+        const data = await createAcc.mutateAsync(acc);
+        await createAccTracking.mutateAsync(data);
       } else {
-        await updateAcc.mutateAsync(acc);
+        const data = await updateAcc.mutateAsync(acc);
+        data["date"] = new Date();
+        await createAccTracking.mutateAsync(data);
       }
       handleReset();
     } catch {}

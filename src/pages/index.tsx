@@ -30,6 +30,7 @@ export default function Home() {
       });
     },
   });
+  const createAccTracking = api.post.createTracking.useMutation();
 
   const updatePost = api.post.update.useMutation({
     async onSuccess() {
@@ -71,9 +72,12 @@ export default function Home() {
   const handleSubmit = async (post: PostProps) => {
     try {
       if (createState) {
-        await createPost.mutateAsync(post);
+        const data = await createPost.mutateAsync(post);
+        await createAccTracking.mutateAsync(data);
       } else {
-        await updatePost.mutateAsync(post);
+        const data = await updatePost.mutateAsync(post);
+        data["date"] = new Date();
+        await createAccTracking.mutateAsync(data);
       }
       handleReset();
     } catch {}

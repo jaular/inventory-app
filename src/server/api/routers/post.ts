@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { postSchema } from "~/lib/schema";
+import { postSchema, postTrackingSchema } from "~/lib/schema";
 
 import {
   createTRPCRouter,
@@ -55,6 +55,21 @@ export const postRouter = createTRPCRouter({
     });
   }),
 
+  getTrackingAllById: protectedProcedure
+    .input(z.object({ n: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const { n } = input;
+      return await ctx.db.postTracking.findMany({
+        include: {
+          createdBy: {
+            select: { name: true },
+          },
+        },
+        where: { n },
+        orderBy: { createdAt: "desc" },
+      });
+    }),
+
   getById: protectedProcedure
     .input(z.object({ n: z.string() }))
     .query(async ({ ctx, input }) => {
@@ -73,6 +88,14 @@ export const postRouter = createTRPCRouter({
     .input(postSchema)
     .mutation(async ({ ctx, input }) => {
       return await ctx.db.post.create({
+        data: { ...input, createdBy: { connect: { id: ctx.session.user.id } } },
+      });
+    }),
+
+  createTracking: protectedProcedure
+    .input(postTrackingSchema)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.postTracking.create({
         data: { ...input, createdBy: { connect: { id: ctx.session.user.id } } },
       });
     }),

@@ -17,6 +17,7 @@ import {
   IconTableExport,
   IconLayoutRows,
   IconTableRow,
+  IconHistoryToggle,
 } from "@tabler/icons-react";
 import { downloadExcel } from "~/utils/excelExport";
 import { localization } from "~/lib/tableLocale";
@@ -56,11 +57,11 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
         accessorKey: "n",
         header: "ID",
         maxSize: 130,
-        accessorFn: (row) => (
-          <Anchor component={Link} href={`/post/${row.n}`}>
-            {row.n}
-          </Anchor>
-        ),
+        // accessorFn: (row) => (
+        //   <Anchor component={Link} href={`/post/${row.n}`}>
+        //     {row.n}
+        //   </Anchor>
+        // ),
       },
       {
         accessorKey: "name",
@@ -131,6 +132,16 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
                 }}
               >
                 <IconTrash size={18} stroke={1.5} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Historial" color="gray" offset={10}>
+              <ActionIcon
+                size={32}
+                variant="light"
+                component={Link}
+                href={`/post/${row.n}`}
+              >
+                <IconHistoryToggle size={18} stroke={1.5} />
               </ActionIcon>
             </Tooltip>
           </Group>

@@ -37,6 +37,32 @@ model Post {
     createdById String
 }
 
+model PostTracking {
+    n            String
+    serialNumber String
+    name         String
+    brand        String
+    modelName    String
+    range        String
+    ram          String
+    accessories  String[]
+
+    userName   String
+    management String
+    department String
+    office     String
+
+    date        DateTime @default(now())
+    orderNumber String
+    note        String
+
+    createdAt DateTime @id @default(now())
+    updatedAt DateTime @updatedAt
+
+    createdBy   User   @relation(fields: [createdById], references: [id])
+    createdById String
+}
+
 model Acc {
     n            String @id @default(cuid())
     type         String
@@ -49,6 +75,27 @@ model Acc {
     department String
 
     date DateTime @default(now())
+    note String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    createdBy   User   @relation(fields: [createdById], references: [id])
+    createdById String
+}
+
+model AccTracking {
+    n            String
+    type         String
+    serialNumber String
+    brand        String
+    modelName    String
+    condition    String
+
+    userName   String
+    department String
+
+    date DateTime @id @default(now())
     note String
 
     createdAt DateTime @default(now())
@@ -86,16 +133,18 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String         @id @default(cuid())
     name          String?
-    email         String?   @unique
+    email         String?        @unique
     emailVerified DateTime?
-    role          String    @default("none")
+    role          String         @default("none")
     image         String?
     accounts      Account[]
     sessions      Session[]
     posts         Post[]
+    postt         PostTracking[]
     accs          Acc[]
+    acct          AccTracking[]
 }
 
 model VerificationToken {

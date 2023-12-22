@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { accSchema } from "~/lib/schema";
+import { accSchema, accTrackingSchema } from "~/lib/schema";
 
 import {
   createTRPCRouter,
@@ -19,6 +19,21 @@ export const accRouter = createTRPCRouter({
     });
   }),
 
+  getTrackingAllById: protectedProcedure
+    .input(z.object({ n: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const { n } = input;
+      return await ctx.db.accTracking.findMany({
+        include: {
+          createdBy: {
+            select: { name: true },
+          },
+        },
+        where: { n },
+        orderBy: { createdAt: "desc" },
+      });
+    }),
+
   getById: protectedProcedure
     .input(z.object({ n: z.string() }))
     .query(async ({ ctx, input }) => {
@@ -37,6 +52,14 @@ export const accRouter = createTRPCRouter({
     .input(accSchema)
     .mutation(async ({ ctx, input }) => {
       return await ctx.db.acc.create({
+        data: { ...input, createdBy: { connect: { id: ctx.session.user.id } } },
+      });
+    }),
+
+  createTracking: protectedProcedure
+    .input(accTrackingSchema)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.accTracking.create({
         data: { ...input, createdBy: { connect: { id: ctx.session.user.id } } },
       });
     }),

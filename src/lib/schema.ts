@@ -138,3 +138,112 @@ export const accSchema = z.object({
     .trim()
     .or(z.literal("")),
 });
+
+export const postTrackingSchema = z.object({
+  n: z.string().cuid(),
+  serialNumber: z
+    .string()
+    .min(2, { message: "Debe tener 2 o más caracteres" })
+    .trim()
+    .or(z.literal("")),
+  name: z
+    .string()
+    .min(2, { message: "Debe tener 2 o más caracteres" })
+    .trim()
+    .or(z.literal("")),
+  brand: z
+    .string()
+    .min(1, { message: "Elige una opción" })
+    .trim()
+    .or(z.literal("")),
+  modelName: z
+    .string()
+    .min(2, { message: "Debe tener 2 o más caracteres" })
+    .trim()
+    .or(z.literal("")),
+  range: z
+    .string()
+    .min(1, { message: "Elige una opción" })
+    .trim()
+    .or(z.literal("")),
+  ram: z
+    .string()
+    .min(1, { message: "Elige una opción" })
+    .trim()
+    .or(z.literal("")),
+  accessories: z.string().array().optional(),
+  userName: z
+    .string()
+    .min(2, { message: "Debe tener 2 o más caracteres" })
+    .trim()
+    .or(z.literal("")),
+  management: z
+    .string()
+    .min(2, { message: "Debe tener 2 o más caracteres" })
+    .trim()
+    .or(z.literal("")),
+  department: z
+    .string()
+    .min(2, { message: "Debe tener 2 o más caracteres" })
+    .trim()
+    .or(z.literal("")),
+  office: z.string().min(1, { message: "Elige una opción" }).trim(),
+  date: z
+    .date({
+      required_error: "Please select a date and time",
+      invalid_type_error: "That's not a date!",
+    })
+    .optional(),
+  orderNumber: z
+    .string()
+    .min(2, { message: "Debe tener 2 o más caracteres" })
+    .trim()
+    .or(z.literal("")),
+  note: z
+    .string()
+    .min(2, { message: "Debe tener 2 o más caracteres" })
+    .trim()
+    .or(z.literal("")),
+});
+
+export const accTrackingSchema = z.object({
+  n: z.string().cuid(),
+  type: z.string().min(1, { message: "Elige una opción" }).trim(),
+  serialNumber: z
+    .string()
+    .min(2, { message: "Debe tener 2 o más caracteres" })
+    .trim()
+    .or(z.literal("")),
+  brand: z
+    .string()
+    .min(1, { message: "Elige una opción" })
+    .trim()
+    .or(z.literal("")),
+  modelName: z
+    .string()
+    .min(2, { message: "Debe tener 2 o más caracteres" })
+    .trim()
+    .or(z.literal("")),
+  condition: z.string().min(1, { message: "Elige una opción" }).trim(),
+  userName: z
+    .string()
+    .min(2, { message: "Debe tener 2 o más caracteres" })
+    .trim()
+    .or(z.literal("")),
+  department: z
+    .string()
+    .min(2, { message: "Debe tener 2 o más caracteres" })
+    .trim()
+    .or(z.literal("")),
+  date: z
+    .date({
+      required_error: "Please select a date and time",
+      invalid_type_error: "That's not a date!",
+    })
+    .optional(),
+  note: z
+    .string()
+    .min(2, { message: "Debe tener 2 o más caracteres" })
+    .trim()
+    .or(z.literal("")),
+});

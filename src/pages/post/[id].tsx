@@ -1,23 +1,38 @@
-import NextError from "next/error";
+import type { PostProps } from "~/lib/types";
 import Link from "next/link";
+import NextError from "next/error";
 import { useRouter } from "next/router";
 import Container from "~/components/Container";
+import TrackingTableList from "~/components/TrackingTableList";
 import { RouterOutputs, api } from "~/utils/api";
 
 type PostByIdOutput = RouterOutputs["post"]["getById"];
 
-function PostItem(props: { post: PostByIdOutput }) {
-  const { post } = props;
+type DataProps = PostProps & {
+  n: string;
+  createdBy?: {
+    name: string | null;
+  };
+};
+
+type Props = {
+  data: DataProps[];
+  isSuccess: boolean;
+  post: PostByIdOutput;
+};
+
+function PostItem({ post, data, isSuccess }: Props) {
   return (
     <Container>
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <Link className="mb-4 text-blue-500 underline" href="/">
           Regresar
         </Link>
-        <h1 className="mt-4 text-lg font-bold">{post?.n}</h1>
-        {/* <pre className="mt-6 overflow-x-scroll rounded-xl bg-gray-800 p-4">
-          {JSON.stringify(post, null, 4)}
-        </pre> */}
+        <h1 className="mt-4 text-lg">
+          Historial de cambios del elemento con ID:{" "}
+          <span className="font-bold">{post?.n}</span>
+        </h1>
+        <TrackingTableList data={isSuccess ? data : []} />
       </div>
     </Container>
   );
@@ -26,6 +41,7 @@ function PostItem(props: { post: PostByIdOutput }) {
 const PostViewPage = () => {
   const n = useRouter().query.id as string;
   const postQuery = api.post.getById.useQuery({ n });
+  const { data, isSuccess } = api.post.getTrackingAllById.useQuery({ n });
 
   if (postQuery.error) {
     return (
@@ -37,17 +53,12 @@ const PostViewPage = () => {
   }
 
   if (postQuery.status !== "success") {
-    return (
-      <div className="flex h-full flex-col justify-center px-8 ">
-        <div className="mb-2 h-10 w-full animate-pulse rounded-md bg-zinc-900/70"></div>
-        <div className="mb-8 h-5 w-2/6 animate-pulse rounded-md bg-zinc-900/70"></div>
-
-        <div className="h-40 w-full animate-pulse rounded-md bg-zinc-900/70"></div>
-      </div>
-    );
+    return <div className="flex h-full flex-col justify-center px-8 "></div>;
   }
-  const { data } = postQuery;
-  return <PostItem post={data} />;
+  const { data: post } = postQuery;
+  return (
+    <PostItem post={post} data={isSuccess ? data : []} isSuccess={isSuccess} />
+  );
 };
 
 export default PostViewPage;
