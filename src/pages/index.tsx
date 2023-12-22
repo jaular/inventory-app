@@ -76,7 +76,6 @@ export default function Home() {
         await createAccTracking.mutateAsync(data);
       } else {
         const data = await updatePost.mutateAsync(post);
-        data["date"] = new Date();
         await createAccTracking.mutateAsync(data);
       }
       handleReset();

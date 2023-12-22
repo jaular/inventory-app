@@ -95,10 +95,10 @@ model AccTracking {
     userName   String
     department String
 
-    date DateTime @id @default(now())
+    date DateTime @default(now())
     note String
 
-    createdAt DateTime @default(now())
+    createdAt DateTime @id @default(now())
     updatedAt DateTime @updatedAt
 
     createdBy   User   @relation(fields: [createdById], references: [id])

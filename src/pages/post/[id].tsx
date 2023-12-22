@@ -10,6 +10,7 @@ type PostByIdOutput = RouterOutputs["post"]["getById"];
 
 type DataProps = PostProps & {
   n: string;
+  createdAt: Date;
   createdBy?: {
     name: string | null;
   };
@@ -28,7 +29,7 @@ function PostItem({ post, data, isSuccess }: Props) {
         <Link className="mb-4 text-blue-500 underline" href="/">
           Regresar
         </Link>
-        <h1 className="mt-4 text-lg">
+        <h1 className="my-4 text-lg">
           Historial de cambios del elemento con ID:{" "}
           <span className="font-bold">{post?.n}</span>
         </h1>

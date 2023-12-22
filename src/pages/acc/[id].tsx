@@ -10,6 +10,7 @@ type AccByIdOutput = RouterOutputs["acc"]["getById"];
 
 type DataProps = AccProps & {
   n: string;
+  createdAt: Date;
   createdBy?: {
     name: string | null;
   };
@@ -28,7 +29,7 @@ function AccItem({ acc, data, isSuccess }: Props) {
         <Link className="mb-4 text-blue-500 underline" href="/accs">
           Regresar
         </Link>
-        <h1 className="mt-4 text-lg">
+        <h1 className="my-4 text-lg">
           Historial de cambios del elemento con ID:{" "}
           <span className="font-bold">{acc?.n}</span>
         </h1>

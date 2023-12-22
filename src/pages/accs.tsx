@@ -71,7 +71,6 @@ export default function AccPage() {
         await createAccTracking.mutateAsync(data);
       } else {
         const data = await updateAcc.mutateAsync(acc);
-        data["date"] = new Date();
         await createAccTracking.mutateAsync(data);
       }
       handleReset();

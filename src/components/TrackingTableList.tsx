@@ -15,6 +15,7 @@ import { brandData, officeData } from "~/lib/data";
 
 type DataProps = PostProps & {
   n: string;
+  createdAt: Date;
   accessories: any; // string[]
   createdBy?: {
     name: string | null;
@@ -37,6 +38,16 @@ const TrackingTableList = ({ data }: Props) => {
 
   const columns = useMemo<MRT_ColumnDef<DataProps>[]>(
     () => [
+      {
+        accessorFn: (row) => row.createdAt.toLocaleDateString(),
+        header: "Fecha del cambio",
+        maxSize: 150,
+      },
+      {
+        accessorFn: (row) => row.createdBy?.name,
+        header: "Cambio hecho por",
+        maxSize: 180,
+      },
       {
         accessorKey: "n",
         header: "ID",
@@ -72,6 +83,16 @@ const TrackingTableList = ({ data }: Props) => {
         maxSize: 130,
       },
       {
+        accessorKey: "range",
+        header: "Game",
+        maxSize: 150,
+      },
+      {
+        accessorKey: "ram",
+        header: "Memoria RAM",
+        maxSize: 150,
+      },
+      {
         accessorKey: "userName",
         header: "Usuario",
         maxSize: 130,
@@ -86,13 +107,13 @@ const TrackingTableList = ({ data }: Props) => {
         },
       },
       {
-        accessorFn: (row) => row.createdBy?.name,
-        header: "Cambio hecho por",
+        accessorKey: "orderNumber",
+        header: "Numero de orden",
         maxSize: 150,
       },
       {
         accessorFn: (row) => row.date.toLocaleDateString(),
-        header: "Fecha",
+        header: "Fecha de entrega",
         maxSize: 150,
       },
     ],
@@ -130,7 +151,7 @@ const TrackingTableList = ({ data }: Props) => {
 
   return (
     <>
-      <ActionIcon.Group className="my-4">
+      {/* <ActionIcon.Group className="my-4">
         <Tooltip label="Exportar todo" color="gray" offset={10}>
           <ActionIcon
             size="lg"
@@ -176,7 +197,7 @@ const TrackingTableList = ({ data }: Props) => {
             />
           </ActionIcon>
         </Tooltip>
-      </ActionIcon.Group>
+      </ActionIcon.Group> */}
       <MantineReactTable table={table} />
     </>
   );
