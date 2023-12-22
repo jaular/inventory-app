@@ -79,12 +79,13 @@ const AccForm = ({
           label="Estado"
           data={conditionData}
           searchable
+          withAsterisk
           {...form.getInputProps("condition")}
         />
 
         <Divider
           my="md"
-          label="Responsable"
+          label="RESPONSABLE"
           labelPosition="center"
           className="col-span-2 md:col-span-3 xl:col-span-4"
         />
@@ -102,7 +103,7 @@ const AccForm = ({
 
         <Divider
           my="md"
-          label="Informaci&oacute;n adicional"
+          label="INFORMACI&Oacute;N ADICIONAL"
           labelPosition="center"
           className="col-span-2 md:col-span-3 xl:col-span-4"
         />

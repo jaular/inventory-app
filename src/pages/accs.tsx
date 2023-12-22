@@ -152,9 +152,9 @@ export default function AccPage() {
 
   return (
     <Container title="Inventario (Accesorios)">
-      <div className="text-center">
-        <p>You are not authorized to view this page!</p>
-      </div>
+      <p className="text-center text-lg font-medium md:text-2xl">
+        ¡No est&aacute;s autorizado a ver esta p&aacute;gina!
+      </p>
     </Container>
   );
 }

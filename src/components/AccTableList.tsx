@@ -104,7 +104,7 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
         header: "...",
         enableSorting: false,
         accessorFn: (row) => (
-          <ActionIcon.Group>
+          <Group>
             <Tooltip label="Actualizar" color="gray" offset={10}>
               <ActionIcon
                 size={32}
@@ -128,7 +128,7 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
                 <IconTrash size={18} stroke={1.5} />
               </ActionIcon>
             </Tooltip>
-          </ActionIcon.Group>
+          </Group>
         ),
       },
     ],
@@ -207,7 +207,7 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
       <ActionIcon.Group className="my-4">
         <Tooltip label="Exportar todo" color="gray" offset={10}>
           <ActionIcon
-            size={32}
+            size="lg"
             variant="light"
             color="teal"
             onClick={handleExportData}
@@ -220,7 +220,7 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
         </Tooltip>
         <Tooltip label="Exportar todas las filas" color="gray" offset={10}>
           <ActionIcon
-            size={32}
+            size="lg"
             variant="light"
             color="teal"
             disabled={table.getPrePaginationRowModel().rows.length === 0}
@@ -236,7 +236,7 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
         </Tooltip>
         <Tooltip label="Exportar filas seleccionadas" color="gray" offset={10}>
           <ActionIcon
-            size={32}
+            size="lg"
             variant="light"
             color="teal"
             disabled={

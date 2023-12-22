@@ -54,10 +54,7 @@ function AuthShowcase() {
 
           <Menu.Dropdown>
             <Menu.Label>
-              --{" "}
-              {sessionData.user?.role !== "none" &&
-                sessionData.user?.role.toUpperCase()}{" "}
-              --
+              -- {sessionData.user?.role.toUpperCase()} --
             </Menu.Label>
             <Menu.Label>{sessionData.user?.email}</Menu.Label>
             <Menu.Divider />

@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { Center, Loader, Modal } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { useForm, zodResolver } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import { api } from "~/utils/api";
 import { userSchema } from "~/lib/schema";
 import { userInitialValues } from "~/lib/data";
@@ -29,6 +30,9 @@ export default function UsersPage() {
   const updateUser = api.user.update.useMutation({
     async onSuccess() {
       await utils.user.getAll.invalidate();
+      notifications.show({
+        message: "Usuario actualizado",
+      });
     },
   });
 
@@ -112,9 +116,9 @@ export default function UsersPage() {
 
   return (
     <Container title="Gestión de usuarios">
-      <div className="text-center">
-        <p>You are not authorized to view this page!</p>
-      </div>
+      <p className="text-center text-lg font-medium md:text-2xl">
+        ¡No est&aacute;s autorizado a ver esta p&aacute;gina!
+      </p>
     </Container>
   );
 }

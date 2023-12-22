@@ -55,6 +55,7 @@ export default function Home() {
     transformValues: (values) => ({
       ...values,
       // macE: values.macE.toUpperCase(),
+      name: values.name.toUpperCase(),
       accessories: createState
         ? values.accessories.slice(1)
         : values.accessories,
@@ -154,9 +155,9 @@ export default function Home() {
 
   return (
     <Container title="Inventario (Equipos)">
-      <div className="text-center">
-        <p>You are not authorized to view this page!</p>
-      </div>
+      <p className="text-center text-lg font-medium md:text-2xl">
+        ¡No est&aacute;s autorizado a ver esta p&aacute;gina!
+      </p>
     </Container>
   );
 }

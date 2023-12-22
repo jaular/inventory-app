@@ -10,14 +10,14 @@ function PostItem(props: { post: PostByIdOutput }) {
   const { post } = props;
   return (
     <Container>
-      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <Link className="mb-4 text-blue-500 underline" href="/">
           Regresar
         </Link>
         <h1 className="mt-4 text-lg font-bold">{post?.n}</h1>
-        <pre className="mt-6 overflow-x-scroll rounded-xl bg-gray-800 p-4">
+        {/* <pre className="mt-6 overflow-x-scroll rounded-xl bg-gray-800 p-4">
           {JSON.stringify(post, null, 4)}
-        </pre>
+        </pre> */}
       </div>
     </Container>
   );

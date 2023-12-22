@@ -110,7 +110,7 @@ const Form = ({
 
         <Divider
           my="md"
-          label="Responsable"
+          label="RESPONSABLE"
           labelPosition="center"
           className="col-span-2 md:col-span-3 xl:col-span-4"
         />
@@ -130,12 +130,13 @@ const Form = ({
           label="Sede"
           data={officeData}
           searchable
+          withAsterisk
           {...form.getInputProps("office")}
         />
 
         <Divider
           my="md"
-          label="Informaci&oacute;n adicional"
+          label="INFORMACI&Oacute;N ADICIONAL"
           labelPosition="center"
           className="col-span-2 md:col-span-3 xl:col-span-4"
         />
