@@ -59,6 +59,7 @@ export default function AccPage() {
   });
 
   const handleReset = () => {
+    form.setInitialValues(accInitialValues);
     form.reset();
     setCreateState(true);
     setFormModalOpened(false);
@@ -78,6 +79,7 @@ export default function AccPage() {
   };
 
   const handleUpdate = (acc: AccProps) => {
+    form.setInitialValues(acc);
     Object.entries(acc).forEach(([key, value]) => {
       form.setFieldValue(key, value);
     });

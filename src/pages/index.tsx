@@ -64,6 +64,7 @@ export default function Home() {
   });
 
   const handleReset = () => {
+    form.setInitialValues(postInitialValues);
     form.reset();
     setCreateState(true);
     setFormModalOpened(false);
@@ -83,6 +84,7 @@ export default function Home() {
   };
 
   const handleUpdate = (post: PostProps) => {
+    form.setInitialValues(post);
     Object.entries(post).forEach(([key, value]) => {
       form.setFieldValue(key, value);
     });

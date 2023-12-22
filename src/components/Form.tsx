@@ -42,6 +42,9 @@ const Form = ({
   createPost,
   updatePost,
 }: Props) => {
+  const isLoading = createPost || updatePost;
+  const customDisable = isLoading ? true : !form.isDirty();
+
   return (
     <form
       className="space-y-8"
@@ -54,6 +57,7 @@ const Form = ({
         //   n: randomId(),
         // });
         // console.log(values);
+
         onSubmit(values);
       })}
       autoComplete="off"
@@ -159,7 +163,7 @@ const Form = ({
         />
       </div>
       <Group>
-        <Button type="submit" color="blue" disabled={createPost || updatePost}>
+        <Button type="submit" color="blue" disabled={customDisable}>
           Enviar
         </Button>
         <Button

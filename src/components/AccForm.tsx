@@ -35,6 +35,9 @@ const AccForm = ({
   createAcc,
   updateAcc,
 }: Props) => {
+  const isLoading = createAcc || updateAcc;
+  const customDisable = isLoading ? true : !form.isDirty();
+
   return (
     <form
       className="space-y-8"
@@ -123,7 +126,7 @@ const AccForm = ({
         />
       </div>
       <Group>
-        <Button type="submit" color="blue" disabled={createAcc || updateAcc}>
+        <Button type="submit" color="blue" disabled={customDisable}>
           Enviar
         </Button>
         <Button
