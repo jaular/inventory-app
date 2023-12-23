@@ -67,13 +67,13 @@ const Form = ({
           <>
             <TextInput
               label="ID"
-              disabled
+              readOnly
               withAsterisk
               {...form.getInputProps("n")}
             />
             <TextInput
               label="Creado por"
-              disabled
+              readOnly
               withAsterisk
               {...form.getInputProps("createdBy.name")}
             />
@@ -134,6 +134,7 @@ const Form = ({
           label="Sede"
           data={officeData}
           searchable
+          clearable
           withAsterisk
           {...form.getInputProps("office")}
         />
@@ -163,9 +164,16 @@ const Form = ({
         />
       </div>
       <Group>
-        <Button type="submit" color="blue" disabled={customDisable}>
-          Enviar
-        </Button>
+        {createState ? (
+          <Button type="submit" color="blue" disabled={isLoading}>
+            Enviar
+          </Button>
+        ) : (
+          <Button type="submit" color="blue" disabled={customDisable}>
+            Enviar
+          </Button>
+        )}
+
         <Button
           variant="default"
           disabled={createPost || updatePost}

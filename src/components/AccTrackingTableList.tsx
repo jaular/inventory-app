@@ -2,13 +2,13 @@ import type { AccProps } from "~/lib/types";
 import type { MRT_ColumnDef, MRT_Row } from "mantine-react-table";
 import { useMemo } from "react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import { ActionIcon, Tooltip } from "@mantine/core";
-import {
-  IconTableExport,
-  IconLayoutRows,
-  IconTableRow,
-} from "@tabler/icons-react";
-import { downloadExcelAcc } from "~/utils/excelExport";
+// import { ActionIcon, Tooltip } from "@mantine/core";
+// import {
+//   IconTableExport,
+//   IconLayoutRows,
+//   IconTableRow,
+// } from "@tabler/icons-react";
+// import { downloadExcelAcc } from "~/utils/excelExport";
 import { localization } from "~/lib/tableLocale";
 import { typeData, brandData, conditionData } from "~/lib/data";
 
@@ -25,14 +25,14 @@ type Props = {
 };
 
 const AccTrackingTableList = ({ data }: Props) => {
-  const handleExportRows = (rows: MRT_Row<DataProps>[]) => {
-    const rowData = rows.map((row) => row.original);
-    downloadExcelAcc(rowData);
-  };
+  // const handleExportRows = (rows: MRT_Row<DataProps>[]) => {
+  //   const rowData = rows.map((row) => row.original);
+  //   downloadExcelAcc(rowData);
+  // };
 
-  const handleExportData = () => {
-    downloadExcelAcc(data);
-  };
+  // const handleExportData = () => {
+  //   downloadExcelAcc(data);
+  // };
 
   const columns = useMemo<MRT_ColumnDef<DataProps>[]>(
     () => [
@@ -110,7 +110,7 @@ const AccTrackingTableList = ({ data }: Props) => {
   const table = useMantineReactTable({
     columns,
     data,
-    enableRowSelection: true,
+    // enableRowSelection: true,
     enableDensityToggle: false,
     localization: localization,
     initialState: {

@@ -99,7 +99,7 @@ const AccTableList = ({ data, onUpdate, onDelete }: Props) => {
       },
       {
         accessorFn: (row) => row.date.toLocaleDateString(),
-        header: "Fecha",
+        header: "Fecha de entrega",
         maxSize: 150,
       },
       {

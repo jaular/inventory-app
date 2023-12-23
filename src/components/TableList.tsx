@@ -21,7 +21,7 @@ import {
 } from "@tabler/icons-react";
 import { downloadExcel } from "~/utils/excelExport";
 import { localization } from "~/lib/tableLocale";
-import { brandData, officeData } from "~/lib/data";
+import { brandData, officeData, rangeData, ramData } from "~/lib/data";
 import classes from "~/styles/table.module.css";
 
 type DataProps = PostProps & {
@@ -88,6 +88,36 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
         maxSize: 130,
       },
       {
+        accessorKey: "range",
+        header: "Gama",
+        maxSize: 150,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: rangeData,
+        },
+      },
+      {
+        accessorKey: "ram",
+        header: "Memoria RAM",
+        maxSize: 150,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: ramData,
+        },
+      },
+      {
+        accessorKey: "mouse",
+        accessorFn: (row) => (row.accessories[0] === "Mouse" ? "Si" : "No"),
+        header: "Mouse",
+        maxSize: 130,
+      },
+      {
+        accessorKey: "bag",
+        accessorFn: (row) => (row.accessories[1] === "Bolso" ? "Si" : "No"),
+        header: "Bolso",
+        maxSize: 130,
+      },
+      {
         accessorKey: "userName",
         header: "Usuario",
         maxSize: 130,
@@ -103,7 +133,7 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
       },
       {
         accessorFn: (row) => row.date.toLocaleDateString(),
-        header: "Fecha",
+        header: "Fecha de entrega",
         maxSize: 150,
       },
       {
@@ -161,6 +191,10 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
       columnVisibility: {
         n: false,
         modelName: false,
+        range: false,
+        ram: false,
+        mouse: false,
+        bag: false,
         office: false,
       },
       pagination: { pageSize: 5, pageIndex: 0 },

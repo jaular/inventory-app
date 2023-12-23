@@ -1,15 +1,14 @@
 import type { PostProps } from "~/lib/types";
 import type { MRT_ColumnDef, MRT_Row } from "mantine-react-table";
 import { useMemo } from "react";
-import Link from "next/link";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import { ActionIcon, Tooltip, Anchor } from "@mantine/core";
-import {
-  IconTableExport,
-  IconLayoutRows,
-  IconTableRow,
-} from "@tabler/icons-react";
-import { downloadExcel } from "~/utils/excelExport";
+// import { ActionIcon, Tooltip, Anchor } from "@mantine/core";
+// import {
+//   IconTableExport,
+//   IconLayoutRows,
+//   IconTableRow,
+// } from "@tabler/icons-react";
+// import { downloadExcel } from "~/utils/excelExport";
 import { localization } from "~/lib/tableLocale";
 import { brandData, officeData } from "~/lib/data";
 
@@ -27,14 +26,14 @@ type Props = {
 };
 
 const TrackingTableList = ({ data }: Props) => {
-  const handleExportRows = (rows: MRT_Row<DataProps>[]) => {
-    const rowData = rows.map((row) => row.original);
-    downloadExcel(rowData);
-  };
+  // const handleExportRows = (rows: MRT_Row<DataProps>[]) => {
+  //   const rowData = rows.map((row) => row.original);
+  //   downloadExcel(rowData);
+  // };
 
-  const handleExportData = () => {
-    downloadExcel(data);
-  };
+  // const handleExportData = () => {
+  //   downloadExcel(data);
+  // };
 
   const columns = useMemo<MRT_ColumnDef<DataProps>[]>(
     () => [
@@ -84,13 +83,25 @@ const TrackingTableList = ({ data }: Props) => {
       },
       {
         accessorKey: "range",
-        header: "Game",
+        header: "Gama",
         maxSize: 150,
       },
       {
         accessorKey: "ram",
         header: "Memoria RAM",
         maxSize: 150,
+      },
+      {
+        accessorKey: "mouse",
+        accessorFn: (row) => (row.accessories[0] === "Mouse" ? "Si" : "No"),
+        header: "Mouse",
+        maxSize: 130,
+      },
+      {
+        accessorKey: "bag",
+        accessorFn: (row) => (row.accessories[1] === "Bolso" ? "Si" : "No"),
+        header: "Bolso",
+        maxSize: 130,
       },
       {
         accessorKey: "userName",
@@ -123,7 +134,7 @@ const TrackingTableList = ({ data }: Props) => {
   const table = useMantineReactTable({
     columns,
     data,
-    enableRowSelection: true,
+    // enableRowSelection: true,
     enableDensityToggle: false,
     localization: localization,
     initialState: {

@@ -31,7 +31,7 @@ function AccItem({ id, acc, data, isSuccess }: Props) {
           Regresar
         </Link>
         <div className="my-4">
-          <h1 className="text-lg">
+          <h1>
             Historial de cambios del elemento con ID:{" "}
             <span className="font-bold">{id}</span>
           </h1>
