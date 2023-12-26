@@ -258,8 +258,10 @@ const TableList = ({ data, onUpdate, onDelete, FormModalOpened }: Props) => {
         </Group>
       </Modal>
 
-      <div className="my-4 flex justify-between">
-        <Button onClick={() => FormModalOpened(true)}>Nuevo</Button>
+      <div className="my-4 flex items-center justify-between">
+        <Button variant="outline" onClick={() => FormModalOpened(true)}>
+          Nuevo
+        </Button>
 
         <ActionIcon.Group>
           <Tooltip label="Exportar todo" color="gray" offset={10}>

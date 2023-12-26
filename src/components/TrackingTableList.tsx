@@ -142,6 +142,7 @@ const TrackingTableList = ({ data }: Props) => {
         n: false,
       },
       pagination: { pageSize: 5, pageIndex: 0 },
+      density: "xs",
     },
     paginationDisplayMode: "pages",
     mantineTableProps: {

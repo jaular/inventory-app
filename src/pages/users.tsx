@@ -101,7 +101,7 @@ export default function UsersPage() {
         </Modal>
 
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h1 className="text-lg font-bold md:text-3xl">
+          <h1 className="text-xl font-bold md:text-3xl">
             Gesti&oacute;n de usuarios
           </h1>
         </div>
