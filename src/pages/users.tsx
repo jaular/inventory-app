@@ -1,7 +1,7 @@
 import type { UserProps } from "~/lib/types";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { Center, Loader, Modal } from "@mantine/core";
+import { Modal, Loader } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
@@ -21,7 +21,7 @@ export default function UsersPage() {
   const [formModalOpened, setFormModalOpened] = useState<boolean>(false);
   const [createState, setCreateState] = useState<boolean>(true);
 
-  const { data: sessionData } = useSession();
+  const { data: sessionData, status } = useSession();
 
   const utils = api.useUtils();
   const { data, isSuccess, isLoading } = api.user.getAll.useQuery();
@@ -67,17 +67,17 @@ export default function UsersPage() {
 
   const modelWidth = useMediaQuery("(max-width: 1200px)") ? "100%" : "85%";
 
-  if (isLoading) {
+  if (status === "loading") {
     return (
-      <Container>
-        <Center h={300}>
+      <Container title="Gestión de usuarios">
+        <div className="flex min-h-[65vh] items-center justify-center">
           <Loader color="blue" size="lg" />
-        </Center>
+        </div>
       </Container>
     );
   }
 
-  if (sessionData?.user.role === "admin") {
+  if (status === "authenticated" && sessionData?.user.role === "admin") {
     return (
       <Container title="Gestión de usuarios">
         <Modal
@@ -116,11 +116,25 @@ export default function UsersPage() {
     );
   }
 
+  if (status === "unauthenticated") {
+    return (
+      <Container title="Gestión de usuarios">
+        <div className="flex min-h-[65vh] items-center justify-center">
+          <p className="text-lg font-medium md:text-2xl">
+            ¡No est&aacute;s autorizado a ver esta p&aacute;gina!
+          </p>
+        </div>
+      </Container>
+    );
+  }
+
   return (
     <Container title="Gestión de usuarios">
-      <p className="text-center text-lg font-medium md:text-2xl">
-        ¡No est&aacute;s autorizado a ver esta p&aacute;gina!
-      </p>
+      <div className="flex min-h-[65vh] items-center justify-center">
+        <p className="text-lg font-medium md:text-2xl">
+          ¡No est&aacute;s autorizado a ver esta p&aacute;gina!
+        </p>
+      </div>
     </Container>
   );
 }

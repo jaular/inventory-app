@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { Modal, Group, ActionIcon, Button, Tooltip } from "@mantine/core";
 import {
+  IconTablePlus,
   IconPencil,
   IconTrash,
   IconTableExport,
@@ -26,12 +27,19 @@ type DataProps = AccProps & {
 
 type Props = {
   data: DataProps[];
+  dataIsLoading: boolean;
   onUpdate: (Post: AccProps) => void;
   onDelete: (serialNumber: string) => Promise<void>;
   FormModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const AccTableList = ({ data, onUpdate, onDelete, FormModalOpened }: Props) => {
+const AccTableList = ({
+  data,
+  dataIsLoading,
+  onUpdate,
+  onDelete,
+  FormModalOpened,
+}: Props) => {
   const [deviceId, setDeviceId] = useState("");
   const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
 
@@ -99,7 +107,7 @@ const AccTableList = ({ data, onUpdate, onDelete, FormModalOpened }: Props) => {
         maxSize: 180,
       },
       {
-        accessorFn: (row) => row.date.toLocaleDateString(),
+        accessorFn: (row) => row.date?.toLocaleDateString(),
         header: "Fecha de entrega",
         maxSize: 150,
       },
@@ -114,6 +122,7 @@ const AccTableList = ({ data, onUpdate, onDelete, FormModalOpened }: Props) => {
               <ActionIcon
                 size={32}
                 variant="light"
+                aria-label="Actualizar"
                 onClick={() => onUpdate(row.original)}
               >
                 <IconPencil size={18} stroke={1.5} />
@@ -124,6 +133,7 @@ const AccTableList = ({ data, onUpdate, onDelete, FormModalOpened }: Props) => {
                 size={32}
                 variant="light"
                 color="red"
+                aria-label="Eliminar"
                 onClick={() => {
                   setDeleteModalOpened(true);
                   setDeviceId(row.original.n);
@@ -137,6 +147,7 @@ const AccTableList = ({ data, onUpdate, onDelete, FormModalOpened }: Props) => {
                 size={32}
                 variant="light"
                 color="gray"
+                aria-label="Historial"
                 component={Link}
                 href={`/acc/${row.original.n}`}
               >
@@ -153,6 +164,7 @@ const AccTableList = ({ data, onUpdate, onDelete, FormModalOpened }: Props) => {
   const table = useMantineReactTable({
     columns,
     data,
+    state: { isLoading: dataIsLoading },
     enableRowSelection: true,
     enableDensityToggle: false,
     localization: localization,
@@ -221,9 +233,19 @@ const AccTableList = ({ data, onUpdate, onDelete, FormModalOpened }: Props) => {
       </Modal>
 
       <div className="my-4 flex items-center justify-between">
-        <Button variant="outline" onClick={() => FormModalOpened(true)}>
-          Nuevo
-        </Button>
+        <Tooltip label="Nuevo" color="gray" offset={10}>
+          <ActionIcon
+            size="lg"
+            variant="light"
+            aria-label="Nuevo"
+            onClick={() => FormModalOpened(true)}
+          >
+            <IconTablePlus
+              style={{ width: "70%", height: "70%" }}
+              stroke={1.5}
+            />
+          </ActionIcon>
+        </Tooltip>
 
         <ActionIcon.Group>
           <Tooltip label="Exportar todo" color="gray" offset={10}>
@@ -231,6 +253,7 @@ const AccTableList = ({ data, onUpdate, onDelete, FormModalOpened }: Props) => {
               size="lg"
               variant="light"
               color="teal"
+              aria-label="Exportar todo"
               onClick={handleExportData}
             >
               <IconTableExport
@@ -244,6 +267,7 @@ const AccTableList = ({ data, onUpdate, onDelete, FormModalOpened }: Props) => {
               size="lg"
               variant="light"
               color="teal"
+              aria-label="Exportar todas las filas"
               disabled={table.getPrePaginationRowModel().rows.length === 0}
               onClick={() =>
                 handleExportRows(table.getPrePaginationRowModel().rows)
@@ -264,6 +288,7 @@ const AccTableList = ({ data, onUpdate, onDelete, FormModalOpened }: Props) => {
               size="lg"
               variant="light"
               color="teal"
+              aria-label="Exportar filas seleccionadas"
               disabled={
                 !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
               }

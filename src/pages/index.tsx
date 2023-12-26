@@ -1,7 +1,7 @@
 import type { PostProps } from "~/lib/types";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { Button, Group, Modal, Loader, Center } from "@mantine/core";
+import { Modal, Loader } from "@mantine/core";
 // import { useMediaQuery } from "@mantine/hooks";
 import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
@@ -17,7 +17,7 @@ export default function Home() {
   const [formModalOpened, setFormModalOpened] = useState<boolean>(false);
   const [createState, setCreateState] = useState<boolean>(true);
 
-  const { data: sessionData } = useSession();
+  const { data: sessionData, status } = useSession();
 
   const utils = api.useUtils();
   const { data, isSuccess, isLoading } = api.post.getAll.useQuery();
@@ -102,17 +102,17 @@ export default function Home() {
 
   // const modelWidth = useMediaQuery("(max-width: 1200px)") ? "100%" : "70%";
 
-  if (isLoading) {
+  if (status === "loading") {
     return (
       <Container title="Inventario (Equipos)">
-        <Center h={300}>
+        <div className="flex min-h-[65vh] items-center justify-center">
           <Loader color="blue" size="lg" />
-        </Center>
+        </div>
       </Container>
     );
   }
 
-  if (sessionData && sessionData?.user.role !== "none") {
+  if (status === "authenticated" && sessionData?.user.role !== "none") {
     return (
       <Container title="Inventario (Equipos)">
         <Modal
@@ -148,6 +148,7 @@ export default function Home() {
         <div className="mx-auto mt-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <TableList
             data={isSuccess ? data : []}
+            dataIsLoading={isLoading}
             onUpdate={handleUpdate}
             onDelete={handleDelete}
             FormModalOpened={setFormModalOpened}
@@ -157,11 +158,25 @@ export default function Home() {
     );
   }
 
+  if (status === "unauthenticated") {
+    return (
+      <Container title="Inventario (Equipos)">
+        <div className="flex min-h-[65vh] items-center justify-center">
+          <p className="text-lg font-medium md:text-2xl">
+            ¡No est&aacute;s autorizado a ver esta p&aacute;gina!
+          </p>
+        </div>
+      </Container>
+    );
+  }
+
   return (
     <Container title="Inventario (Equipos)">
-      <p className="text-center text-lg font-medium md:text-2xl">
-        ¡No est&aacute;s autorizado a ver esta p&aacute;gina!
-      </p>
+      <div className="flex min-h-[65vh] items-center justify-center">
+        <p className="text-lg font-medium md:text-2xl">
+          ¡No est&aacute;s autorizado a ver esta p&aacute;gina!
+        </p>
+      </div>
     </Container>
   );
 }
