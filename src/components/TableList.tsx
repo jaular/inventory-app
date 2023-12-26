@@ -36,9 +36,10 @@ type Props = {
   data: DataProps[];
   onUpdate: (post: PostProps) => void;
   onDelete: (serialNumber: string) => Promise<void>;
+  FormModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const TableList = ({ data, onUpdate, onDelete }: Props) => {
+const TableList = ({ data, onUpdate, onDelete, FormModalOpened }: Props) => {
   const [deviceId, setDeviceId] = useState("");
   const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
 
@@ -137,16 +138,17 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
         maxSize: 150,
       },
       {
-        header: "...",
+        header: " ",
+        enableHiding: false,
         enableSorting: false,
-        accessorFn: (row) => (
+        enableColumnActions: false,
+        Cell: ({ row }) => (
           <Group>
             <Tooltip label="Actualizar" color="gray" offset={10}>
               <ActionIcon
                 size={32}
                 variant="light"
-                color="gray"
-                onClick={() => onUpdate(row)}
+                onClick={() => onUpdate(row.original)}
               >
                 <IconPencil size={18} stroke={1.5} />
               </ActionIcon>
@@ -158,7 +160,7 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
                 color="red"
                 onClick={() => {
                   setDeleteModalOpened(true);
-                  setDeviceId(row.n);
+                  setDeviceId(row.original.n);
                 }}
               >
                 <IconTrash size={18} stroke={1.5} />
@@ -168,8 +170,9 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
               <ActionIcon
                 size={32}
                 variant="light"
+                color="gray"
                 component={Link}
-                href={`/post/${row.n}`}
+                href={`/post/${row.original.n}`}
               >
                 <IconHistoryToggle size={18} stroke={1.5} />
               </ActionIcon>
@@ -198,6 +201,7 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
         office: false,
       },
       pagination: { pageSize: 5, pageIndex: 0 },
+      density: "xs",
     },
     paginationDisplayMode: "pages",
     mantineTableProps: {
@@ -254,53 +258,62 @@ const TableList = ({ data, onUpdate, onDelete }: Props) => {
         </Group>
       </Modal>
 
-      <ActionIcon.Group className="my-4">
-        <Tooltip label="Exportar todo" color="gray" offset={10}>
-          <ActionIcon
-            size="lg"
-            variant="light"
-            color="teal"
-            onClick={handleExportData}
+      <div className="my-4 flex justify-between">
+        <Button onClick={() => FormModalOpened(true)}>Nuevo</Button>
+
+        <ActionIcon.Group>
+          <Tooltip label="Exportar todo" color="gray" offset={10}>
+            <ActionIcon
+              size="lg"
+              variant="light"
+              color="teal"
+              onClick={handleExportData}
+            >
+              <IconTableExport
+                style={{ width: "70%", height: "70%" }}
+                stroke={1.5}
+              />
+            </ActionIcon>
+          </Tooltip>
+          <Tooltip label="Exportar todas las filas" color="gray" offset={10}>
+            <ActionIcon
+              size="lg"
+              variant="light"
+              color="teal"
+              disabled={table.getPrePaginationRowModel().rows.length === 0}
+              onClick={() =>
+                handleExportRows(table.getPrePaginationRowModel().rows)
+              }
+            >
+              <IconLayoutRows
+                style={{ width: "70%", height: "70%" }}
+                stroke={1.5}
+              />
+            </ActionIcon>
+          </Tooltip>
+          <Tooltip
+            label="Exportar filas seleccionadas"
+            color="gray"
+            offset={10}
           >
-            <IconTableExport
-              style={{ width: "70%", height: "70%" }}
-              stroke={1.5}
-            />
-          </ActionIcon>
-        </Tooltip>
-        <Tooltip label="Exportar todas las filas" color="gray" offset={10}>
-          <ActionIcon
-            size="lg"
-            variant="light"
-            color="teal"
-            disabled={table.getPrePaginationRowModel().rows.length === 0}
-            onClick={() =>
-              handleExportRows(table.getPrePaginationRowModel().rows)
-            }
-          >
-            <IconLayoutRows
-              style={{ width: "70%", height: "70%" }}
-              stroke={1.5}
-            />
-          </ActionIcon>
-        </Tooltip>
-        <Tooltip label="Exportar filas seleccionadas" color="gray" offset={10}>
-          <ActionIcon
-            size="lg"
-            variant="light"
-            color="teal"
-            disabled={
-              !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
-            }
-            onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
-          >
-            <IconTableRow
-              style={{ width: "70%", height: "70%" }}
-              stroke={1.5}
-            />
-          </ActionIcon>
-        </Tooltip>
-      </ActionIcon.Group>
+            <ActionIcon
+              size="lg"
+              variant="light"
+              color="teal"
+              disabled={
+                !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
+              }
+              onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
+            >
+              <IconTableRow
+                style={{ width: "70%", height: "70%" }}
+                stroke={1.5}
+              />
+            </ActionIcon>
+          </Tooltip>
+        </ActionIcon.Group>
+      </div>
+
       <MantineReactTable table={table} />
     </>
   );

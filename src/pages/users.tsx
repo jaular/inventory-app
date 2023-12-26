@@ -8,9 +8,9 @@ import { notifications } from "@mantine/notifications";
 import { api } from "~/utils/api";
 import { userSchema } from "~/lib/schema";
 import { userInitialValues } from "~/lib/data";
-import UserForm from "~/components/UserForm";
-import UserTableList from "~/components/UserTableList";
 import Container from "~/components/Container";
+import UserForm from "~/components/user/UserForm";
+import UserTableList from "~/components/user/UserTableList";
 import classes from "~/styles/modal.module.css";
 
 type DataProps = UserProps & {
@@ -100,11 +100,13 @@ export default function UsersPage() {
           />
         </Modal>
 
-        <h1 className="text-center text-lg font-medium md:text-xl">
-          Gesti&oacute;n de usuarios
-        </h1>
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h1 className="text-lg font-bold md:text-3xl">
+            Gesti&oacute;n de usuarios
+          </h1>
+        </div>
 
-        <div className="mx-auto mt-16 w-full max-w-7xl px-4 sm:px-6 md:mt-24 lg:px-8">
+        <div className="mx-auto mt-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <UserTableList
             data={isSuccess ? userData : []}
             onUpdate={handleUpdate}

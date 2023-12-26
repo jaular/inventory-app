@@ -9,8 +9,8 @@ import { api } from "~/utils/api";
 import { accSchema } from "~/lib/schema";
 import { accInitialValues } from "~/lib/data";
 import Container from "~/components/Container";
-import AccForm from "~/components/AccForm";
-import AccTableList from "~/components/AccTableList";
+import AccForm from "~/components/acc/AccForm";
+import AccTableList from "~/components/acc/AccTableList";
 import classes from "~/styles/modal.module.css";
 
 export default function AccPage() {
@@ -134,21 +134,18 @@ export default function AccPage() {
           )}
         </Modal>
 
-        <h1 className="text-center text-lg font-medium md:text-2xl">
-          Accesorios
-        </h1>
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h1 className="text-lg font-bold md:text-3xl">
+            Inventario de Accesorios
+          </h1>
+        </div>
 
-        <Group justify="center" className="mt-8">
-          <Button variant="default" onClick={() => setFormModalOpened(true)}>
-            Añadir elemento
-          </Button>
-        </Group>
-
-        <div className="mx-auto mt-16 w-full max-w-7xl px-4 sm:px-6 md:mt-24 lg:px-8">
+        <div className="mx-auto mt-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <AccTableList
             data={isSuccess ? data : []}
             onUpdate={handleUpdate}
             onDelete={handleDelete}
+            FormModalOpened={setFormModalOpened}
           />
         </div>
       </Container>

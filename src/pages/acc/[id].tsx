@@ -3,7 +3,7 @@ import Link from "next/link";
 import NextError from "next/error";
 import { useRouter } from "next/router";
 import Container from "~/components/Container";
-import AccTrackingTableList from "~/components/AccTrackingTableList";
+import AccTrackingTableList from "~/components/acc/AccTrackingTableList";
 import { RouterOutputs, api } from "~/utils/api";
 
 type AccByIdOutput = RouterOutputs["acc"]["getById"];
