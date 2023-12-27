@@ -108,9 +108,9 @@ const AccTableList = ({
       },
       {
         accessorKey: "date",
+        accessorFn: (row) => row.date?.toLocaleDateString(),
         header: "Fecha de entrega",
         maxSize: 150,
-        Cell: ({ row }) => row.original.date.toLocaleDateString(),
       },
       {
         header: " ",

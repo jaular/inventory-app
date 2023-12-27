@@ -24,9 +24,9 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
     () => [
       {
         accessorKey: "createdAt",
+        accessorFn: (row) => row.createdAt?.toLocaleDateString(),
         header: "Fecha del cambio",
         maxSize: 150,
-        Cell: ({ row }) => row.original.createdAt.toLocaleDateString(),
       },
       {
         accessorFn: (row) => row.createdBy?.name,
@@ -74,17 +74,15 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
       },
       {
         accessorKey: "mouse",
+        accessorFn: (row) => (row.accessories?.[0] === "Mouse" ? "Si" : "No"),
         header: "Mouse",
         maxSize: 130,
-        Cell: ({ row }) =>
-          row.original.accessories[0] === "Mouse" ? "Si" : "No",
       },
       {
         accessorKey: "bag",
+        accessorFn: (row) => (row.accessories?.[1] === "Bolso" ? "Si" : "No"),
         header: "Bolso",
         maxSize: 130,
-        Cell: ({ row }) =>
-          row.original.accessories[1] === "Bolso" ? "Si" : "No",
       },
       {
         accessorKey: "userName",
@@ -107,9 +105,9 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
       },
       {
         accessorKey: "date",
+        accessorFn: (row) => row.date?.toLocaleDateString(),
         header: "Fecha de entrega",
         maxSize: 150,
-        Cell: ({ row }) => row.original.date.toLocaleDateString(),
       },
     ],
     [],

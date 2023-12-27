@@ -23,9 +23,9 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
     () => [
       {
         accessorKey: "createdAt",
+        accessorFn: (row) => row.createdAt?.toLocaleDateString(),
         header: "Fecha del cambio",
         maxSize: 150,
-        Cell: ({ row }) => row.original.createdAt.toLocaleDateString(),
       },
       {
         accessorFn: (row) => row.createdBy?.name,
@@ -86,9 +86,9 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
       },
       {
         accessorKey: "date",
+        accessorFn: (row) => row.date?.toLocaleDateString(),
         header: "Fecha de entrega",
         maxSize: 150,
-        Cell: ({ row }) => row.original.date.toLocaleDateString(),
       },
     ],
     [],
