@@ -124,7 +124,7 @@ export default function Main() {
 
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl font-bold md:text-3xl">
-          Inventario de Equipos
+          Inventario de equipos
         </h1>
       </div>
 

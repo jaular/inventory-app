@@ -1,13 +1,12 @@
 import type { UserProps } from "~/lib/types";
 import { useState } from "react";
-import { Modal, Loader } from "@mantine/core";
+import { Modal } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { useForm, zodResolver } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
 import { api } from "~/utils/api";
 import { userSchema } from "~/lib/schema";
 import { userInitialValues } from "~/lib/data";
-import Container from "~/components/Container";
 import UserForm from "~/components/user/UserForm";
 import UserTableList from "~/components/user/UserTableList";
 import classes from "~/styles/modal.module.css";
@@ -63,16 +62,6 @@ export default function UserMain() {
   };
 
   const modelWidth = useMediaQuery("(max-width: 1200px)") ? "100%" : "85%";
-
-  if (status === "loading") {
-    return (
-      <Container title="Gestión de usuarios">
-        <div className="flex min-h-[65vh] items-center justify-center">
-          <Loader color="blue" size="lg" />
-        </div>
-      </Container>
-    );
-  }
 
   return (
     <>

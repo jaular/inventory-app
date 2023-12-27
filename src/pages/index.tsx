@@ -9,7 +9,7 @@ export default function Home() {
 
   if (status === "loading") {
     return (
-      <Container title="Inventario de Equipos">
+      <Container title="Inventario de equipos">
         <div className="flex min-h-[65vh] items-center justify-center">
           <Loader color="blue" size="lg" />
         </div>
@@ -19,7 +19,7 @@ export default function Home() {
 
   if (status === "authenticated" && sessionData?.user.role !== "none") {
     return (
-      <Container title="Inventario de Equipos">
+      <Container title="Inventario de equipos">
         <Main />
       </Container>
     );
@@ -27,14 +27,14 @@ export default function Home() {
 
   if (status === "unauthenticated") {
     return (
-      <Container title="Inventario de Equipos">
+      <Container title="Inventario de equipos">
         <Message title="¡No estás autorizado a ver esta página!" />
       </Container>
     );
   }
 
   return (
-    <Container title="Inventario de Equipos">
+    <Container title="Inventario de equipos">
       <Message title="¡No estás autorizado a ver esta página!" />
     </Container>
   );

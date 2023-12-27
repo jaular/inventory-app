@@ -9,7 +9,7 @@ export default function AccPage() {
 
   if (status === "loading") {
     return (
-      <Container title="Inventario de Accesorios">
+      <Container title="Inventario de accesorios">
         <div className="flex min-h-[65vh] items-center justify-center">
           <Loader color="blue" size="lg" />
         </div>
@@ -19,7 +19,7 @@ export default function AccPage() {
 
   if (status === "authenticated" && sessionData?.user.role !== "none") {
     return (
-      <Container title="Inventario de Accesorios">
+      <Container title="Inventario de accesorios">
         <AccMain />
       </Container>
     );
@@ -27,14 +27,14 @@ export default function AccPage() {
 
   if (status === "unauthenticated") {
     return (
-      <Container title="Inventario de Accesorios">
+      <Container title="Inventario de accesorios">
         <Message title="¡No estás autorizado a ver esta página!" />
       </Container>
     );
   }
 
   return (
-    <Container title="Inventario de Accesorios">
+    <Container title="Inventario de accesorios">
       <Message title="¡No estás autorizado a ver esta página!" />
     </Container>
   );
