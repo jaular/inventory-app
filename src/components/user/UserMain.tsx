@@ -11,7 +11,6 @@ import Container from "~/components/Container";
 import UserForm from "~/components/user/UserForm";
 import UserTableList from "~/components/user/UserTableList";
 import classes from "~/styles/modal.module.css";
-import Test from "./Test";
 
 type DataProps = UserProps & {
   id: string;
