@@ -84,6 +84,7 @@ const Form = ({
           label="Marca"
           data={brandData}
           searchable
+          allowDeselect={false}
           {...form.getInputProps("brand")}
         />
         <TextInput label="Modelo" {...form.getInputProps("modelName")} />
@@ -92,12 +93,14 @@ const Form = ({
           label="Gama"
           data={rangeData}
           searchable
+          allowDeselect={false}
           {...form.getInputProps("range")}
         />
         <Select
           label="Memoria RAM"
           data={ramData}
           searchable
+          allowDeselect={false}
           {...form.getInputProps("ram")}
         />
         {/* <TextInput label="Dirección MAC (E)" {...form.getInputProps("macE")} /> */}
@@ -127,6 +130,7 @@ const Form = ({
           label="Dirección"
           data={departmentData}
           searchable
+          allowDeselect={false}
           {...form.getInputProps("department")}
         />
         <TextInput label="Gerencia" {...form.getInputProps("management")} />
@@ -134,7 +138,7 @@ const Form = ({
           label="Sede"
           data={officeData}
           searchable
-          clearable
+          allowDeselect={false}
           withAsterisk
           {...form.getInputProps("office")}
         />

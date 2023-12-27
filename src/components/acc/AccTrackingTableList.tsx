@@ -1,14 +1,7 @@
 import type { AccProps } from "~/lib/types";
-import type { MRT_ColumnDef, MRT_Row } from "mantine-react-table";
+import type { MRT_ColumnDef } from "mantine-react-table";
 import { useMemo } from "react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-// import { ActionIcon, Tooltip } from "@mantine/core";
-// import {
-//   IconTableExport,
-//   IconLayoutRows,
-//   IconTableRow,
-// } from "@tabler/icons-react";
-// import { downloadExcelAcc } from "~/utils/excelExport";
 import { localization } from "~/lib/tableLocale";
 import { typeData, brandData, conditionData } from "~/lib/data";
 
@@ -22,24 +15,17 @@ type DataProps = AccProps & {
 
 type Props = {
   data: DataProps[];
+  isDataLoading: boolean;
 };
 
-const AccTrackingTableList = ({ data }: Props) => {
-  // const handleExportRows = (rows: MRT_Row<DataProps>[]) => {
-  //   const rowData = rows.map((row) => row.original);
-  //   downloadExcelAcc(rowData);
-  // };
-
-  // const handleExportData = () => {
-  //   downloadExcelAcc(data);
-  // };
-
+const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
   const columns = useMemo<MRT_ColumnDef<DataProps>[]>(
     () => [
       {
-        accessorFn: (row) => row.createdAt.toLocaleDateString(),
+        accessorKey: "createdAt",
         header: "Fecha del cambio",
         maxSize: 150,
+        Cell: ({ row }) => row.original.createdAt.toLocaleDateString(),
       },
       {
         accessorFn: (row) => row.createdBy?.name,
@@ -99,9 +85,10 @@ const AccTrackingTableList = ({ data }: Props) => {
         maxSize: 180,
       },
       {
-        accessorFn: (row) => row.date.toLocaleDateString(),
+        accessorKey: "date",
         header: "Fecha de entrega",
         maxSize: 150,
+        Cell: ({ row }) => row.original.date.toLocaleDateString(),
       },
     ],
     [],
@@ -110,7 +97,7 @@ const AccTrackingTableList = ({ data }: Props) => {
   const table = useMantineReactTable({
     columns,
     data,
-    // enableRowSelection: true,
+    state: { isLoading: isDataLoading },
     enableDensityToggle: false,
     localization: localization,
     initialState: {
@@ -134,58 +121,10 @@ const AccTrackingTableList = ({ data }: Props) => {
     mantineSelectCheckboxProps: {
       size: "sm",
     },
-    // renderTopToolbarCustomActions: ({ table }) => (),
   });
 
   return (
     <>
-      {/* <ActionIcon.Group className="my-4">
-        <Tooltip label="Exportar todo" color="gray" offset={10}>
-          <ActionIcon
-            size="lg"
-            variant="light"
-            color="teal"
-            onClick={handleExportData}
-          >
-            <IconTableExport
-              style={{ width: "70%", height: "70%" }}
-              stroke={1.5}
-            />
-          </ActionIcon>
-        </Tooltip>
-        <Tooltip label="Exportar todas las filas" color="gray" offset={10}>
-          <ActionIcon
-            size="lg"
-            variant="light"
-            color="teal"
-            disabled={table.getPrePaginationRowModel().rows.length === 0}
-            onClick={() =>
-              handleExportRows(table.getPrePaginationRowModel().rows)
-            }
-          >
-            <IconLayoutRows
-              style={{ width: "70%", height: "70%" }}
-              stroke={1.5}
-            />
-          </ActionIcon>
-        </Tooltip>
-        <Tooltip label="Exportar filas seleccionadas" color="gray" offset={10}>
-          <ActionIcon
-            size="lg"
-            variant="light"
-            color="teal"
-            disabled={
-              !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
-            }
-            onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
-          >
-            <IconTableRow
-              style={{ width: "70%", height: "70%" }}
-              stroke={1.5}
-            />
-          </ActionIcon>
-        </Tooltip>
-      </ActionIcon.Group> */}
       <MantineReactTable table={table} />
     </>
   );

@@ -28,7 +28,7 @@ type DataProps = PostProps & {
 
 type Props = {
   data: DataProps[];
-  dataIsLoading: boolean;
+  isDataLoading: boolean;
   onUpdate: (post: PostProps) => void;
   onDelete: (serialNumber: string) => Promise<void>;
   FormModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,7 +36,7 @@ type Props = {
 
 const TableList = ({
   data,
-  dataIsLoading,
+  isDataLoading,
   onUpdate,
   onDelete,
   FormModalOpened,
@@ -109,15 +109,17 @@ const TableList = ({
       },
       {
         accessorKey: "mouse",
-        accessorFn: (row) => (row.accessories[0] === "Mouse" ? "Si" : "No"),
         header: "Mouse",
         maxSize: 130,
+        Cell: ({ row }) =>
+          row.original.accessories[0] === "Mouse" ? "Si" : "No",
       },
       {
         accessorKey: "bag",
-        accessorFn: (row) => (row.accessories[1] === "Bolso" ? "Si" : "No"),
         header: "Bolso",
         maxSize: 130,
+        Cell: ({ row }) =>
+          row.original.accessories[1] === "Bolso" ? "Si" : "No",
       },
       {
         accessorKey: "userName",
@@ -134,9 +136,10 @@ const TableList = ({
         },
       },
       {
-        accessorFn: (row) => row.date?.toLocaleDateString(),
+        accessorKey: "date",
         header: "Fecha de entrega",
         maxSize: 150,
+        Cell: ({ row }) => row.original.date.toLocaleDateString(),
       },
       {
         header: " ",
@@ -191,7 +194,7 @@ const TableList = ({
   const table = useMantineReactTable({
     columns,
     data,
-    state: { isLoading: dataIsLoading },
+    state: { isLoading: isDataLoading },
     enableRowSelection: true,
     enableDensityToggle: false,
     localization: localization,

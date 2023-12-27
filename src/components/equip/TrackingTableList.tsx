@@ -1,14 +1,7 @@
 import type { PostProps } from "~/lib/types";
-import type { MRT_ColumnDef, MRT_Row } from "mantine-react-table";
+import type { MRT_ColumnDef } from "mantine-react-table";
 import { useMemo } from "react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-// import { ActionIcon, Tooltip, Anchor } from "@mantine/core";
-// import {
-//   IconTableExport,
-//   IconLayoutRows,
-//   IconTableRow,
-// } from "@tabler/icons-react";
-// import { downloadExcel } from "~/utils/excelExport";
 import { localization } from "~/lib/tableLocale";
 import { brandData, officeData } from "~/lib/data";
 
@@ -23,24 +16,17 @@ type DataProps = PostProps & {
 
 type Props = {
   data: DataProps[];
+  isDataLoading: boolean;
 };
 
-const TrackingTableList = ({ data }: Props) => {
-  // const handleExportRows = (rows: MRT_Row<DataProps>[]) => {
-  //   const rowData = rows.map((row) => row.original);
-  //   downloadExcel(rowData);
-  // };
-
-  // const handleExportData = () => {
-  //   downloadExcel(data);
-  // };
-
+const TrackingTableList = ({ data, isDataLoading }: Props) => {
   const columns = useMemo<MRT_ColumnDef<DataProps>[]>(
     () => [
       {
-        accessorFn: (row) => row.createdAt.toLocaleDateString(),
+        accessorKey: "createdAt",
         header: "Fecha del cambio",
         maxSize: 150,
+        Cell: ({ row }) => row.original.createdAt.toLocaleDateString(),
       },
       {
         accessorFn: (row) => row.createdBy?.name,
@@ -51,11 +37,6 @@ const TrackingTableList = ({ data }: Props) => {
         accessorKey: "n",
         header: "ID",
         maxSize: 130,
-        // accessorFn: (row) => (
-        //   <Anchor component={Link} href={`/post/${row.n}`}>
-        //     {row.n}
-        //   </Anchor>
-        // ),
       },
       {
         accessorKey: "name",
@@ -93,15 +74,17 @@ const TrackingTableList = ({ data }: Props) => {
       },
       {
         accessorKey: "mouse",
-        accessorFn: (row) => (row.accessories[0] === "Mouse" ? "Si" : "No"),
         header: "Mouse",
         maxSize: 130,
+        Cell: ({ row }) =>
+          row.original.accessories[0] === "Mouse" ? "Si" : "No",
       },
       {
         accessorKey: "bag",
-        accessorFn: (row) => (row.accessories[1] === "Bolso" ? "Si" : "No"),
         header: "Bolso",
         maxSize: 130,
+        Cell: ({ row }) =>
+          row.original.accessories[1] === "Bolso" ? "Si" : "No",
       },
       {
         accessorKey: "userName",
@@ -123,9 +106,10 @@ const TrackingTableList = ({ data }: Props) => {
         maxSize: 150,
       },
       {
-        accessorFn: (row) => row.date.toLocaleDateString(),
+        accessorKey: "date",
         header: "Fecha de entrega",
         maxSize: 150,
+        Cell: ({ row }) => row.original.date.toLocaleDateString(),
       },
     ],
     [],
@@ -134,7 +118,7 @@ const TrackingTableList = ({ data }: Props) => {
   const table = useMantineReactTable({
     columns,
     data,
-    // enableRowSelection: true,
+    state: { isLoading: isDataLoading },
     enableDensityToggle: false,
     localization: localization,
     initialState: {
@@ -158,58 +142,10 @@ const TrackingTableList = ({ data }: Props) => {
     mantineSelectCheckboxProps: {
       size: "sm",
     },
-    // renderTopToolbarCustomActions: ({ table }) => (),
   });
 
   return (
     <>
-      {/* <ActionIcon.Group className="my-4">
-        <Tooltip label="Exportar todo" color="gray" offset={10}>
-          <ActionIcon
-            size="lg"
-            variant="light"
-            color="teal"
-            onClick={handleExportData}
-          >
-            <IconTableExport
-              style={{ width: "70%", height: "70%" }}
-              stroke={1.5}
-            />
-          </ActionIcon>
-        </Tooltip>
-        <Tooltip label="Exportar todas las filas" color="gray" offset={10}>
-          <ActionIcon
-            size="lg"
-            variant="light"
-            color="teal"
-            disabled={table.getPrePaginationRowModel().rows.length === 0}
-            onClick={() =>
-              handleExportRows(table.getPrePaginationRowModel().rows)
-            }
-          >
-            <IconLayoutRows
-              style={{ width: "70%", height: "70%" }}
-              stroke={1.5}
-            />
-          </ActionIcon>
-        </Tooltip>
-        <Tooltip label="Exportar filas seleccionadas" color="gray" offset={10}>
-          <ActionIcon
-            size="lg"
-            variant="light"
-            color="teal"
-            disabled={
-              !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
-            }
-            onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
-          >
-            <IconTableRow
-              style={{ width: "70%", height: "70%" }}
-              stroke={1.5}
-            />
-          </ActionIcon>
-        </Tooltip>
-      </ActionIcon.Group> */}
       <MantineReactTable table={table} />
     </>
   );

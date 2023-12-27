@@ -95,7 +95,7 @@ export default function UserMain() {
         <UserTableList
           data={isSuccess ? userData : []}
           onUpdate={handleUpdate}
-          dataIsLoading={isLoading}
+          isDataLoading={isLoading}
         />
       </div>
     </>

@@ -1,12 +1,15 @@
 import type { AccProps } from "~/lib/types";
+import { useEffect } from "react";
 import Link from "next/link";
-import NextError from "next/error";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { Loader } from "@mantine/core";
 import Container from "~/components/Container";
 import AccTrackingTableList from "~/components/acc/AccTrackingTableList";
+import Message from "~/components/Message";
 import { RouterOutputs, api } from "~/utils/api";
 
-type AccByIdOutput = RouterOutputs["acc"]["getById"];
+// type AccByIdOutput = RouterOutputs["acc"]["getById"];
 
 type DataProps = AccProps & {
   n: string;
@@ -20,55 +23,78 @@ type Props = {
   id: string;
   data: DataProps[];
   isSuccess: boolean;
-  acc: AccByIdOutput;
+  isLoading: boolean;
+  // acc: AccByIdOutput;
 };
 
-function AccItem({ id, acc, data, isSuccess }: Props) {
+export default function AccHistoryPage() {
+  const { data: sessionData, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [status]);
+
+  if (status === "loading") {
+    return (
+      <Container>
+        <div className="flex min-h-[65vh] items-center justify-center">
+          <Loader color="blue" size="lg" />
+        </div>
+      </Container>
+    );
+  }
+
+  if (status === "authenticated" && sessionData?.user.role !== "none") {
+    return (
+      <Container>
+        <Main />
+      </Container>
+    );
+  }
+
   return (
     <Container>
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Link className="mb-4 text-blue-500 underline" href="/accs">
-          Regresar
-        </Link>
-        <div className="my-4">
-          <h1>
-            Historial de cambios del elemento con ID:{" "}
-            <span className="font-bold">{id}</span>
-          </h1>
-          {!acc?.n && <p>Elemento ya fue eliminado!</p>}
-        </div>
-        <AccTrackingTableList data={isSuccess ? data : []} />
-      </div>
+      <Message title="¡No estás autorizado a ver esta página!" />
     </Container>
   );
 }
 
-const AccViewPage = () => {
-  const n = useRouter().query.id as string;
-  const accQuery = api.acc.getById.useQuery({ n });
-  const { data, isSuccess } = api.acc.getTrackingAllById.useQuery({ n });
-
-  if (accQuery.error) {
-    return (
-      <NextError
-        title={accQuery.error.message}
-        statusCode={accQuery.error.data?.httpStatus ?? 500}
+function AccItem({ id, data, isSuccess, isLoading }: Props) {
+  return (
+    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <Link className="mb-4 text-blue-500 underline" href="/accs">
+        Regresar
+      </Link>
+      <div className="my-4">
+        <h1 className="text-base md:text-lg">
+          Historial de cambios del elemento con ID:{" "}
+          <span className="font-bold">{id}</span>
+        </h1>
+      </div>
+      <AccTrackingTableList
+        data={isSuccess ? data : []}
+        isDataLoading={isLoading}
       />
-    );
-  }
+    </div>
+  );
+}
 
-  if (accQuery.status !== "success") {
-    return <div className="flex h-full flex-col justify-center px-8 "></div>;
-  }
-  const { data: acc } = accQuery;
+const Main = () => {
+  const n = useRouter().query.id as string;
+  // const accQuery = api.acc.getById.useQuery({ n });
+  const { data, isSuccess, isLoading } = api.acc.getTrackingAllById.useQuery({
+    n,
+  });
+
   return (
     <AccItem
       id={n}
-      acc={acc}
       data={isSuccess ? data : []}
       isSuccess={isSuccess}
+      isLoading={isLoading}
     />
   );
 };
-
-export default AccViewPage;

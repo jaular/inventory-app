@@ -131,7 +131,7 @@ export default function Main() {
       <div className="mx-auto mt-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <TableList
           data={isSuccess ? data : []}
-          dataIsLoading={isLoading}
+          isDataLoading={isLoading}
           onUpdate={handleUpdate}
           onDelete={handleDelete}
           FormModalOpened={setFormModalOpened}

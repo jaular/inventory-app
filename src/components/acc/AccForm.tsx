@@ -67,6 +67,7 @@ const AccForm = ({
           label="Tipo"
           data={typeData}
           searchable
+          allowDeselect={false}
           withAsterisk
           {...form.getInputProps("type")}
         />
@@ -75,6 +76,7 @@ const AccForm = ({
           label="Marca"
           data={brandData}
           searchable
+          allowDeselect={false}
           {...form.getInputProps("brand")}
         />
         <TextInput label="Modelo" {...form.getInputProps("modelName")} />
@@ -82,6 +84,7 @@ const AccForm = ({
           label="Estado"
           data={conditionData}
           searchable
+          allowDeselect={false}
           withAsterisk
           {...form.getInputProps("condition")}
         />
@@ -101,6 +104,7 @@ const AccForm = ({
           label="Direcci&oacute;n"
           data={departmentData}
           searchable
+          allowDeselect={false}
           {...form.getInputProps("department")}
         />
 

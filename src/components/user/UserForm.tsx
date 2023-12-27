@@ -53,6 +53,7 @@ const UserForm = ({
         <Select
           label="Rol"
           data={["none", "user", "admin"]}
+          allowDeselect={false}
           withAsterisk
           {...form.getInputProps("role")}
         />

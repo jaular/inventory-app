@@ -12,11 +12,11 @@ type DataProps = UserProps & {
 
 type Props = {
   data: DataProps[];
-  dataIsLoading: boolean;
+  isDataLoading: boolean;
   onUpdate: (user: UserProps) => void;
 };
 
-const UserTableList = ({ data, dataIsLoading, onUpdate }: Props) => {
+const UserTableList = ({ data, isDataLoading, onUpdate }: Props) => {
   const columns = useMemo<MRT_ColumnDef<DataProps>[]>(
     () => [
       {
@@ -70,7 +70,7 @@ const UserTableList = ({ data, dataIsLoading, onUpdate }: Props) => {
   const table = useMantineReactTable({
     columns,
     data,
-    state: { isLoading: dataIsLoading },
+    state: { isLoading: isDataLoading },
     enableDensityToggle: false,
     localization: localization,
     initialState: {

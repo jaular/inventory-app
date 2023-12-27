@@ -27,7 +27,7 @@ type DataProps = AccProps & {
 
 type Props = {
   data: DataProps[];
-  dataIsLoading: boolean;
+  isDataLoading: boolean;
   onUpdate: (acc: AccProps) => void;
   onDelete: (serialNumber: string) => Promise<void>;
   FormModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,7 +35,7 @@ type Props = {
 
 const AccTableList = ({
   data,
-  dataIsLoading,
+  isDataLoading,
   onUpdate,
   onDelete,
   FormModalOpened,
@@ -107,9 +107,10 @@ const AccTableList = ({
         maxSize: 180,
       },
       {
-        accessorFn: (row) => row.date?.toLocaleDateString(),
+        accessorKey: "date",
         header: "Fecha de entrega",
         maxSize: 150,
+        Cell: ({ row }) => row.original.date.toLocaleDateString(),
       },
       {
         header: " ",
@@ -164,7 +165,7 @@ const AccTableList = ({
   const table = useMantineReactTable({
     columns,
     data,
-    state: { isLoading: dataIsLoading },
+    state: { isLoading: isDataLoading },
     enableRowSelection: true,
     enableDensityToggle: false,
     localization: localization,
