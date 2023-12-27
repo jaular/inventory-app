@@ -28,7 +28,7 @@ type DataProps = AccProps & {
 type Props = {
   data: DataProps[];
   dataIsLoading: boolean;
-  onUpdate: (Post: AccProps) => void;
+  onUpdate: (acc: AccProps) => void;
   onDelete: (serialNumber: string) => Promise<void>;
   FormModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
 };

@@ -3,7 +3,7 @@ import Link from "next/link";
 import NextError from "next/error";
 import { useRouter } from "next/router";
 import Container from "~/components/Container";
-import TrackingTableList from "~/components/TrackingTableList";
+import TrackingTableList from "~/components/equip/TrackingTableList";
 import { RouterOutputs, api } from "~/utils/api";
 
 type PostByIdOutput = RouterOutputs["post"]["getById"];
