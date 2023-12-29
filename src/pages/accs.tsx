@@ -20,7 +20,7 @@ export default function AccPage() {
   if (status === "authenticated" && sessionData?.user.role !== "none") {
     return (
       <Container title="Inventario de accesorios">
-        <AccMain />
+        <AccMain user={sessionData.user} />
       </Container>
     );
   }

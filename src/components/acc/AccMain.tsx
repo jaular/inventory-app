@@ -1,4 +1,4 @@
-import type { AccProps } from "~/lib/types";
+import type { AccProps, UserProps } from "~/lib/types";
 import { useState } from "react";
 import { Modal } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
@@ -10,7 +10,11 @@ import AccForm from "~/components/acc/AccForm";
 import AccTableList from "~/components/acc/AccTableList";
 import classes from "~/styles/modal.module.css";
 
-export default function AccMain() {
+type Props = {
+  user: UserProps;
+};
+
+export default function AccMain({ user }: Props) {
   const [formModalOpened, setFormModalOpened] = useState<boolean>(false);
   const [createState, setCreateState] = useState<boolean>(true);
 
@@ -124,6 +128,7 @@ export default function AccMain() {
           onUpdate={handleUpdate}
           onDelete={handleDelete}
           FormModalOpened={setFormModalOpened}
+          user={user}
         />
       </div>
     </>

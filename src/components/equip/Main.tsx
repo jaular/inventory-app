@@ -1,4 +1,4 @@
-import type { PostProps } from "~/lib/types";
+import type { PostProps, UserProps } from "~/lib/types";
 import { useState } from "react";
 import { Modal } from "@mantine/core";
 // import { useMediaQuery } from "@mantine/hooks";
@@ -11,7 +11,11 @@ import Form from "~/components/equip/Form";
 import TableList from "~/components/equip/TableList";
 import classes from "~/styles/modal.module.css";
 
-export default function Main() {
+type Props = {
+  user: UserProps;
+};
+
+export default function Main({ user }: Props) {
   const [formModalOpened, setFormModalOpened] = useState<boolean>(false);
   const [createState, setCreateState] = useState<boolean>(true);
 
@@ -136,6 +140,7 @@ export default function Main() {
           onUpdate={handleUpdate}
           onDelete={handleDelete}
           FormModalOpened={setFormModalOpened}
+          user={user}
         />
       </div>
     </>

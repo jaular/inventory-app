@@ -20,7 +20,7 @@ export default function Home() {
   if (status === "authenticated" && sessionData?.user.role !== "none") {
     return (
       <Container title="Inventario de equipos">
-        <Main />
+        <Main user={sessionData.user} />
       </Container>
     );
   }

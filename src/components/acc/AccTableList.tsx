@@ -1,4 +1,4 @@
-import type { AccProps } from "~/lib/types";
+import type { AccProps, UserProps } from "~/lib/types";
 import type { MRT_ColumnDef, MRT_Row } from "mantine-react-table";
 import { useMemo, useState } from "react";
 import Link from "next/link";
@@ -31,6 +31,7 @@ type Props = {
   onUpdate: (acc: AccProps) => void;
   onDelete: (serialNumber: string) => Promise<void>;
   FormModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  user: UserProps;
 };
 
 type ColsProps = {
@@ -46,6 +47,7 @@ const AccTableList = ({
   onUpdate,
   onDelete,
   FormModalOpened,
+  user,
 }: Props) => {
   const [deviceId, setDeviceId] = useState("");
   const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
@@ -159,6 +161,7 @@ const AccTableList = ({
                 variant="light"
                 color="red"
                 aria-label="Eliminar"
+                disabled={row.original.createdBy?.name !== user.name}
                 onClick={() => {
                   setDeleteModalOpened(true);
                   setDeviceId(row.original.n);
