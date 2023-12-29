@@ -103,7 +103,6 @@ const Form = ({
           allowDeselect={false}
           {...form.getInputProps("ram")}
         />
-        {/* <TextInput label="Dirección MAC (E)" {...form.getInputProps("macE")} /> */}
         <Checkbox.Group
           className="col-span-2 md:col-span-3 xl:col-span-4"
           label="Accesorios"
@@ -114,6 +113,8 @@ const Form = ({
             <Checkbox value="Bolso" label="Bolso" />
           </div>
         </Checkbox.Group>
+        <TextInput label="Dirección MAC (E)" {...form.getInputProps("macE")} />
+        <TextInput label="Dirección MAC (W)" {...form.getInputProps("macW")} />
 
         <Divider
           my="md"

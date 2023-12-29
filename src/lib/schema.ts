@@ -30,13 +30,6 @@ export const postSchema = z.object({
     .min(2, { message: "Debe tener 2 o más caracteres" })
     .trim()
     .or(z.literal("")),
-  // macE: z
-  //   .string()
-  //   .regex(macRegex, {
-  //     message: "Invalid MAC address",
-  //   })
-  //   .trim()
-  //   .or(z.literal("")),
   range: z
     .string()
     .min(1, { message: "Elige una opción" })
@@ -48,6 +41,20 @@ export const postSchema = z.object({
     .trim()
     .or(z.literal("")),
   accessories: z.string().array().optional(),
+  macE: z
+    .string()
+    .regex(macRegex, {
+      message: "Dirección MAC invalida",
+    })
+    .trim()
+    .or(z.literal("")),
+  macW: z
+    .string()
+    .regex(macRegex, {
+      message: "Dirección MAC invalida",
+    })
+    .trim()
+    .or(z.literal("")),
   userName: z
     .string()
     .min(2, { message: "Debe tener 2 o más caracteres" })
@@ -172,6 +179,20 @@ export const postTrackingSchema = z.object({
     .trim()
     .or(z.literal("")),
   accessories: z.string().array().optional(),
+  macE: z
+    .string()
+    .regex(macRegex, {
+      message: "Dirección MAC invalida",
+    })
+    .trim()
+    .or(z.literal("")),
+  macW: z
+    .string()
+    .regex(macRegex, {
+      message: "Dirección MAC invalida",
+    })
+    .trim()
+    .or(z.literal("")),
   userName: z
     .string()
     .min(2, { message: "Debe tener 2 o más caracteres" })

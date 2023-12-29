@@ -51,11 +51,12 @@ export default function Main() {
     initialValues: postInitialValues,
     transformValues: (values) => ({
       ...values,
-      // macE: values.macE.toUpperCase(),
       name: values.name.toUpperCase(),
       accessories: createState
         ? values.accessories.slice(1)
         : values.accessories,
+      macE: values.macE.toUpperCase(),
+      macw: values.macW.toUpperCase(),
     }),
   });
 

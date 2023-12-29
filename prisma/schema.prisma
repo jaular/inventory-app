@@ -20,6 +20,8 @@ model Post {
     range        String
     ram          String
     accessories  String[]
+    macE         String
+    macW         String
 
     userName   String
     management String
@@ -46,6 +48,8 @@ model PostTracking {
     range        String
     ram          String
     accessories  String[]
+    macE         String
+    macW         String
 
     userName   String
     management String

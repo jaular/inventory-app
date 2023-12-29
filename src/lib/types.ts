@@ -3,10 +3,11 @@ export type PostProps = {
   name: string;
   brand: string;
   modelName: string;
-  // macE: string;
   range: string;
   ram: string;
   accessories: string[];
+  macE: string;
+  macW: string;
   userName: string;
   management: string;
   department: string;

@@ -145,6 +145,16 @@ const TableList = ({
         maxSize: 130,
       },
       {
+        accessorKey: "macE",
+        header: "MAC (E)",
+        maxSize: 130,
+      },
+      {
+        accessorKey: "macW",
+        header: "MAC (W)",
+        maxSize: 130,
+      },
+      {
         accessorKey: "userName",
         header: "Usuario",
         maxSize: 130,
@@ -253,6 +263,8 @@ const TableList = ({
         ram: false,
         mouse: false,
         bag: false,
+        macE: false,
+        macW: false,
         department: false,
         management: false,
         office: false,
