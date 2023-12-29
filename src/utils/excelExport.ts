@@ -1,5 +1,12 @@
 import { PostProps, AccProps } from "~/lib/types";
-import { writeFile, utils } from "xlsx";
+import csvDownload from "json-to-csv-export";
+
+type ColsProps = {
+  id: string;
+  header: string;
+  size: number;
+  minSize: number;
+};
 
 type ExcelProps = PostProps & {
   n: string;
@@ -8,31 +15,18 @@ type ExcelProps = PostProps & {
   };
 };
 
-const new_headers = [
-  "ID",
-  "S/N",
-  "Nombre del equipo",
-  "Marca",
-  "Modelo",
-  "Gama",
-  "Memoria RAM",
-  "Mouse",
-  "Bolso",
-  "Usuario",
-  "Dirección",
-  "Gerencia",
-  "Sede",
-  "Fecha de entrega",
-];
+// Equipment
+export const downloadExcel = (sortedData: ExcelProps[], cols: ColsProps[]) => {
+  const headers = cols.map((col) => col.header);
+  const ids = cols.map((col) => col.id);
 
-export const downloadExcel = (sortedData: ExcelProps[]) => {
   const acc = sortedData.map((row) => ({
     mouse: row.accessories.find((item) => item === "Mouse"),
     bag: row.accessories.find((item) => item === "Bolso"),
   }));
 
   const rows = sortedData.map((row, i) => ({
-    id: row.n,
+    n: row.n,
     serialNumber: row.serialNumber,
     name: row.name,
     brand: row.brand,
@@ -48,59 +42,40 @@ export const downloadExcel = (sortedData: ExcelProps[]) => {
     date: row.date.toLocaleDateString(),
   }));
 
-  // generate worksheet and workbook
-  const worksheet = utils.json_to_sheet(rows);
-  const workbook = utils.book_new();
-  utils.book_append_sheet(workbook, worksheet, "Sheet1");
+  const data = rows.map((row) =>
+    ids.reduce((acc, curr) => {
+      // @ts-ignore
+      acc[curr] = row[curr];
+      return acc;
+    }, {}),
+  );
 
-  // fix headers
-  utils.sheet_add_aoa(worksheet, [new_headers], { origin: "A1" });
-
-  // column width
-  const wscols = [
-    { wch: 30 },
-    { wch: 30 },
-    { wch: 25 },
-    { wch: 20 },
-    { wch: 20 },
-    { wch: 15 },
-    { wch: 20 },
-    { wch: 10 },
-    { wch: 10 },
-    { wch: 20 },
-    { wch: 25 },
-    { wch: 20 },
-    { wch: 20 },
-    { wch: 20 },
-  ];
-  worksheet["!cols"] = wscols;
-
-  // create an XLSX file
-  writeFile(workbook, "Equipos.xlsx", { compression: true });
+  const dataToConvert = {
+    data: data,
+    filename: "Inventario de equipos",
+    // delimiter: ",",
+    headers: headers,
+  };
+  csvDownload(dataToConvert);
 };
 
-type ExcelProps2 = AccProps & {
+// Accessories
+type AccExcelProps = AccProps & {
   n: string;
   createdBy?: {
     name: string | null;
   };
 };
 
-const new_headers2 = [
-  "ID",
-  "Tipo",
-  "S/N",
-  "Marca",
-  "Modelo",
-  "Estado",
-  "Usuario",
-  "Dirección",
-  "Fecha de entrega",
-];
+export const downloadExcelAcc = (
+  sortedData: AccExcelProps[],
+  cols: ColsProps[],
+) => {
+  const headers = cols.map((col) => col.header);
+  const ids = cols.map((col) => col.id);
 
-export const downloadExcelAcc = (sortedData: ExcelProps2[]) => {
   const rows = sortedData.map((row, i) => ({
-    id: row.n,
+    n: row.n,
     type: row.type,
     serialNumber: row.serialNumber,
     brand: row.brand,
@@ -111,28 +86,19 @@ export const downloadExcelAcc = (sortedData: ExcelProps2[]) => {
     date: row.date.toLocaleDateString(),
   }));
 
-  // generate worksheet and workbook
-  const worksheet = utils.json_to_sheet(rows);
-  const workbook = utils.book_new();
-  utils.book_append_sheet(workbook, worksheet, "Sheet1");
+  const data = rows.map((row) =>
+    ids.reduce((acc, curr) => {
+      // @ts-ignore
+      acc[curr] = row[curr];
+      return acc;
+    }, {}),
+  );
 
-  // fix headers
-  utils.sheet_add_aoa(worksheet, [new_headers2], { origin: "A1" });
-
-  // column width
-  const wscols = [
-    { wch: 30 },
-    { wch: 25 },
-    { wch: 30 },
-    { wch: 20 },
-    { wch: 20 },
-    { wch: 15 },
-    { wch: 20 },
-    { wch: 20 },
-    { wch: 20 },
-  ];
-  worksheet["!cols"] = wscols;
-
-  // create an XLSX file
-  writeFile(workbook, "Accesorios.xlsx", { compression: true });
+  const dataToConvert = {
+    data: data,
+    filename: "Inventario de accesorios",
+    // delimiter: ",",
+    headers: headers,
+  };
+  csvDownload(dataToConvert);
 };

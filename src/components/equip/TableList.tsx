@@ -34,6 +34,13 @@ type Props = {
   FormModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+type ColsProps = {
+  id: string;
+  header: string;
+  size: number;
+  minSize: number;
+};
+
 const TableList = ({
   data,
   isDataLoading,
@@ -45,12 +52,24 @@ const TableList = ({
   const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
 
   const handleExportRows = (rows: MRT_Row<DataProps>[]) => {
+    const visCols = table.getVisibleFlatColumns().map((col) => {
+      const { header, id, size, minSize } = col.columnDef;
+      return { id, header, size, minSize };
+    });
+    const cols = visCols.slice(1, visCols.length - 1) as ColsProps[];
+
     const rowData = rows.map((row) => row.original);
-    downloadExcel(rowData);
+    downloadExcel(rowData, cols);
   };
 
   const handleExportData = () => {
-    downloadExcel(data);
+    const visCols = table.getVisibleFlatColumns().map((col) => {
+      const { header, id, size, minSize } = col.columnDef;
+      return { id, header, size, minSize };
+    });
+    const cols = visCols.slice(1, visCols.length - 1) as ColsProps[];
+
+    downloadExcel(data, cols);
   };
 
   const columns = useMemo<MRT_ColumnDef<DataProps>[]>(
