@@ -126,6 +126,11 @@ const AccTableList = ({
         maxSize: 180,
       },
       {
+        accessorKey: "note",
+        header: "Observaciones",
+        maxSize: 160,
+      },
+      {
         accessorKey: "date",
         accessorFn: (row) => row.date?.toLocaleDateString(),
         header: "Fecha de entrega",
@@ -193,6 +198,7 @@ const AccTableList = ({
         n: false,
         modelName: false,
         department: false,
+        note: false,
       },
       pagination: { pageSize: 5, pageIndex: 0 },
       density: "xs",

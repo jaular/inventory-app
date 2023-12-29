@@ -39,6 +39,8 @@ export const downloadExcel = (sortedData: ExcelProps[], cols: ColsProps[]) => {
     department: row.department,
     management: row.management,
     office: row.office,
+    orderNumber: row.orderNumber,
+    note: row.note,
     date: row.date.toLocaleDateString(),
   }));
 
@@ -83,6 +85,7 @@ export const downloadExcelAcc = (
     condition: row.condition,
     userName: row.userName,
     department: row.department,
+    note: row.note,
     date: row.date.toLocaleDateString(),
   }));
 

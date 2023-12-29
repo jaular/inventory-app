@@ -15,7 +15,13 @@ import {
 } from "@tabler/icons-react";
 import { downloadExcel } from "~/utils/excelExport";
 import { localization } from "~/lib/tableLocale";
-import { brandData, officeData, rangeData, ramData } from "~/lib/data";
+import {
+  brandData,
+  officeData,
+  rangeData,
+  ramData,
+  departmentData,
+} from "~/lib/data";
 import classes from "~/styles/table.module.css";
 
 type DataProps = PostProps & {
@@ -144,6 +150,20 @@ const TableList = ({
         maxSize: 130,
       },
       {
+        accessorKey: "department",
+        header: "Dirección",
+        maxSize: 160,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: departmentData,
+        },
+      },
+      {
+        accessorKey: "management",
+        header: "Gerencia",
+        maxSize: 130,
+      },
+      {
         accessorKey: "office",
         header: "Sede",
         maxSize: 160,
@@ -151,6 +171,16 @@ const TableList = ({
         mantineFilterSelectProps: {
           data: officeData,
         },
+      },
+      {
+        accessorKey: "orderNumber",
+        header: "Número de orden",
+        maxSize: 130,
+      },
+      {
+        accessorKey: "note",
+        header: "Observaciones",
+        maxSize: 160,
       },
       {
         accessorKey: "date",
@@ -223,7 +253,11 @@ const TableList = ({
         ram: false,
         mouse: false,
         bag: false,
+        department: false,
+        management: false,
         office: false,
+        orderNumber: false,
+        note: false,
       },
       pagination: { pageSize: 5, pageIndex: 0 },
       density: "xs",

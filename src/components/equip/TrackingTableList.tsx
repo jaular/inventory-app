@@ -3,7 +3,13 @@ import type { MRT_ColumnDef } from "mantine-react-table";
 import { useMemo } from "react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { localization } from "~/lib/tableLocale";
-import { brandData, officeData } from "~/lib/data";
+import {
+  brandData,
+  officeData,
+  rangeData,
+  ramData,
+  departmentData,
+} from "~/lib/data";
 
 type DataProps = PostProps & {
   n: string;
@@ -26,11 +32,13 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
         accessorKey: "createdAt",
         accessorFn: (row) => row.createdAt?.toLocaleDateString(),
         header: "Fecha del cambio",
+        enableHiding: false,
         maxSize: 150,
       },
       {
         accessorFn: (row) => row.createdBy?.name,
         header: "Cambio hecho por",
+        enableHiding: false,
         maxSize: 180,
       },
       {
@@ -66,11 +74,19 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
         accessorKey: "range",
         header: "Gama",
         maxSize: 150,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: rangeData,
+        },
       },
       {
         accessorKey: "ram",
         header: "Memoria RAM",
         maxSize: 150,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: ramData,
+        },
       },
       {
         accessorKey: "mouse",
@@ -90,6 +106,20 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
         maxSize: 130,
       },
       {
+        accessorKey: "department",
+        header: "Dirección",
+        maxSize: 160,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: departmentData,
+        },
+      },
+      {
+        accessorKey: "management",
+        header: "Gerencia",
+        maxSize: 130,
+      },
+      {
         accessorKey: "office",
         header: "Sede",
         maxSize: 160,
@@ -100,8 +130,13 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
       },
       {
         accessorKey: "orderNumber",
-        header: "Numero de orden",
-        maxSize: 150,
+        header: "Número de orden",
+        maxSize: 130,
+      },
+      {
+        accessorKey: "note",
+        header: "Observaciones",
+        maxSize: 160,
       },
       {
         accessorKey: "date",
@@ -122,6 +157,16 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
     initialState: {
       columnVisibility: {
         n: false,
+        modelName: false,
+        range: false,
+        ram: false,
+        mouse: false,
+        bag: false,
+        department: false,
+        management: false,
+        office: false,
+        orderNumber: false,
+        note: false,
       },
       pagination: { pageSize: 5, pageIndex: 0 },
       density: "xs",

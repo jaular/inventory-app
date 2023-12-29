@@ -25,11 +25,13 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
         accessorKey: "createdAt",
         accessorFn: (row) => row.createdAt?.toLocaleDateString(),
         header: "Fecha del cambio",
+        enableHiding: false,
         maxSize: 150,
       },
       {
         accessorFn: (row) => row.createdBy?.name,
         header: "Cambio hecho por",
+        enableHiding: false,
         maxSize: 150,
       },
       {
@@ -85,6 +87,11 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
         maxSize: 180,
       },
       {
+        accessorKey: "note",
+        header: "Observaciones",
+        maxSize: 160,
+      },
+      {
         accessorKey: "date",
         accessorFn: (row) => row.date?.toLocaleDateString(),
         header: "Fecha de entrega",
@@ -103,6 +110,9 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
     initialState: {
       columnVisibility: {
         n: false,
+        modelName: false,
+        department: false,
+        note: false,
       },
       pagination: { pageSize: 5, pageIndex: 0 },
       density: "xs",
