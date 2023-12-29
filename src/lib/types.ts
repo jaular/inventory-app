@@ -17,13 +17,13 @@ export type PostProps = {
   note: string;
 };
 
-// export type UserProps = {
-//   name: string;
-//   email: string;
-//   role: string;
-// };
-
 export type UserProps = {
+  name: string;
+  email: string;
+  role: string;
+};
+
+export type UserSessionProps = {
   name?: string | null | undefined;
   email?: string | null | undefined;
   image?: string | null | undefined;

@@ -1,4 +1,4 @@
-import type { PostProps, UserProps } from "~/lib/types";
+import type { PostProps, UserSessionProps } from "~/lib/types";
 import type { MRT_ColumnDef, MRT_Row } from "mantine-react-table";
 import { useMemo, useState } from "react";
 import Link from "next/link";
@@ -38,7 +38,7 @@ type Props = {
   onUpdate: (post: PostProps) => void;
   onDelete: (serialNumber: string) => Promise<void>;
   FormModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
-  user: UserProps;
+  user: UserSessionProps;
 };
 
 type ColsProps = {

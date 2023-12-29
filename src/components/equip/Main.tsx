@@ -1,4 +1,4 @@
-import type { PostProps, UserProps } from "~/lib/types";
+import type { PostProps, UserSessionProps } from "~/lib/types";
 import { useState } from "react";
 import { Modal } from "@mantine/core";
 // import { useMediaQuery } from "@mantine/hooks";
@@ -12,7 +12,7 @@ import TableList from "~/components/equip/TableList";
 import classes from "~/styles/modal.module.css";
 
 type Props = {
-  user: UserProps;
+  user: UserSessionProps;
 };
 
 export default function Main({ user }: Props) {

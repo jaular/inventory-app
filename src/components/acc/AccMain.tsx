@@ -1,4 +1,4 @@
-import type { AccProps, UserProps } from "~/lib/types";
+import type { AccProps, UserSessionProps } from "~/lib/types";
 import { useState } from "react";
 import { Modal } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
@@ -11,7 +11,7 @@ import AccTableList from "~/components/acc/AccTableList";
 import classes from "~/styles/modal.module.css";
 
 type Props = {
-  user: UserProps;
+  user: UserSessionProps;
 };
 
 export default function AccMain({ user }: Props) {
