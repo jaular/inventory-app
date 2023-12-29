@@ -4,7 +4,7 @@ type Props = {
 
 const Message = ({ title }: Props) => {
   return (
-    <div className="flex min-h-[65vh] items-center justify-center">
+    <div className="flex min-h-[64vh] items-center justify-center">
       <p className="text-lg font-medium md:text-2xl">{title}</p>
     </div>
   );

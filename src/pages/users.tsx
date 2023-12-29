@@ -28,7 +28,7 @@ export default function UsersPage() {
   if (status === "unauthenticated") {
     return (
       <Container title="Gestión de usuarios">
-        <Message title="¡No estás autorizado a ver esta página!" />
+        <Message title="Inicia sesión" />
       </Container>
     );
   }

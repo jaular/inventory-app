@@ -28,7 +28,7 @@ export default function Home() {
   if (status === "unauthenticated") {
     return (
       <Container title="Inventario de equipos">
-        <Message title="¡No estás autorizado a ver esta página!" />
+        <Message title="Inicia sesión" />
       </Container>
     );
   }

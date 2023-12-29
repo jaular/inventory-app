@@ -28,7 +28,7 @@ export default function AccPage() {
   if (status === "unauthenticated") {
     return (
       <Container title="Inventario de accesorios">
-        <Message title="¡No estás autorizado a ver esta página!" />
+        <Message title="Inicia sesión" />
       </Container>
     );
   }

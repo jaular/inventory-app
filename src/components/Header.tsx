@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Menu, Button, Loader } from "@mantine/core";
-import { IconUser } from "@tabler/icons-react";
+import { Button, Menu } from "@mantine/core";
+import { IconUserSquareRounded } from "@tabler/icons-react";
 import cx from "clsx";
 import classes from "~/styles/header.module.css";
 
@@ -49,11 +49,7 @@ function AuthShowcase() {
               alt="user"
             />
           ) : (
-            <IconUser
-              className="rounded-full bg-gray-700"
-              width={32}
-              height={32}
-            />
+            <IconUserSquareRounded stroke={1} width={32} height={32} />
           )}
         </Menu.Target>
 
