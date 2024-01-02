@@ -134,7 +134,12 @@ const AccTableList = ({
       },
       {
         accessorKey: "date",
-        accessorFn: (row) => row.date?.toLocaleDateString(),
+        accessorFn: (row) =>
+          row.date?.toLocaleDateString("es-VE", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          }),
         header: "Fecha de entrega",
         maxSize: 150,
       },

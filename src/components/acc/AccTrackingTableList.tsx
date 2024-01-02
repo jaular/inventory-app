@@ -23,10 +23,15 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
     () => [
       {
         accessorKey: "createdAt",
-        accessorFn: (row) => row.createdAt?.toLocaleDateString(),
+        accessorFn: (row) =>
+          `${row.createdAt?.toLocaleDateString("es-VE", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          })} - ${row.createdAt?.toLocaleTimeString("en-US")}`,
         header: "Fecha del cambio",
         enableHiding: false,
-        maxSize: 150,
+        maxSize: 200,
       },
       {
         accessorFn: (row) => row.createdBy?.name,
@@ -93,7 +98,12 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
       },
       {
         accessorKey: "date",
-        accessorFn: (row) => row.date?.toLocaleDateString(),
+        accessorFn: (row) =>
+          row.date?.toLocaleDateString("es-VE", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          }),
         header: "Fecha de entrega",
         maxSize: 150,
       },
