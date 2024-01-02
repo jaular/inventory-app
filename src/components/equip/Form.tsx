@@ -118,7 +118,7 @@ const Form = ({
 
         <Divider
           my="md"
-          label="RESPONSABLE"
+          label="INFORMACI&Oacute;N ADICIONAL"
           labelPosition="center"
           className="col-span-2 md:col-span-3 xl:col-span-4"
         />
@@ -142,13 +142,6 @@ const Form = ({
           allowDeselect={false}
           withAsterisk
           {...form.getInputProps("office")}
-        />
-
-        <Divider
-          my="md"
-          label="INFORMACI&Oacute;N ADICIONAL"
-          labelPosition="center"
-          className="col-span-2 md:col-span-3 xl:col-span-4"
         />
         <DatePickerInput
           locale="es"
