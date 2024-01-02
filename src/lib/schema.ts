@@ -10,6 +10,7 @@ const macRegex = /^[a-fA-F0-9]{2}(:[a-fA-F0-9]{2}){5}$/;
 
 export const postSchema = z.object({
   n: z.string().cuid().optional(),
+  status: z.boolean(),
   serialNumber: z
     .string()
     .min(2, { message: "Debe tener 2 o más caracteres" })
@@ -148,6 +149,7 @@ export const accSchema = z.object({
 
 export const postTrackingSchema = z.object({
   n: z.string().cuid(),
+  status: z.boolean(),
   serialNumber: z
     .string()
     .min(2, { message: "Debe tener 2 o más caracteres" })

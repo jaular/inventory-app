@@ -1,4 +1,5 @@
 export const postInitialValues = {
+  status: true,
   serialNumber: "",
   name: "",
   brand: "",

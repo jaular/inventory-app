@@ -27,6 +27,7 @@ export const downloadExcel = (sortedData: ExcelProps[], cols: ColsProps[]) => {
 
   const rows = sortedData.map((row, i) => ({
     n: row.n,
+    status: row.status ? "En uso" : "Almacenado",
     serialNumber: row.serialNumber,
     name: row.name,
     brand: row.brand,

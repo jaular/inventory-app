@@ -93,6 +93,12 @@ const TableList = ({
         // ),
       },
       {
+        accessorKey: "status",
+        accessorFn: (row) => (row.status ? "En uso" : "Almacenado"),
+        header: "Estado",
+        maxSize: 130,
+      },
+      {
         accessorKey: "name",
         header: "Nombre",
         maxSize: 150,
@@ -266,6 +272,7 @@ const TableList = ({
     initialState: {
       columnVisibility: {
         n: false,
+        status: false,
         modelName: false,
         range: false,
         ram: false,

@@ -7,6 +7,7 @@ import {
   Group,
   Divider,
   Checkbox,
+  Switch,
   Textarea,
 } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
@@ -63,6 +64,11 @@ const Form = ({
       autoComplete="off"
     >
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 xl:grid-cols-4">
+        <Switch
+          className="col-span-2 md:col-span-3 xl:col-span-4"
+          label={form.getInputProps("status").value ? "En uso" : "Almacenado"}
+          {...form.getInputProps("status", { type: "checkbox" })}
+        />
         {!createState && (
           <>
             <TextInput

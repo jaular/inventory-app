@@ -1,4 +1,5 @@
 export type PostProps = {
+  status: boolean;
   serialNumber: string;
   name: string;
   brand: string;

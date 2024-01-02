@@ -52,6 +52,12 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
         maxSize: 130,
       },
       {
+        accessorKey: "status",
+        accessorFn: (row) => (row.status ? "En uso" : "Almacenado"),
+        header: "Estado",
+        maxSize: 130,
+      },
+      {
         accessorKey: "name",
         header: "Nombre",
         maxSize: 150,

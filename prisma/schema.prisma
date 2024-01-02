@@ -13,6 +13,7 @@ datasource db {
 
 model Post {
     n            String   @id @default(cuid())
+    status       Boolean
     serialNumber String
     name         String
     brand        String
@@ -41,6 +42,7 @@ model Post {
 
 model PostTracking {
     n            String
+    status       Boolean
     serialNumber String
     name         String
     brand        String
