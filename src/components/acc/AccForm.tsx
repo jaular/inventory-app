@@ -81,7 +81,7 @@ const AccForm = ({
         />
         <TextInput label="Modelo" {...form.getInputProps("modelName")} />
         <Select
-          label="Estado"
+          label="Condición"
           data={conditionData}
           searchable
           allowDeselect={false}

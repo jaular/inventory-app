@@ -74,7 +74,7 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
       },
       {
         accessorKey: "condition",
-        header: "Estado",
+        header: "Condición",
         maxSize: 140,
         filterVariant: "multi-select",
         mantineFilterSelectProps: {
