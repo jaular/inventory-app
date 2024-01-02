@@ -153,6 +153,7 @@ const Form = ({
         <DatePickerInput
           locale="es"
           label="Fecha de entrega"
+          valueFormat="DD/MM/YYYY"
           defaultValue={new Date()}
           {...form.getInputProps("date")}
         />

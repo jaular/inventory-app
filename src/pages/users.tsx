@@ -11,7 +11,7 @@ export default function UsersPage() {
     return (
       <Container title="Gestión de usuarios">
         <div className="flex min-h-[65vh] items-center justify-center">
-          <Loader color="blue" size="lg" />
+          <Loader color="gray" size="xl" type="dots" />
         </div>
       </Container>
     );

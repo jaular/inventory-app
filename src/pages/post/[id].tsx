@@ -1,5 +1,4 @@
 import type { PostProps } from "~/lib/types";
-import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
@@ -28,20 +27,20 @@ type Props = {
 };
 
 export default function EquipHistoryPage() {
-  const { data: sessionData, status } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
+  const { data: sessionData, status } = useSession({
+    required: true,
+    onUnauthenticated() {
       router.push("/");
-    }
-  }, [status]);
+    },
+  });
 
   if (status === "loading") {
     return (
       <Container>
         <div className="flex min-h-[65vh] items-center justify-center">
-          <Loader color="blue" size="lg" />
+          <Loader color="gray" size="xl" type="dots" />
         </div>
       </Container>
     );

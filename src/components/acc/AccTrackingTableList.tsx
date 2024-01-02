@@ -131,6 +131,13 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
     mantineSelectCheckboxProps: {
       size: "sm",
     },
+    mantineLoadingOverlayProps: {
+      loaderProps: {
+        style: {
+          display: "none",
+        },
+      },
+    },
   });
 
   return (

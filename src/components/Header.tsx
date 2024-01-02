@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Button, Menu } from "@mantine/core";
+import { Button, Menu, Skeleton } from "@mantine/core";
 import { IconUserSquareRounded } from "@tabler/icons-react";
 import cx from "clsx";
 import classes from "~/styles/header.module.css";
@@ -25,9 +25,7 @@ function AuthShowcase() {
   const { data: sessionData, status } = useSession();
 
   if (status === "loading") {
-    return (
-      <div className="h-8 w-8 animate-pulse rounded-full bg-gray-700"></div>
-    );
+    return <Skeleton width={32} height={32} circle />;
   }
 
   if (status === "authenticated") {

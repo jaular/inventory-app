@@ -220,7 +220,13 @@ const AccTableList = ({
     mantineSelectCheckboxProps: {
       size: "sm",
     },
-    // renderTopToolbarCustomActions: ({ table }) => (),
+    mantineLoadingOverlayProps: {
+      loaderProps: {
+        style: {
+          display: "none",
+        },
+      },
+    },
   });
 
   return (

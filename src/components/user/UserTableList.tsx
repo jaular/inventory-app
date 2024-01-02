@@ -94,6 +94,13 @@ const UserTableList = ({ data, isDataLoading, onUpdate }: Props) => {
     mantineSelectCheckboxProps: {
       size: "sm",
     },
+    mantineLoadingOverlayProps: {
+      loaderProps: {
+        style: {
+          display: "none",
+        },
+      },
+    },
   });
 
   return (

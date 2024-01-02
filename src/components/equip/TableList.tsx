@@ -291,6 +291,13 @@ const TableList = ({
     mantineSelectCheckboxProps: {
       size: "sm",
     },
+    mantineLoadingOverlayProps: {
+      loaderProps: {
+        style: {
+          display: "none",
+        },
+      },
+    },
     // renderTopToolbarCustomActions: ({ table }) => (),
   });
 

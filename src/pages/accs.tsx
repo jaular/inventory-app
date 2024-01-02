@@ -11,7 +11,7 @@ export default function AccPage() {
     return (
       <Container title="Inventario de accesorios">
         <div className="flex min-h-[65vh] items-center justify-center">
-          <Loader color="blue" size="lg" />
+          <Loader color="gray" size="xl" type="dots" />
         </div>
       </Container>
     );
