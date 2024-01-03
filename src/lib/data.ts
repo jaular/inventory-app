@@ -20,6 +20,7 @@ export const postInitialValues = {
 };
 
 export const accInitialValues = {
+  status: true,
   type: "",
   serialNumber: "",
   brand: "",

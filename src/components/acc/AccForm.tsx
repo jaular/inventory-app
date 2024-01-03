@@ -7,6 +7,7 @@ import {
   Group,
   Divider,
   Textarea,
+  Chip,
 } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { typeData, brandData, conditionData, departmentData } from "~/lib/data";
@@ -47,6 +48,11 @@ const AccForm = ({
       autoComplete="off"
     >
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 xl:grid-cols-4">
+        <div className="col-span-2 md:col-span-3 xl:col-span-4">
+          <Chip {...form.getInputProps("status", { type: "checkbox" })}>
+            En uso
+          </Chip>
+        </div>
         {!createState && (
           <>
             <TextInput

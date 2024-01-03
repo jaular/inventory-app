@@ -34,6 +34,7 @@ export type UserSessionProps = {
 };
 
 export type AccProps = {
+  status: boolean;
   type: string;
   serialNumber: string;
   brand: string;

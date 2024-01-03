@@ -82,6 +82,7 @@ export const downloadExcelAcc = (
 
   const rows = sortedData.map((row, i) => ({
     n: row.n,
+    status: row.status ? "En uso" : "Almacenado",
     type: row.type,
     serialNumber: row.serialNumber,
     brand: row.brand,

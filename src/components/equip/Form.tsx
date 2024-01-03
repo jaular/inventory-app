@@ -70,7 +70,6 @@ const Form = ({
             En uso
           </Chip>
         </div>
-
         {!createState && (
           <>
             <TextInput

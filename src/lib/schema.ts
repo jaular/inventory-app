@@ -108,6 +108,7 @@ export const userSchema = z.object({
 
 export const accSchema = z.object({
   n: z.string().cuid().optional(),
+  status: z.boolean(),
   type: z.string().min(1, { message: "Elige una opción" }).trim(),
   serialNumber: z
     .string()
@@ -233,6 +234,7 @@ export const postTrackingSchema = z.object({
 
 export const accTrackingSchema = z.object({
   n: z.string().cuid(),
+  status: z.boolean(),
   type: z.string().min(1, { message: "Elige una opción" }).trim(),
   serialNumber: z
     .string()

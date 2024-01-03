@@ -81,6 +81,12 @@ const AccTableList = ({
         maxSize: 130,
       },
       {
+        accessorKey: "status",
+        accessorFn: (row) => (row.status ? "En uso" : "Almacenado"),
+        header: "Estado",
+        maxSize: 130,
+      },
+      {
         accessorKey: "type",
         header: "Tipo",
         maxSize: 140,
@@ -204,8 +210,10 @@ const AccTableList = ({
     initialState: {
       columnVisibility: {
         n: false,
+        status: false,
         modelName: false,
         department: false,
+        condition: false,
         note: false,
       },
       pagination: { pageSize: 5, pageIndex: 0 },

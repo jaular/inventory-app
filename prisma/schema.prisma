@@ -72,7 +72,8 @@ model PostTracking {
 }
 
 model Acc {
-    n            String @id @default(cuid())
+    n            String  @id @default(cuid())
+    status       Boolean
     type         String
     serialNumber String
     brand        String
@@ -94,6 +95,7 @@ model Acc {
 
 model AccTracking {
     n            String
+    status       Boolean
     type         String
     serialNumber String
     brand        String
