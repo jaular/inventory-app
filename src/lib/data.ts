@@ -28,6 +28,7 @@ export const accInitialValues = {
   condition: "",
   userName: "",
   department: "",
+  office: "",
   date: new Date(),
   note: "",
 };

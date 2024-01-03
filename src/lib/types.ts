@@ -42,6 +42,7 @@ export type AccProps = {
   condition: string;
   userName: string;
   department: string;
+  office: string;
   date: any;
   note: string;
 };

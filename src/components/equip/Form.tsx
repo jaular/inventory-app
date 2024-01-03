@@ -111,15 +111,21 @@ const Form = ({
           {...form.getInputProps("ram")}
         />
         <Select
-          label="Condición"
+          label="Condici&oacute;n"
           data={conditionData}
           searchable
           allowDeselect={false}
           withAsterisk
           {...form.getInputProps("condition")}
         />
-        <TextInput label="Dirección MAC (E)" {...form.getInputProps("macE")} />
-        <TextInput label="Dirección MAC (W)" {...form.getInputProps("macW")} />
+        <TextInput
+          label="Direcci&oacute;n MAC (E)"
+          {...form.getInputProps("macE")}
+        />
+        <TextInput
+          label="Direcci&oacute;n MAC (W)"
+          {...form.getInputProps("macW")}
+        />
         <Checkbox.Group
           className="col-span-2 md:col-span-3 xl:col-span-4"
           label="Accesorios"
@@ -143,7 +149,7 @@ const Form = ({
           {...form.getInputProps("userName")}
         />
         <Select
-          label="Dirección"
+          label="Direcci&oacute;n"
           data={departmentData}
           searchable
           allowDeselect={false}

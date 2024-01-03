@@ -82,6 +82,7 @@ model Acc {
 
     userName   String
     department String
+    office     String
 
     date DateTime @default(now())
     note String
@@ -104,6 +105,7 @@ model AccTracking {
 
     userName   String
     department String
+    office     String
 
     date DateTime @default(now())
     note String

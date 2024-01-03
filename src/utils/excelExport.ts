@@ -90,6 +90,7 @@ export const downloadExcelAcc = (
     condition: row.condition,
     userName: row.userName,
     department: row.department,
+    office: row.office,
     note: row.note,
     date: row.date.toLocaleDateString(),
   }));

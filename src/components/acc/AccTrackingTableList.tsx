@@ -3,7 +3,7 @@ import type { MRT_ColumnDef } from "mantine-react-table";
 import { useMemo } from "react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { localization } from "~/lib/tableLocale";
-import { typeData, brandData, conditionData } from "~/lib/data";
+import { typeData, brandData, conditionData, officeData } from "~/lib/data";
 
 type DataProps = AccProps & {
   n: string;
@@ -96,6 +96,15 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
         accessorKey: "department",
         header: "Dirección",
         maxSize: 180,
+      },
+      {
+        accessorKey: "office",
+        header: "Sede",
+        maxSize: 160,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: officeData,
+        },
       },
       {
         accessorKey: "note",

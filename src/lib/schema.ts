@@ -136,6 +136,7 @@ export const accSchema = z.object({
     .min(2, { message: "Debe tener 2 o más caracteres" })
     .trim()
     .or(z.literal("")),
+  office: z.string().min(1, { message: "Elige una opción" }).trim(),
   date: z
     .date({
       required_error: "Please select a date and time",
@@ -262,6 +263,7 @@ export const accTrackingSchema = z.object({
     .min(2, { message: "Debe tener 2 o más caracteres" })
     .trim()
     .or(z.literal("")),
+  office: z.string().min(1, { message: "Elige una opción" }).trim(),
   date: z
     .date({
       required_error: "Please select a date and time",

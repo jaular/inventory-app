@@ -10,7 +10,13 @@ import {
   Chip,
 } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
-import { typeData, brandData, conditionData, departmentData } from "~/lib/data";
+import {
+  typeData,
+  brandData,
+  conditionData,
+  departmentData,
+  officeData,
+} from "~/lib/data";
 import "dayjs/locale/es";
 
 type DataProps = AccProps & {
@@ -87,7 +93,7 @@ const AccForm = ({
         />
         <TextInput label="Modelo" {...form.getInputProps("modelName")} />
         <Select
-          label="Condición"
+          label="Condici&oacute;n"
           data={conditionData}
           searchable
           allowDeselect={false}
@@ -112,6 +118,14 @@ const AccForm = ({
           searchable
           allowDeselect={false}
           {...form.getInputProps("department")}
+        />
+        <Select
+          label="Sede"
+          data={officeData}
+          searchable
+          allowDeselect={false}
+          withAsterisk
+          {...form.getInputProps("office")}
         />
         <DatePickerInput
           locale="es"
