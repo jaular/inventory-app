@@ -7,6 +7,7 @@ export type PostProps = {
   range: string;
   ram: string;
   accessories: string[];
+  condition: string;
   macE: string;
   macW: string;
   userName: string;

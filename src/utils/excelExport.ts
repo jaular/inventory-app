@@ -36,6 +36,7 @@ export const downloadExcel = (sortedData: ExcelProps[], cols: ColsProps[]) => {
     ram: row.ram,
     mouse: acc[i]?.mouse === "Mouse" ? "Si" : "No",
     bag: acc[i]?.bag === "Bolso" ? "Si" : "No",
+    condition: row.condition,
     macE: row.macE,
     macW: row.macW,
     userName: row.userName,

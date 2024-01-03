@@ -21,6 +21,7 @@ import {
   rangeData,
   ramData,
   departmentData,
+  conditionData,
 } from "~/lib/data";
 import classes from "~/styles/table.module.css";
 
@@ -153,6 +154,15 @@ const TableList = ({
         maxSize: 130,
       },
       {
+        accessorKey: "condition",
+        header: "Condición",
+        maxSize: 140,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: conditionData,
+        },
+      },
+      {
         accessorKey: "macE",
         header: "MAC (E)",
         maxSize: 130,
@@ -278,6 +288,7 @@ const TableList = ({
         ram: false,
         mouse: false,
         bag: false,
+        condition: false,
         macE: false,
         macW: false,
         department: false,

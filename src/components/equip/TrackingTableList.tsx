@@ -9,6 +9,7 @@ import {
   rangeData,
   ramData,
   departmentData,
+  conditionData,
 } from "~/lib/data";
 
 type DataProps = PostProps & {
@@ -112,6 +113,15 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
         maxSize: 130,
       },
       {
+        accessorKey: "condition",
+        header: "Condición",
+        maxSize: 140,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: conditionData,
+        },
+      },
+      {
         accessorKey: "macE",
         header: "MAC (E)",
         maxSize: 130,
@@ -188,6 +198,7 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
         ram: false,
         mouse: false,
         bag: false,
+        condition: false,
         macE: false,
         macW: false,
         department: false,

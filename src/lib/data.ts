@@ -7,6 +7,7 @@ export const postInitialValues = {
   range: "",
   ram: "",
   accessories: [""],
+  condition: "",
   macE: "",
   macW: "",
   userName: "",

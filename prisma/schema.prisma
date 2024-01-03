@@ -21,6 +21,7 @@ model Post {
     range        String
     ram          String
     accessories  String[]
+    condition    String
     macE         String
     macW         String
 
@@ -50,6 +51,7 @@ model PostTracking {
     range        String
     ram          String
     accessories  String[]
+    condition    String
     macE         String
     macW         String
 

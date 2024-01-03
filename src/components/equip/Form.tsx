@@ -7,14 +7,15 @@ import {
   Group,
   Divider,
   Checkbox,
-  Switch,
   Textarea,
+  Chip,
 } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import {
   brandData,
   rangeData,
   ramData,
+  conditionData,
   departmentData,
   officeData,
 } from "~/lib/data";
@@ -64,11 +65,12 @@ const Form = ({
       autoComplete="off"
     >
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6 xl:grid-cols-4">
-        <Switch
-          className="col-span-2 md:col-span-3 xl:col-span-4"
-          label={form.getInputProps("status").value ? "En uso" : "Almacenado"}
-          {...form.getInputProps("status", { type: "checkbox" })}
-        />
+        <div className="col-span-2 md:col-span-3 xl:col-span-4">
+          <Chip {...form.getInputProps("status", { type: "checkbox" })}>
+            En uso
+          </Chip>
+        </div>
+
         {!createState && (
           <>
             <TextInput
@@ -108,6 +110,14 @@ const Form = ({
           searchable
           allowDeselect={false}
           {...form.getInputProps("ram")}
+        />
+        <Select
+          label="Condición"
+          data={conditionData}
+          searchable
+          allowDeselect={false}
+          withAsterisk
+          {...form.getInputProps("condition")}
         />
         <TextInput label="Dirección MAC (E)" {...form.getInputProps("macE")} />
         <TextInput label="Dirección MAC (W)" {...form.getInputProps("macW")} />

@@ -42,6 +42,7 @@ export const postSchema = z.object({
     .trim()
     .or(z.literal("")),
   accessories: z.string().array().optional(),
+  condition: z.string().min(1, { message: "Elige una opción" }).trim(),
   macE: z
     .string()
     .regex(macRegex, {
@@ -181,6 +182,7 @@ export const postTrackingSchema = z.object({
     .trim()
     .or(z.literal("")),
   accessories: z.string().array().optional(),
+  condition: z.string().min(1, { message: "Elige una opción" }).trim(),
   macE: z
     .string()
     .regex(macRegex, {
