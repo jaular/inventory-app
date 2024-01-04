@@ -77,7 +77,7 @@ export const departmentData = [
   "Infraestructura",
   "Comercial",
   "Finanzas",
-  "Logistica",
+  "Logística",
   "Jurídico",
   "Talento Humano",
 ];
