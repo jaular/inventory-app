@@ -135,10 +135,10 @@ const AccForm = ({
           locale="es"
           label="Fecha de entrega"
           valueFormat="DD/MM/YYYY"
+          clearable
           defaultValue={new Date()}
           {...form.getInputProps("date")}
         />
-        <div></div>
         <Textarea
           className="col-span-2 max-w-lg md:col-span-3"
           label="Observaciones"

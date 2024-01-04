@@ -30,7 +30,7 @@ model Post {
     department String
     office     String
 
-    date        DateTime @default(now())
+    date        DateTime?
     orderNumber String
     note        String
 
@@ -60,7 +60,7 @@ model PostTracking {
     department String
     office     String
 
-    date        DateTime @default(now())
+    date        DateTime?
     orderNumber String
     note        String
 
@@ -84,7 +84,7 @@ model Acc {
     department String
     office     String
 
-    date DateTime @default(now())
+    date DateTime?
     note String
 
     createdAt DateTime @default(now())
@@ -107,7 +107,7 @@ model AccTracking {
     department String
     office     String
 
-    date DateTime @default(now())
+    date DateTime?
     note String
 
     createdAt DateTime @id @default(now())

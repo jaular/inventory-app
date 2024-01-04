@@ -172,6 +172,7 @@ const Form = ({
           locale="es"
           label="Fecha de entrega"
           valueFormat="DD/MM/YYYY"
+          clearable
           defaultValue={new Date()}
           {...form.getInputProps("date")}
         />

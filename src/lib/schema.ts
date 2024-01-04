@@ -78,7 +78,7 @@ export const postSchema = z.object({
       required_error: "Please select a date and time",
       invalid_type_error: "That's not a date!",
     })
-    .optional(),
+    .nullable(),
   orderNumber: z
     .string()
     .min(2, { message: "Debe tener 2 o más caracteres" })
@@ -142,7 +142,7 @@ export const accSchema = z.object({
       required_error: "Please select a date and time",
       invalid_type_error: "That's not a date!",
     })
-    .optional(),
+    .nullable(),
   note: z
     .string()
     .min(2, { message: "Debe tener 2 o más caracteres" })
@@ -220,7 +220,7 @@ export const postTrackingSchema = z.object({
       required_error: "Please select a date and time",
       invalid_type_error: "That's not a date!",
     })
-    .optional(),
+    .nullable(),
   orderNumber: z
     .string()
     .min(2, { message: "Debe tener 2 o más caracteres" })
@@ -269,7 +269,7 @@ export const accTrackingSchema = z.object({
       required_error: "Please select a date and time",
       invalid_type_error: "That's not a date!",
     })
-    .optional(),
+    .nullable(),
   note: z
     .string()
     .min(2, { message: "Debe tener 2 o más caracteres" })
