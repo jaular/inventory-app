@@ -56,12 +56,12 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
         accessorKey: "status",
         accessorFn: (row) => (row.status ? "En uso" : "Almacenado"),
         header: "Estado",
-        maxSize: 130,
+        maxSize: 110,
       },
       {
         accessorKey: "name",
         header: "Nombre",
-        maxSize: 150,
+        maxSize: 130,
       },
       {
         accessorKey: "serialNumber",
@@ -71,7 +71,7 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
       {
         accessorKey: "brand",
         header: "Marca",
-        maxSize: 150,
+        maxSize: 120,
         filterVariant: "multi-select",
         mantineFilterSelectProps: {
           data: brandData,
@@ -139,7 +139,7 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
       {
         accessorKey: "department",
         header: "Dirección",
-        maxSize: 160,
+        maxSize: 130,
         filterVariant: "multi-select",
         mantineFilterSelectProps: {
           data: departmentData,
@@ -153,7 +153,7 @@ const TrackingTableList = ({ data, isDataLoading }: Props) => {
       {
         accessorKey: "office",
         header: "Sede",
-        maxSize: 160,
+        maxSize: 130,
         filterVariant: "multi-select",
         mantineFilterSelectProps: {
           data: officeData,

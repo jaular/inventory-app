@@ -48,7 +48,7 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
         accessorKey: "status",
         accessorFn: (row) => (row.status ? "En uso" : "Almacenado"),
         header: "Estado",
-        maxSize: 130,
+        maxSize: 110,
       },
       {
         accessorKey: "type",
@@ -67,7 +67,7 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
       {
         accessorKey: "brand",
         header: "Marca",
-        maxSize: 150,
+        maxSize: 120,
         filterVariant: "multi-select",
         mantineFilterSelectProps: {
           data: brandData,
@@ -95,12 +95,12 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
       {
         accessorKey: "department",
         header: "Dirección",
-        maxSize: 180,
+        maxSize: 130,
       },
       {
         accessorKey: "office",
         header: "Sede",
-        maxSize: 160,
+        maxSize: 130,
         filterVariant: "multi-select",
         mantineFilterSelectProps: {
           data: officeData,
