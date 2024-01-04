@@ -141,7 +141,7 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
         condition: false,
         note: false,
       },
-      pagination: { pageSize: 5, pageIndex: 0 },
+      pagination: { pageSize: 10, pageIndex: 0 },
       density: "xs",
     },
     paginationDisplayMode: "pages",

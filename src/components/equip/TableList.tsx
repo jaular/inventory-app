@@ -297,7 +297,7 @@ const TableList = ({
         orderNumber: false,
         note: false,
       },
-      pagination: { pageSize: 5, pageIndex: 0 },
+      pagination: { pageSize: 10, pageIndex: 0 },
       density: "xs",
     },
     paginationDisplayMode: "pages",
