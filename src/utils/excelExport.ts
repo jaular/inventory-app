@@ -45,7 +45,7 @@ export const downloadExcel = (sortedData: ExcelProps[], cols: ColsProps[]) => {
     office: row.office,
     orderNumber: row.orderNumber,
     note: row.note,
-    date: row.date.toLocaleDateString(),
+    date: row.date ? row.date.toLocaleDateString() : "",
   }));
 
   const data = rows.map((row) =>
@@ -92,7 +92,7 @@ export const downloadExcelAcc = (
     department: row.department,
     office: row.office,
     note: row.note,
-    date: row.date.toLocaleDateString(),
+    date: row.date ? row.date.toLocaleDateString() : "",
   }));
 
   const data = rows.map((row) =>
