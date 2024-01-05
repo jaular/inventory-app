@@ -95,7 +95,7 @@ const AccTableList = ({
       {
         accessorKey: "type",
         header: "Tipo",
-        maxSize: 140,
+        maxSize: 120,
         filterVariant: "multi-select",
         mantineFilterSelectProps: {
           data: typeData,

@@ -59,7 +59,7 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
       {
         accessorKey: "type",
         header: "Tipo",
-        maxSize: 140,
+        maxSize: 120,
         filterVariant: "multi-select",
         mantineFilterSelectProps: {
           data: typeData,
