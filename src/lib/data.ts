@@ -26,6 +26,7 @@ export const accInitialValues = {
   brand: "",
   modelName: "",
   condition: "",
+  connector: "",
   userName: "",
   department: "",
   office: "",
@@ -50,7 +51,10 @@ export const brandData = [
   "Razer",
   "Amazon",
   "Microsoft",
+  "Genius",
+  "Compaq",
   "Alienware",
+  "TECH",
   "Otro",
 ];
 export const rangeData = ["Baja", "Media", "Alta"];
@@ -71,6 +75,7 @@ export const ramData = [
 ];
 export const typeData = ["Mouse", "Teclado", "Monitor", "Cargador"];
 export const conditionData = ["Nuevo", "Usado", "Dañado"];
+export const connectorData = ["USB", "PS/2", "Otro"];
 export const departmentData = [
   "Tecnología y Sistemas",
   "Marca",

@@ -126,6 +126,11 @@ export const accSchema = z.object({
     .trim()
     .or(z.literal("")),
   condition: z.string().min(1, { message: "Elige una opción" }).trim(),
+  connector: z
+    .string()
+    .min(1, { message: "Elige una opción" })
+    .trim()
+    .or(z.literal("")),
   userName: z
     .string()
     .min(2, { message: "Debe tener 2 o más caracteres" })
@@ -253,6 +258,11 @@ export const accTrackingSchema = z.object({
     .trim()
     .or(z.literal("")),
   condition: z.string().min(1, { message: "Elige una opción" }).trim(),
+  connector: z
+    .string()
+    .min(1, { message: "Elige una opción" })
+    .trim()
+    .or(z.literal("")),
   userName: z
     .string()
     .min(2, { message: "Debe tener 2 o más caracteres" })

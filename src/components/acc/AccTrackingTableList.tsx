@@ -3,7 +3,13 @@ import type { MRT_ColumnDef } from "mantine-react-table";
 import { useMemo } from "react";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { localization } from "~/lib/tableLocale";
-import { typeData, brandData, conditionData, officeData } from "~/lib/data";
+import {
+  typeData,
+  brandData,
+  conditionData,
+  officeData,
+  connectorData,
+} from "~/lib/data";
 
 type DataProps = AccProps & {
   n: string;
@@ -88,6 +94,15 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
         },
       },
       {
+        accessorKey: "connector",
+        header: "Conector",
+        maxSize: 130,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: connectorData,
+        },
+      },
+      {
         accessorKey: "userName",
         header: "Usuario",
         maxSize: 130,
@@ -139,6 +154,7 @@ const AccTrackingTableList = ({ data, isDataLoading }: Props) => {
         modelName: false,
         department: false,
         condition: false,
+        connector: false,
         note: false,
       },
       pagination: { pageSize: 10, pageIndex: 0 },

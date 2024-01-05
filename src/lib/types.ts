@@ -40,6 +40,7 @@ export type AccProps = {
   brand: string;
   modelName: string;
   condition: string;
+  connector: string;
   userName: string;
   department: string;
   office: string;

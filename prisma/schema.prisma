@@ -79,6 +79,7 @@ model Acc {
     brand        String
     modelName    String
     condition    String
+    connector    String
 
     userName   String
     department String
@@ -102,6 +103,7 @@ model AccTracking {
     brand        String
     modelName    String
     condition    String
+    connector    String
 
     userName   String
     department String

@@ -15,7 +15,13 @@ import {
 } from "@tabler/icons-react";
 import { downloadExcelAcc } from "~/utils/excelExport";
 import { localization } from "~/lib/tableLocale";
-import { typeData, brandData, conditionData, officeData } from "~/lib/data";
+import {
+  typeData,
+  brandData,
+  conditionData,
+  officeData,
+  connectorData,
+} from "~/lib/data";
 import classes from "~/styles/table.module.css";
 
 type DataProps = AccProps & {
@@ -124,6 +130,15 @@ const AccTableList = ({
         },
       },
       {
+        accessorKey: "connector",
+        header: "Conector",
+        maxSize: 130,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: connectorData,
+        },
+      },
+      {
         accessorKey: "userName",
         header: "Usuario",
         maxSize: 130,
@@ -223,6 +238,7 @@ const AccTableList = ({
         modelName: false,
         department: false,
         condition: false,
+        connector: false,
         office: false,
         note: false,
       },

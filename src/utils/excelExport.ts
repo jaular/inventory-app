@@ -88,6 +88,7 @@ export const downloadExcelAcc = (
     brand: row.brand,
     modelName: row.modelName,
     condition: row.condition,
+    connector: row.connector,
     userName: row.userName,
     department: row.department,
     office: row.office,

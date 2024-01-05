@@ -16,6 +16,7 @@ import {
   conditionData,
   departmentData,
   officeData,
+  connectorData,
 } from "~/lib/data";
 import "dayjs/locale/es";
 
@@ -103,6 +104,14 @@ const AccForm = ({
           allowDeselect={false}
           withAsterisk
           {...form.getInputProps("condition")}
+        />
+        <Select
+          label="Conector"
+          data={connectorData}
+          searchable
+          allowDeselect={false}
+          withAsterisk
+          {...form.getInputProps("connector")}
         />
 
         <Divider
