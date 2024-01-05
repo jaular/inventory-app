@@ -300,7 +300,7 @@ const TableList = ({
       pagination: { pageSize: 10, pageIndex: 0 },
       density: "xs",
     },
-    paginationDisplayMode: "pages",
+    // paginationDisplayMode: "pages",
     mantineTableProps: {
       style: {
         tableLayout: "fixed",
