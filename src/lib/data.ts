@@ -101,3 +101,32 @@ export const officeData = [
   "Villa de Rosario",
   "San José",
 ];
+
+// Footer
+export const socialLinks = [
+  {
+    href: "https://www.linkedin.com/in/jos%C3%A9-aular-804656171/",
+    title: "LinkedIn",
+    name: "linkedin",
+  },
+  {
+    href: "https://github.com/jaular",
+    title: "Github",
+    name: "github",
+  },
+  {
+    href: "https://twitter.com/jaular14",
+    title: "X",
+    name: "x",
+  },
+  {
+    href: "https://jaular.itch.io/",
+    title: "Itch.io",
+    name: "itch",
+  },
+  {
+    href: "https://discord.com/users/769656181865447464",
+    title: "Discord",
+    name: "discord",
+  },
+];

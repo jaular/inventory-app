@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button, Menu, Skeleton } from "@mantine/core";
-import { IconUserSquareRounded } from "@tabler/icons-react";
+import { IconClipboardText, IconUserSquareRounded } from "@tabler/icons-react";
 import cx from "clsx";
 import classes from "~/styles/header.module.css";
 
@@ -11,7 +11,7 @@ const Header = () => {
     <header className={cx(classes.header, "mb-14")}>
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 py-4 text-center sm:px-6 lg:px-8">
         <Link href="/">
-          <span>Logo</span>
+          <IconClipboardText stroke={1} width={32} height={32} />
         </Link>
         <div>
           <AuthShowcase />
