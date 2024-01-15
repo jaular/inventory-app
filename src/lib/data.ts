@@ -55,6 +55,7 @@ export const brandData = [
   "Compaq",
   "Alienware",
   "TECH",
+  "IBM",
   "Otro",
 ];
 export const rangeData = ["Baja", "Media", "Alta"];
