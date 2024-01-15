@@ -110,7 +110,6 @@ const AccForm = ({
           data={connectorData}
           searchable
           allowDeselect={false}
-          withAsterisk
           {...form.getInputProps("connector")}
         />
 
