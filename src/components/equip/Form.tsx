@@ -135,8 +135,11 @@ const Form = ({
           label="Accesorios"
           {...form.getInputProps("accessories")}
         >
-          <div className="flex space-x-5">
+          <div className="grid grid-cols-3 gap-4 md:max-w-xl md:grid-cols-5">
             <Checkbox value="Mouse" label="Mouse" />
+            <Checkbox value="Teclado" label="Teclado" />
+            <Checkbox value="Monitor" label="Monitor" />
+            <Checkbox value="Cargador" label="Cargador" />
             <Checkbox value="Bolso" label="Bolso" />
           </div>
         </Checkbox.Group>

@@ -143,13 +143,34 @@ const TableList = ({
       },
       {
         accessorKey: "mouse",
-        accessorFn: (row) => (row.accessories?.[0] === "Mouse" ? "Si" : "No"),
+        accessorFn: (row) => (row.accessories.includes("Mouse") ? "Si" : "No"),
         header: "Mouse",
         maxSize: 130,
       },
       {
+        accessorKey: "keyboard",
+        accessorFn: (row) =>
+          row.accessories.includes("Teclado") ? "Si" : "No",
+        header: "Teclado",
+        maxSize: 130,
+      },
+      {
+        accessorKey: "monitor",
+        accessorFn: (row) =>
+          row.accessories.includes("Monitor") ? "Si" : "No",
+        header: "Monitor",
+        maxSize: 130,
+      },
+      {
+        accessorKey: "charger",
+        accessorFn: (row) =>
+          row.accessories.includes("Cargador") ? "Si" : "No",
+        header: "Cargador",
+        maxSize: 130,
+      },
+      {
         accessorKey: "bag",
-        accessorFn: (row) => (row.accessories?.[1] === "Bolso" ? "Si" : "No"),
+        accessorFn: (row) => (row.accessories.includes("Bolso") ? "Si" : "No"),
         header: "Bolso",
         maxSize: 130,
       },
@@ -287,6 +308,9 @@ const TableList = ({
         range: false,
         ram: false,
         mouse: false,
+        keyboard: false,
+        monitor: false,
+        charger: false,
         bag: false,
         condition: false,
         macE: false,

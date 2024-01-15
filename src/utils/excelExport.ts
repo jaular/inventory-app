@@ -22,6 +22,9 @@ export const downloadExcel = (sortedData: ExcelProps[], cols: ColsProps[]) => {
 
   const acc = sortedData.map((row) => ({
     mouse: row.accessories.find((item) => item === "Mouse"),
+    keyboard: row.accessories.find((item) => item === "Teclado"),
+    monitor: row.accessories.find((item) => item === "Monitor"),
+    charger: row.accessories.find((item) => item === "Cargador"),
     bag: row.accessories.find((item) => item === "Bolso"),
   }));
 
@@ -35,6 +38,9 @@ export const downloadExcel = (sortedData: ExcelProps[], cols: ColsProps[]) => {
     range: row.range,
     ram: row.ram,
     mouse: acc[i]?.mouse === "Mouse" ? "Si" : "No",
+    keyboard: acc[i]?.keyboard === "Teclado" ? "Si" : "No",
+    monitor: acc[i]?.monitor === "Monitor" ? "Si" : "No",
+    charger: acc[i]?.charger === "Cargador" ? "Si" : "No",
     bag: acc[i]?.bag === "Bolso" ? "Si" : "No",
     condition: row.condition,
     macE: row.macE,
