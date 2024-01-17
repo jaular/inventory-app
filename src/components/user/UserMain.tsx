@@ -20,7 +20,9 @@ export default function UserMain() {
   const [createState, setCreateState] = useState<boolean>(true);
 
   const utils = api.useUtils();
-  const { data, isSuccess, isLoading } = api.user.getAll.useQuery();
+  const { data, isSuccess, isLoading } = api.user.getAll.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  });
   const userData = data as DataProps[];
 
   const updateUser = api.user.update.useMutation({

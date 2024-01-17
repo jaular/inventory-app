@@ -20,7 +20,9 @@ export default function Main({ user }: Props) {
   const [createState, setCreateState] = useState<boolean>(true);
 
   const utils = api.useUtils();
-  const { data, isSuccess, isLoading } = api.post.getAll.useQuery();
+  const { data, isSuccess, isLoading } = api.post.getAll.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  });
 
   const createPost = api.post.create.useMutation({
     async onSuccess() {

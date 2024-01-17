@@ -84,9 +84,10 @@ function PostItem({ id, data, isSuccess, isLoading }: Props) {
 const Main = () => {
   const n = useRouter().query.id as string;
   // const { data: post, status } = api.post.getById.useQuery({ n });
-  const { data, isSuccess, isLoading } = api.post.getTrackingAllById.useQuery({
-    n,
-  });
+  const { data, isSuccess, isLoading } = api.post.getTrackingAllById.useQuery(
+    { n },
+    { refetchOnWindowFocus: false },
+  );
 
   return (
     <PostItem

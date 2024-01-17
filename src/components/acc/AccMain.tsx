@@ -19,7 +19,9 @@ export default function AccMain({ user }: Props) {
   const [createState, setCreateState] = useState<boolean>(true);
 
   const utils = api.useUtils();
-  const { data, isSuccess, isLoading } = api.acc.getAll.useQuery();
+  const { data, isSuccess, isLoading } = api.acc.getAll.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  });
 
   const createAcc = api.acc.create.useMutation({
     async onSuccess() {

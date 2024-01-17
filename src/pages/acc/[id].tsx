@@ -84,9 +84,10 @@ function AccItem({ id, data, isSuccess, isLoading }: Props) {
 const Main = () => {
   const n = useRouter().query.id as string;
   // const accQuery = api.acc.getById.useQuery({ n });
-  const { data, isSuccess, isLoading } = api.acc.getTrackingAllById.useQuery({
-    n,
-  });
+  const { data, isSuccess, isLoading } = api.acc.getTrackingAllById.useQuery(
+    { n },
+    { refetchOnWindowFocus: false },
+  );
 
   return (
     <AccItem
