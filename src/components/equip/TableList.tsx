@@ -13,6 +13,7 @@ import {
   IconTableRow,
   IconHistoryToggle,
 } from "@tabler/icons-react";
+import Includes from "~/components/Includes";
 import { downloadExcel } from "~/utils/excelExport";
 import { localization } from "~/lib/tableLocale";
 import {
@@ -20,6 +21,7 @@ import {
   officeData,
   rangeData,
   ramData,
+  yesOrNoData,
   departmentData,
   conditionData,
 } from "~/lib/data";
@@ -146,6 +148,13 @@ const TableList = ({
         accessorFn: (row) => (row.accessories.includes("Mouse") ? "Si" : "No"),
         header: "Mouse",
         maxSize: 130,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: yesOrNoData,
+        },
+        Cell: ({ row }) => (
+          <Includes value={row.original.accessories.includes("Mouse")} />
+        ),
       },
       {
         accessorKey: "keyboard",
@@ -153,6 +162,13 @@ const TableList = ({
           row.accessories.includes("Teclado") ? "Si" : "No",
         header: "Teclado",
         maxSize: 130,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: yesOrNoData,
+        },
+        Cell: ({ row }) => (
+          <Includes value={row.original.accessories.includes("Teclado")} />
+        ),
       },
       {
         accessorKey: "monitor",
@@ -160,6 +176,13 @@ const TableList = ({
           row.accessories.includes("Monitor") ? "Si" : "No",
         header: "Monitor",
         maxSize: 130,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: yesOrNoData,
+        },
+        Cell: ({ row }) => (
+          <Includes value={row.original.accessories.includes("Monitor")} />
+        ),
       },
       {
         accessorKey: "charger",
@@ -167,12 +190,26 @@ const TableList = ({
           row.accessories.includes("Cargador") ? "Si" : "No",
         header: "Cargador",
         maxSize: 130,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: yesOrNoData,
+        },
+        Cell: ({ row }) => (
+          <Includes value={row.original.accessories.includes("Cargador")} />
+        ),
       },
       {
         accessorKey: "bag",
         accessorFn: (row) => (row.accessories.includes("Bolso") ? "Si" : "No"),
         header: "Bolso",
         maxSize: 130,
+        filterVariant: "multi-select",
+        mantineFilterSelectProps: {
+          data: yesOrNoData,
+        },
+        Cell: ({ row }) => (
+          <Includes value={row.original.accessories.includes("Bolso")} />
+        ),
       },
       {
         accessorKey: "condition",
@@ -320,6 +357,7 @@ const TableList = ({
         office: false,
         orderNumber: false,
         note: false,
+        date: false,
       },
       pagination: { pageSize: 10, pageIndex: 0 },
       density: "xs",

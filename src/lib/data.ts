@@ -102,3 +102,5 @@ export const officeData = [
   "Villa de Rosario",
   "San José",
 ];
+
+export const yesOrNoData = ["Si", "No"];
