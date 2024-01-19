@@ -3,7 +3,7 @@ import type { MRT_ColumnDef, MRT_Row } from "mantine-react-table";
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
-import { Modal, Group, ActionIcon, Button, Tooltip } from "@mantine/core";
+import { Modal, Group, ActionIcon, Button, Tooltip, Menu } from "@mantine/core";
 import {
   IconTablePlus,
   IconPencil,
@@ -175,49 +175,45 @@ const AccTableList = ({
       },
       {
         header: " ",
+        maxSize: 80,
         enableHiding: false,
         enableSorting: false,
         enableColumnActions: false,
         Cell: ({ row }) => (
-          <Group>
-            <Tooltip label="Actualizar" color="gray" offset={10}>
-              <ActionIcon
-                size={32}
-                variant="light"
-                aria-label="Actualizar"
+          <Menu trigger="hover" position="right" withArrow>
+            <Menu.Target>
+              <Button variant="light" size="compact-sm">
+                ...
+              </Button>
+            </Menu.Target>
+            <Menu.Dropdown>
+              <Menu.Item
+                leftSection={<IconPencil size={16} stroke={1.5} />}
                 onClick={() => onUpdate(row.original)}
               >
-                <IconPencil size={18} stroke={1.5} />
-              </ActionIcon>
-            </Tooltip>
-            <Tooltip label="Eliminar" color="gray" offset={10}>
-              <ActionIcon
-                size={32}
-                variant="light"
+                Actualizar
+              </Menu.Item>
+              <Menu.Item
+                leftSection={<IconHistoryToggle size={16} stroke={1.5} />}
+                component={Link}
+                href={`/acc/${row.original.n}`}
+              >
+                Historial
+              </Menu.Item>
+              <Menu.Divider />
+              <Menu.Item
                 color="red"
-                aria-label="Eliminar"
+                leftSection={<IconTrash size={16} stroke={1.5} />}
                 disabled={row.original.createdBy?.name !== user.name}
                 onClick={() => {
                   setDeleteModalOpened(true);
                   setDeviceId(row.original.n);
                 }}
               >
-                <IconTrash size={18} stroke={1.5} />
-              </ActionIcon>
-            </Tooltip>
-            <Tooltip label="Historial" color="gray" offset={10}>
-              <ActionIcon
-                size={32}
-                variant="light"
-                color="gray"
-                aria-label="Historial"
-                component={Link}
-                href={`/acc/${row.original.n}`}
-              >
-                <IconHistoryToggle size={18} stroke={1.5} />
-              </ActionIcon>
-            </Tooltip>
-          </Group>
+                Eliminar
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
         ),
       },
     ],
@@ -241,6 +237,7 @@ const AccTableList = ({
         connector: false,
         office: false,
         note: false,
+        date: false,
       },
       pagination: { pageSize: 10, pageIndex: 0 },
       density: "xs",
