@@ -180,7 +180,7 @@ const AccTableList = ({
         enableSorting: false,
         enableColumnActions: false,
         Cell: ({ row }) => (
-          <Menu trigger="hover" position="right" withArrow>
+          <Menu position="right" withArrow>
             <Menu.Target>
               <Button variant="light" size="compact-sm">
                 ...
